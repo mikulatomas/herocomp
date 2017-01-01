@@ -1,10 +1,11 @@
 import sys
 
 from antlr4 import *
-from AST_first import AST
+# from AST_first import AST
 from HerocLexer import HerocLexer
-from HerocListener import HerocListener
+# from HerocListener import HerocListener
 from HerocParser import HerocParser
+from tree.TreeVisitor import TreeVisitor
 
 
 def main(argv):
@@ -21,12 +22,12 @@ def main(argv):
     # print(tree.toStringTree(recog=parser))
 
     # listener = HerocListener()
-    # walker = ParseTreeWalker()
-    # walker.walk(listener, tree)
-    
-    ast = AST(tree)
+    treeVisitor = TreeVisitor()
+    treeVisitor.visit(tree);
 
-    print(ast)
+    # ast = AST(tree)
+    #
+    # print(ast)
 
 if __name__ == '__main__':
     main(sys.argv)

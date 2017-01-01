@@ -485,11 +485,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_sourcefile
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSourcefile" ):
-                return visitor.visitSourcefile(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSourcefile" ):
+                listener.enterSourcefile(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSourcefile" ):
+                listener.exitSourcefile(self)
 
 
 
@@ -540,11 +542,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_source
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSource" ):
-                return visitor.visitSource(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSource" ):
+                listener.enterSource(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSource" ):
+                listener.exitSource(self)
 
 
 
@@ -637,11 +641,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_variableDeclaration
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitVariableDeclaration" ):
-                return visitor.visitVariableDeclaration(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterVariableDeclaration" ):
+                listener.enterVariableDeclaration(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitVariableDeclaration" ):
+                listener.exitVariableDeclaration(self)
 
 
 
@@ -690,11 +696,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_initVariableDeclarationList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInitVariableDeclarationList" ):
-                return visitor.visitInitVariableDeclarationList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInitVariableDeclarationList" ):
+                listener.enterInitVariableDeclarationList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInitVariableDeclarationList" ):
+                listener.exitInitVariableDeclarationList(self)
 
 
 
@@ -757,11 +765,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_initDeclaratorVariable
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInitDeclaratorVariable" ):
-                return visitor.visitInitDeclaratorVariable(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInitDeclaratorVariable" ):
+                listener.enterInitDeclaratorVariable(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInitDeclaratorVariable" ):
+                listener.exitInitDeclaratorVariable(self)
 
 
 
@@ -816,11 +826,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_initializer
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInitializer" ):
-                return visitor.visitInitializer(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInitializer" ):
+                listener.enterInitializer(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInitializer" ):
+                listener.exitInitializer(self)
 
 
 
@@ -887,11 +899,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_initializerList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInitializerList" ):
-                return visitor.visitInitializerList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInitializerList" ):
+                listener.enterInitializerList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInitializerList" ):
+                listener.exitInitializerList(self)
 
 
 
@@ -954,11 +968,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_declarator
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDeclarator" ):
-                return visitor.visitDeclarator(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDeclarator" ):
+                listener.enterDeclarator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDeclarator" ):
+                listener.exitDeclarator(self)
 
 
 
@@ -1001,11 +1017,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_pointer
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPointer" ):
-                return visitor.visitPointer(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPointer" ):
+                listener.enterPointer(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPointer" ):
+                listener.exitPointer(self)
 
 
 
@@ -1060,11 +1078,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_directDeclarator
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDirectDeclarator" ):
-                return visitor.visitDirectDeclarator(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDirectDeclarator" ):
+                listener.enterDirectDeclarator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDirectDeclarator" ):
+                listener.exitDirectDeclarator(self)
 
 
 
@@ -1191,11 +1211,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_parameterTypeList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameterTypeList" ):
-                return visitor.visitParameterTypeList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParameterTypeList" ):
+                listener.enterParameterTypeList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParameterTypeList" ):
+                listener.exitParameterTypeList(self)
 
 
 
@@ -1250,11 +1272,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_parameterList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameterList" ):
-                return visitor.visitParameterList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParameterList" ):
+                listener.enterParameterList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParameterList" ):
+                listener.exitParameterList(self)
 
 
 
@@ -1313,11 +1337,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_parameterDeclaration
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitParameterDeclaration" ):
-                return visitor.visitParameterDeclaration(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterParameterDeclaration" ):
+                listener.enterParameterDeclaration(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitParameterDeclaration" ):
+                listener.exitParameterDeclaration(self)
 
 
 
@@ -1354,11 +1380,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_identifierList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIdentifierList" ):
-                return visitor.visitIdentifierList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIdentifierList" ):
+                listener.enterIdentifierList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIdentifierList" ):
+                listener.exitIdentifierList(self)
 
 
 
@@ -1424,11 +1452,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_functionDefinition
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionDefinition" ):
-                return visitor.visitFunctionDefinition(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFunctionDefinition" ):
+                listener.enterFunctionDefinition(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFunctionDefinition" ):
+                listener.exitFunctionDefinition(self)
 
 
 
@@ -1484,11 +1514,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_declarationList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitDeclarationList" ):
-                return visitor.visitDeclarationList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterDeclarationList" ):
+                listener.enterDeclarationList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitDeclarationList" ):
+                listener.exitDeclarationList(self)
 
 
 
@@ -1566,11 +1598,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_initDeclaratorList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInitDeclaratorList" ):
-                return visitor.visitInitDeclaratorList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInitDeclaratorList" ):
+                listener.enterInitDeclaratorList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInitDeclaratorList" ):
+                listener.exitInitDeclaratorList(self)
 
 
 
@@ -1633,11 +1667,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_initDeclarator
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitInitDeclarator" ):
-                return visitor.visitInitDeclarator(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterInitDeclarator" ):
+                listener.enterInitDeclarator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitInitDeclarator" ):
+                listener.exitInitDeclarator(self)
 
 
 
@@ -1685,11 +1721,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_unaryOperator
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitUnaryOperator" ):
-                return visitor.visitUnaryOperator(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryOperator" ):
+                listener.enterUnaryOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryOperator" ):
+                listener.exitUnaryOperator(self)
 
 
 
@@ -1726,11 +1764,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_assignmentOperator
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignmentOperator" ):
-                return visitor.visitAssignmentOperator(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAssignmentOperator" ):
+                listener.enterAssignmentOperator(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAssignmentOperator" ):
+                listener.exitAssignmentOperator(self)
 
 
 
@@ -1770,11 +1810,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_constantExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConstantExpression" ):
-                return visitor.visitConstantExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConstantExpression" ):
+                listener.enterConstantExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConstantExpression" ):
+                listener.exitConstantExpression(self)
 
 
 
@@ -1812,11 +1854,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_expression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpression" ):
-                return visitor.visitExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpression" ):
+                listener.enterExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpression" ):
+                listener.exitExpression(self)
 
 
 
@@ -1887,11 +1931,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_assignmentExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAssignmentExpression" ):
-                return visitor.visitAssignmentExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAssignmentExpression" ):
+                listener.enterAssignmentExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAssignmentExpression" ):
+                listener.exitAssignmentExpression(self)
 
 
 
@@ -1950,11 +1996,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_conditionalExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitConditionalExpression" ):
-                return visitor.visitConditionalExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterConditionalExpression" ):
+                listener.enterConditionalExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitConditionalExpression" ):
+                listener.exitConditionalExpression(self)
 
 
 
@@ -2006,11 +2054,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_logicalOrExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLogicalOrExpression" ):
-                return visitor.visitLogicalOrExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogicalOrExpression" ):
+                listener.enterLogicalOrExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogicalOrExpression" ):
+                listener.exitLogicalOrExpression(self)
 
 
 
@@ -2073,11 +2123,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_logicalAndExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitLogicalAndExpression" ):
-                return visitor.visitLogicalAndExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterLogicalAndExpression" ):
+                listener.enterLogicalAndExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitLogicalAndExpression" ):
+                listener.exitLogicalAndExpression(self)
 
 
 
@@ -2140,11 +2192,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_bitwiseOrExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBitwiseOrExpression" ):
-                return visitor.visitBitwiseOrExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBitwiseOrExpression" ):
+                listener.enterBitwiseOrExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBitwiseOrExpression" ):
+                listener.exitBitwiseOrExpression(self)
 
 
 
@@ -2207,11 +2261,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_bitwiseXOrExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBitwiseXOrExpression" ):
-                return visitor.visitBitwiseXOrExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBitwiseXOrExpression" ):
+                listener.enterBitwiseXOrExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBitwiseXOrExpression" ):
+                listener.exitBitwiseXOrExpression(self)
 
 
 
@@ -2274,11 +2330,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_andExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAndExpression" ):
-                return visitor.visitAndExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAndExpression" ):
+                listener.enterAndExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAndExpression" ):
+                listener.exitAndExpression(self)
 
 
 
@@ -2341,11 +2399,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_equalityExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitEqualityExpression" ):
-                return visitor.visitEqualityExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEqualityExpression" ):
+                listener.enterEqualityExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEqualityExpression" ):
+                listener.exitEqualityExpression(self)
 
 
 
@@ -2428,11 +2488,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_relationalExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitRelationalExpression" ):
-                return visitor.visitRelationalExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterRelationalExpression" ):
+                listener.enterRelationalExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitRelationalExpression" ):
+                listener.exitRelationalExpression(self)
 
 
 
@@ -2541,11 +2603,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_shiftExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitShiftExpression" ):
-                return visitor.visitShiftExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterShiftExpression" ):
+                listener.enterShiftExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitShiftExpression" ):
+                listener.exitShiftExpression(self)
 
 
 
@@ -2628,11 +2692,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_additiveExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitAdditiveExpression" ):
-                return visitor.visitAdditiveExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterAdditiveExpression" ):
+                listener.enterAdditiveExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitAdditiveExpression" ):
+                listener.exitAdditiveExpression(self)
 
 
 
@@ -2715,11 +2781,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_multiplicativeExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitMultiplicativeExpression" ):
-                return visitor.visitMultiplicativeExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterMultiplicativeExpression" ):
+                listener.enterMultiplicativeExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitMultiplicativeExpression" ):
+                listener.exitMultiplicativeExpression(self)
 
 
 
@@ -2825,11 +2893,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_unaryExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitUnaryExpression" ):
-                return visitor.visitUnaryExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterUnaryExpression" ):
+                listener.enterUnaryExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitUnaryExpression" ):
+                listener.exitUnaryExpression(self)
 
 
 
@@ -2926,11 +2996,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_postfixExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPostfixExpression" ):
-                return visitor.visitPostfixExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPostfixExpression" ):
+                listener.enterPostfixExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPostfixExpression" ):
+                listener.exitPostfixExpression(self)
 
 
 
@@ -3073,11 +3145,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_argumentExpressionList
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitArgumentExpressionList" ):
-                return visitor.visitArgumentExpressionList(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterArgumentExpressionList" ):
+                listener.enterArgumentExpressionList(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitArgumentExpressionList" ):
+                listener.exitArgumentExpressionList(self)
 
 
 
@@ -3148,11 +3222,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_primaryExpression
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitPrimaryExpression" ):
-                return visitor.visitPrimaryExpression(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterPrimaryExpression" ):
+                listener.enterPrimaryExpression(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitPrimaryExpression" ):
+                listener.exitPrimaryExpression(self)
 
 
 
@@ -3245,11 +3321,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_statement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitStatement" ):
-                return visitor.visitStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterStatement" ):
+                listener.enterStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitStatement" ):
+                listener.exitStatement(self)
 
 
 
@@ -3323,11 +3401,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_compoundStatement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitCompoundStatement" ):
-                return visitor.visitCompoundStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterCompoundStatement" ):
+                listener.enterCompoundStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitCompoundStatement" ):
+                listener.exitCompoundStatement(self)
 
 
 
@@ -3378,11 +3458,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_blockItem
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitBlockItem" ):
-                return visitor.visitBlockItem(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBlockItem" ):
+                listener.enterBlockItem(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBlockItem" ):
+                listener.exitBlockItem(self)
 
 
 
@@ -3435,11 +3517,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_functionCallStatement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitFunctionCallStatement" ):
-                return visitor.visitFunctionCallStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterFunctionCallStatement" ):
+                listener.enterFunctionCallStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitFunctionCallStatement" ):
+                listener.exitFunctionCallStatement(self)
 
 
 
@@ -3491,11 +3575,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_expressionStatement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitExpressionStatement" ):
-                return visitor.visitExpressionStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterExpressionStatement" ):
+                listener.enterExpressionStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitExpressionStatement" ):
+                listener.exitExpressionStatement(self)
 
 
 
@@ -3545,11 +3631,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_selectionStatement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitSelectionStatement" ):
-                return visitor.visitSelectionStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterSelectionStatement" ):
+                listener.enterSelectionStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitSelectionStatement" ):
+                listener.exitSelectionStatement(self)
 
 
 
@@ -3618,11 +3706,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_iterationStatement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitIterationStatement" ):
-                return visitor.visitIterationStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterIterationStatement" ):
+                listener.enterIterationStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitIterationStatement" ):
+                listener.exitIterationStatement(self)
 
 
 
@@ -3765,11 +3855,13 @@ class HerocParser ( Parser ):
         def getRuleIndex(self):
             return HerocParser.RULE_jumpStatement
 
-        def accept(self, visitor:ParseTreeVisitor):
-            if hasattr( visitor, "visitJumpStatement" ):
-                return visitor.visitJumpStatement(self)
-            else:
-                return visitor.visitChildren(self)
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterJumpStatement" ):
+                listener.enterJumpStatement(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitJumpStatement" ):
+                listener.exitJumpStatement(self)
 
 
 

@@ -1,3 +1,8 @@
 /Heroc.tokens
 /HerocParser.py
 /HerocVisitor.py
+/Lexer.py
+/Lexer.tokens
+/HerocLexer.py
+/HerocLexer.tokens
+/HerocListener.py
