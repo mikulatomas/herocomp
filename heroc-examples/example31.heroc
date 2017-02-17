@@ -1,0 +1,27 @@
+
+main ()
+{
+    /* assignment */
+    long a, b = 20, c = 30, d, e;
+    a = 10;
+    a *= b+2;
+    b <<= 16;
+    c /= 5;
+    b -= 1;
+    a ++;
+    --b;
+    c = b-- - --a;
+    d = -- a * 20;
+    a ++;
+    e = a -- * 20;
+    print_long (a);
+    print_nl ();
+    print_long (b);
+    print_nl ();
+    print_long (c);
+    print_nl ();
+    print_long (d);
+    print_nl ();
+    print_long (e);
+    print_nl ();
+}

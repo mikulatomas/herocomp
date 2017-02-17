@@ -1,0 +1,42 @@
+
+helper (foo)
+{
+    print_long (foo);
+    print_nl ();
+    {
+	long arg = foo, foo = arg + 111;
+	print_long (foo);
+	print_nl ();
+	{
+	    long bar = foo, foo = bar * 2;
+	    print_long (foo);
+	    print_nl ();
+	}
+	print_long (foo);
+	print_nl ();
+    }
+    print_long (foo);
+    print_nl ();
+    return 0;
+}
+
+main ()
+{
+    /* variable scope */
+    long foo = 111;
+    print_long (foo);
+    print_nl ();
+    helper (foo);
+    print_long (foo);
+    print_nl ();
+    {
+	long foo = 222;
+	print_long (foo);
+	print_nl ();
+	helper (foo);
+	print_long (foo);
+	print_nl ();
+    }
+    print_long (foo);
+    print_nl ();
+}

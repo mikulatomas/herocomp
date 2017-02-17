@@ -1,0 +1,20 @@
+
+fib (n)
+{
+    if (n <= 1) {
+	return n;
+    }
+    else {
+	return fib (n - 1) + fib (n - 2);
+    }
+}
+
+main ()
+{
+    /* fibonacci: tree recursion a.k.a. rabbits gone wild */
+    long n;
+    for (n = 0; n < 15; n ++) {
+	print_long (fib (n));
+	print_nl ();
+    }
+}

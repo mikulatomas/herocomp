@@ -1,0 +1,25 @@
+
+swap (a, b)
+{
+    long _aux;
+    _aux = *a;
+    *a = *b;
+    *b = _aux;
+}
+
+main ()
+{
+    /* swapping two values in a stupid way */
+    long a = 666, b = 777;
+    long c = &b;
+    print_long (a);
+    print_nl ();
+    print_long (b);
+    print_nl ();
+    print_nl ();
+    swap (&a, c);
+    print_long (a);
+    print_nl ();
+    print_long (b);
+    print_nl ();
+}

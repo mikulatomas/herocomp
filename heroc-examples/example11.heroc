@@ -1,0 +1,19 @@
+
+minus (x)
+{
+    return -x;
+}
+
+main ()
+{
+    /* negative value */
+    long n = 666, x = 777;
+    print_long (minus (n));
+    print_nl ();
+    print_long (n);
+    print_nl ();
+    print_long (minus (x));
+    print_nl ();
+    print_long (x);
+    print_nl ();
+}

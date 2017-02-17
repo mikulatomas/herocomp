@@ -1,0 +1,24 @@
+
+line_of_stars (n, flag)
+{
+    long foo = n;
+    for (; ! (n < 0); n --) {
+	if (flag || (n == foo) || !n) {
+	    print_char (42);
+	    continue;
+	}
+	print_char (32);
+    }
+    print_nl ();
+}
+
+main ()
+{
+    /* nice triangle with inner blanks */
+    long n = 9, first = 1;
+    do {
+	line_of_stars (n, first);
+	first = 0;
+	n --;
+    } while (n >= 0);
+}

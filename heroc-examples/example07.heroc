@@ -1,0 +1,25 @@
+
+line_of_stars (n)
+{
+    long i;
+    for (;; n --) {
+	print_char (42);
+	if (n <= 0) {
+	    break;
+	}
+    }
+    print_nl ();
+}
+
+main ()
+{
+    /* nice triangle, for-style with breaks */
+    long n;
+    for (n = 1;;) {
+	line_of_stars (10 - n);
+	n ++;
+	if (n > 10) {
+	    break;
+	}
+    }
+}

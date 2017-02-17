@@ -1,0 +1,23 @@
+
+fib (n)
+{
+    print_char (43);
+    if (n <= 1) {
+	print_char (46);
+    }
+    else {
+	fib (n - 1);
+	fib (n - 2);
+    }
+    print_char (45);
+}
+
+main ()
+{
+    /* fibonacci: call/return graph */
+    long n;
+    for (n = 0; n < 7; n ++) {
+	fib (n);
+	print_nl ();
+    }
+}

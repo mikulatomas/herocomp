@@ -1,0 +1,33 @@
+
+main ()
+{
+    /* arithmetic, logic and bitwise operators */
+    print_long (1|2|3|4);
+    print_nl ();
+    print_long (0xffff&0xff00);
+    print_nl ();
+    print_long (12345^678);
+    print_nl ();
+    print_long (891010|12345^678);
+    print_nl ();
+    print_long ((891010|12345)^678);
+    print_nl ();
+    print_long (891010|12345^678<<9);
+    print_nl ();
+    print_long (891010|(12345^678)<<9);
+    print_nl ();
+    print_long ((891010|(12345^678))<<9);
+    print_nl ();
+    print_long (10+891010|(12345^678)<<9);
+    print_nl ();
+    print_long (~10+891010|(12345^678)<<9);
+    print_nl ();
+    print_long (~10+891010|(12345^678)<<9);
+    print_nl ();
+    print_long (~~123);
+    print_nl ();
+    print_long (10<20&&40<=40);
+    print_nl ();
+    print_long (10+(10<20&&40>=40||333));
+    print_nl ();
+}

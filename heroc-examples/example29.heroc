@@ -1,0 +1,27 @@
+
+main ()
+{
+    /* arithmetic and relational operators */
+    print_long (10+20*30);
+    print_nl ();
+    print_long (10*20+30);
+    print_nl ();
+    print_long (5<<6+7);
+    print_nl ();
+    print_long ((5<<6)+7);
+    print_nl ();
+    print_long (50000>>6*2);
+    print_nl ();
+    print_long ((50000>>6)*2);
+    print_nl ();
+    print_long (10%3+1);
+    print_nl ();
+    print_long (10%3*10);
+    print_nl ();
+    print_long (10*10%3);
+    print_nl ();
+    print_long (66*10==10);
+    print_nl ();
+    print_long (66*(10==10));
+    print_nl ();
+}

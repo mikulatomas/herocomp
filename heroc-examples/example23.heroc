@@ -1,0 +1,40 @@
+
+long heap [100000];
+long front = &heap;
+
+lalloc (size)
+{
+    long ptr = front;
+    front += size * sizeof (long);
+    return ptr;
+}
+
+cons (a, b)
+{
+    long new = lalloc (2);
+    new [0] = a;
+    new [1] = b;
+    return new;
+}
+
+car (p)
+{
+    return p [0];
+}
+
+cdr (p)
+{
+    return p [1];
+}
+
+main ()
+{
+    /* simple lisp-style pair manipulation */
+    long a = cons (10, cons (20, cons (30, 0)));
+    print_long (car (a));
+    print_nl ();
+    print_long (car (cdr (a)));
+    print_nl ();
+    print_long (car (cdr (cdr (a))));
+    print_nl ();
+}

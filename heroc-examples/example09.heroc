@@ -1,0 +1,19 @@
+
+line_of_stars (n)
+{
+    long i;
+    for (; ! (n < 0); n --) {
+	print_char (42);
+    }
+    print_nl ();
+}
+
+main ()
+{
+    /* nice triangle, do-style */
+    long n = 9;
+    do {
+	line_of_stars (n);
+	n --;
+    } while (n >= 0);
+}

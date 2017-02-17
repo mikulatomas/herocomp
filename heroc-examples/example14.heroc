@@ -1,0 +1,17 @@
+
+fac (n)
+{
+    return n <= 1 ?
+	1 :
+	n * fac (n - 1);
+}
+
+main ()
+{
+    /* factorial: linear recursion + ternary operator */
+    long n;
+    for (n = 0; n < 10; n ++) {
+	print_long (fac (n));
+	print_nl ();
+    }
+}

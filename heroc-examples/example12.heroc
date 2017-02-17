@@ -1,0 +1,28 @@
+
+bar (x)
+{
+    return x + 10;
+}
+
+foo (x)
+{
+    return bar (2 * x);
+}
+
+main ()
+{
+    /* two function calls in a row */
+    long n = 100;
+    print_long (bar (n));
+    print_nl ();
+    print_long (foo (n));
+    print_nl ();
+    print_long (bar (foo (n)));
+    print_nl ();
+    print_long (foo (bar (n)));
+    print_nl ();
+    print_long (foo (foo (n)));
+    print_nl ();
+    print_long (n);
+    print_nl ();
+}

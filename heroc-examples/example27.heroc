@@ -1,0 +1,43 @@
+
+print_array (array, size)
+{
+    long i;
+    for (i = 0; i < size; i ++) {
+	if (i) {
+	    print_char (',');
+	    print_char (' ');
+	}
+	print_long (array [i]);
+    }
+    print_nl ();
+}
+
+bubble_sort (array, n)
+{
+    long i, swapped;
+    do {
+	swapped = 0;
+	for (i = 1; i < n; i ++) {
+	    if (array [i - 1] > array [i]) {
+		array [i - 1] ^= array [i];
+		array [i] ^= array [i - 1];
+		array [i - 1] ^= array [i];
+		swapped = 1;
+	    }
+	}
+    } while (swapped);
+}
+
+main ()
+{
+    /* bubble sort array */
+    long a = {8, 4, 2, 1, 5, 2, 8, 9, 3, 4, 3, 2, 3, 6, 4, 8, 9, 2, 3, 5};
+    long b = {4, 3, 4, 2, 3, 3, 1, 2, 4, 0, 3, 4, 1, 2, 4};
+    long c = {9, 8, 7, 6, 5, 4, 3, 2, 1, 0};
+    bubble_sort (a, 20);
+    print_array (a, 20);
+    bubble_sort (b, 15);
+    print_array (b, 15);
+    bubble_sort (c, 10);
+    print_array (c, 10);
+}

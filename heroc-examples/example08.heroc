@@ -1,0 +1,24 @@
+
+line_of_stars (n)
+{
+    long i;
+    for (; ! (n < 0); n --) {
+	print_char (42);
+    }
+    print_nl ();
+}
+
+main ()
+{
+    /* nice triangle, while-style with breaks */
+    long n = 9;
+    while (666) {
+	if (n >= 0) {
+	    line_of_stars (n);
+	    n --;
+	}
+	else {
+	    break;
+	}
+    }
+}

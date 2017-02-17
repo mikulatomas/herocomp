@@ -1,0 +1,24 @@
+
+fac (n, p)
+{
+    if (n > 0) {
+	fac (n - 1, p);
+	{
+	    long result = *p;
+	    result *= n;
+	    *p = result;
+	}
+    }
+}
+
+main ()
+{
+    /* factorial: tail recursion with local variable */
+    long n, result;
+    for (n = 0; n < 10; n ++) {
+	result = 1;
+	fac (n, &result);
+	print_long (result);
+	print_nl ();
+    }
+}

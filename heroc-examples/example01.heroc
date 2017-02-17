@@ -1,0 +1,19 @@
+
+main ()
+{
+    /* a stupid way to print a greeting */
+    print_char (0x48);
+    print_char ((0x6 << 4) | 0x5);
+    print_char (0x6C);
+    print_char (0x6c);
+    print_char (0X6F);
+    print_char (0x2c);
+    print_char (040);
+    print_char ('W');
+    print_char (0x6f);
+    print_char (0X72);
+    print_char (0x6c);
+    print_char ((1 << 7) - 28);
+    print_char (33);
+    print_nl ();
+}

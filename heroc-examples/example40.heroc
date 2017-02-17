@@ -1,0 +1,55 @@
+
+print_string (string, n)
+{
+    while (n) {
+	print_char (*string);
+        string += sizeof (long);
+	n --;
+    }
+    print_nl ();
+}
+
+swap (s, i, j)
+{
+    long temp = s [i];
+    s [i] = s [j];
+    s [j] = temp;
+}
+
+copy (array, n)
+{
+    long i;
+    for (i = n; i >= 0; i --) {
+	array [i + n] = array [i];
+    }
+}
+
+permute (string, k, n)
+{
+    if (k >= n) {
+	print_string (string, n);
+    }
+    else {
+	long i;
+	for (i = k; i < n; i ++) {
+	    swap (string, k, i);
+	    copy (string, n);
+	    permute (string + n, k + 1, n);
+	}
+    }
+}
+
+permutations (string, n)
+{
+    permute (string, 0, n);
+}
+
+main ()
+{
+    /* array permutations */
+    long s [1024], i;
+    for (i = 0; i <= 3; i ++) {
+	s [i] = i + 65;
+    }
+    permutations (s, 4);
+}

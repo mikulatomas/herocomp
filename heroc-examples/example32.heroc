@@ -1,0 +1,18 @@
+
+main ()
+{
+    /* ternary operator */
+    long a = 10;
+    print_long (a?20:30);
+    print_nl ();
+    print_long (a==10?20:30);
+    print_nl ();
+    print_long (a==(10?20:30));
+    print_nl ();
+    print_long (a==(10?20:30)?40:50);
+    print_nl ();
+    print_long (a==10?20:30?40:50);
+    print_nl ();
+    print_long (a!=10?20:30?40:50);
+    print_nl ();
+}

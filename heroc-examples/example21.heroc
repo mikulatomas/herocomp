@@ -1,0 +1,39 @@
+
+fill_array (array, begin, size)
+{
+    long i;
+    for (i = 0; i < size; i ++) {
+	array [i] = begin + i;
+    }
+}
+
+print_comma ()
+{
+    print_char (44);
+    print_char (32);
+}
+
+print_array (array, size)
+{
+    long i;
+    for (i = 0; i < size; i ++) {
+	if (i) {
+	    print_comma ();
+	}
+	print_long (array [i]);
+    }
+    print_nl ();
+}
+
+main ()
+{
+    /* fill array and print its elements */
+    long a [10], b [20];
+    long c = {1, 3, 5, 7, 9, 8, 6, 4, 2};
+    fill_array (a, 666, 10);
+    fill_array (b, 10, 10);
+    fill_array (b + 10, 90, 10);
+    print_array (a, 10);
+    print_array (b, 20);
+    print_array (c, 9);
+}

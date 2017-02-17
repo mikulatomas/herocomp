@@ -1,0 +1,24 @@
+
+swap (a, b)
+{
+    *a ^= *b;
+    *b ^= *a;
+    *a ^= *b;
+}
+
+main ()
+{
+    /* swapping two values using xor */
+    long a = 666, b = 999;
+    long c = &b;
+    print_long (a);
+    print_nl ();
+    print_long (b);
+    print_nl ();
+    print_nl ();
+    swap (&a, c);
+    print_long (a);
+    print_nl ();
+    print_long (b);
+    print_nl ();
+}

@@ -1,0 +1,50 @@
+
+long heap [100000];
+long front = &heap;
+
+lalloc (size)
+{
+    long ptr = front;
+    front += size * sizeof (long);
+    return ptr;
+}
+
+fill_array (array, begin, size)
+{
+    long i;
+    for (i = 0; i < size; i ++) {
+	array [i] = begin + i;
+    }
+}
+
+print_comma ()
+{
+    print_char (44);
+    print_char (32);
+}
+
+print_array (array, size)
+{
+    long i;
+    for (i = 0; i < size; i ++) {
+	if (i) {
+	    print_comma ();
+	}
+	print_long (array [i]);
+    }
+    print_nl ();
+}
+
+main ()
+{
+    /* lousy malloc */
+    long a;
+    long b;
+    a = lalloc (10);
+    b = lalloc (20);
+    fill_array (a, 666, 10);
+    fill_array (b, 10, 10);
+    fill_array (b + 10, 90, 10);
+    print_array (a, 30);
+    print_array (b, 20);
+}

@@ -1,0 +1,122 @@
+
+long heap [100000];
+long front = &heap;
+
+lalloc (size)
+{
+    long ptr = front;
+    front += size * sizeof (long);
+    return ptr;
+}
+
+cons (a, b)
+{
+    long new = lalloc (3);
+    new [0] = 1;
+    new [1] = a;
+    new [2] = b;
+    return new;
+}
+
+pairp (x)
+{
+    return x [0] == 1;
+}
+
+car (p)
+{
+    return p [1];
+}
+
+cdr (p)
+{
+    return p [2];
+}
+
+num (x)
+{
+    long new = lalloc (2);
+    new [0] = 0;
+    new [1] = x;
+    return new;
+}
+
+value (n)
+{
+    return n [1];
+}
+
+prt (x, p)
+{
+    if (! x) {
+	print_char (40);
+	print_char (41);
+	return;
+    }
+    if (! pairp (x)) {
+	print_long (value (x));
+	return;
+    }
+    if (p) {
+	print_char (40);
+    }
+    prt (car (x), 1);
+    if (cdr (x) && pairp (cdr (x))) {
+	print_char (32);
+	prt (cdr (x), 0);
+    }
+    else {
+	if (cdr (x)) {
+	    print_char (32);
+	    print_char (46);
+	    print_char (32);
+	    prt (cdr (x), 0);
+	}
+    }
+    if (p) {
+	print_char (41);
+    }
+}
+
+print_elem (elem)
+{
+    prt (elem, 1);
+}
+
+append (x, y)
+{
+    return x == 0 ?
+	y :
+	cons (car (x), append (cdr (x), y));
+}
+
+mapcons (elem, x)
+{
+    return x == 0 ?
+	0 :
+	cons (cons (elem, car (x)), mapcons (elem, cdr (x)));
+}
+
+power (x)
+{
+    if (x) {
+	long y = power (cdr (x));
+	return append (mapcons (car (x), y), y);
+    }
+    else {
+	return cons (0, 0);
+    }
+}
+
+main ()
+{
+    /* power sets */
+    print_elem (power (0));
+    print_nl ();
+    print_elem (power (cons (num (1), 0)));
+    print_nl ();
+    print_elem (power (cons (num (1), cons (num (2), 0))));
+    print_nl ();
+    print_elem (power (cons (num (1), cons (num (2), cons (num (3), 0)))));
+    print_nl ();
+}

@@ -1,0 +1,20 @@
+
+fac (n)
+{
+    if (n <= 1) {
+	return 1;
+    }
+    else {
+	return n * fac (n - 1);
+    }
+}
+
+main ()
+{
+    /* factorial: linear recursion */
+    long n;
+    for (n = 0; n < 10; n ++) {
+	print_long (fac (n));
+	print_nl ();
+    }
+}
