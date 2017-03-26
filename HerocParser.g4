@@ -22,15 +22,21 @@ declarationVariable
 	;
 
 declarationFunction
-	:	IDENTIFIER '(' functionArgsList? ')'
+	:	IDENTIFIER '(' functionDeclarationArgsList? ')'
 		compoundStatement
 	;
 
-functionArgsList
+// Used only in declarationFunction
+functionDeclarationArgsList
 	:	IDENTIFIER
-	|	IDENTIFIER ',' functionArgsList
+	|	IDENTIFIER ',' functionDeclarationArgsList
 	;
 
+functionCall
+	:	IDENTIFIER '(' expressionList? ')' ';'
+	;
+
+// Mainly for declarationFunction
 compoundStatement
 	:	'{' blockItemList? '}'
 	;
@@ -42,51 +48,28 @@ blockItemList
 
 blockItem
 	:	declarationVariable
+	|	functionCall
 	;
 
+binaryMathOperations: PLUS | MINUS | STAR | DIV;
+unaryMathOperations: PLUS_PLUS | MINUS_MINUS;
 
+// Add pointer later
+expression
+	:	IDENTIFIER
+	|	CONSTANT
+	|	OCTAL_CONSTANT
+	|	HEX_CONSTANT
+	|	CHAR
+	|	STRING
+	|	expression unaryMathOperations
+	|	expression binaryMathOperations expression
+	;
 
-
-
-
-
-
-
-//declaration
-//	:	LONG initDeclaratorList SEMI
-//	;
-//
-//initDeclaratorList
-//	:	initDeclarator
-//	|	initDeclaratorList ',' initDeclarator
-//	;
-//	
-//initDeclarator
-//	:	declarator
-//	|	declarator '=' initializer
-//	;
-//
-//initializer
-//    :   assignmentExpression
-//    |   '{' initializerList '}'
-//    |   '{' initializerList ',' '}'
-//    ;
-//
-//// WTF designation?
-//initializerList
-//    :   initializer
-//    |   initializerList ',' initializer
-//    ;
-//
-//// Pridat pointer 'pointer?'
-//declarator
-//    :   IDENTIFIER
-//    ;
-//    
-//conditionalExpression
-//    :   logicalOrExpression ('?' expression ':' conditionalExpression)?
-//    ;
-
+expressionList
+	:	expression
+	|	expression ',' expressionList
+	;
 
 
 
