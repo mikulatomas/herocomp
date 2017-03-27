@@ -4,15 +4,6 @@ from antlr4 import *
 # This class defines a complete listener for a parse tree produced by HerocParserParser.
 class HerocParserListener(ParseTreeListener):
 
-    # Enter a parse tree produced by HerocParserParser#functionDeclarationArgsList.
-    def enterFunctionDeclarationArgsList(self, ctx):
-        pass
-
-    # Exit a parse tree produced by HerocParserParser#functionDeclarationArgsList.
-    def exitFunctionDeclarationArgsList(self, ctx):
-        pass
-
-
     # Enter a parse tree produced by HerocParserParser#unaryOperator.
     def enterUnaryOperator(self, ctx):
         pass
@@ -40,6 +31,15 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#assignmentOperator.
+    def enterAssignmentOperator(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#assignmentOperator.
+    def exitAssignmentOperator(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#compoundStatement.
     def enterCompoundStatement(self, ctx):
         pass
@@ -49,12 +49,21 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by HerocParserParser#assignmentOperator.
-    def enterAssignmentOperator(self, ctx):
+    # Enter a parse tree produced by HerocParserParser#declarationList.
+    def enterDeclarationList(self, ctx):
         pass
 
-    # Exit a parse tree produced by HerocParserParser#assignmentOperator.
-    def exitAssignmentOperator(self, ctx):
+    # Exit a parse tree produced by HerocParserParser#declarationList.
+    def exitDeclarationList(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#selectionStatement.
+    def enterSelectionStatement(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#selectionStatement.
+    def exitSelectionStatement(self, ctx):
         pass
 
 
@@ -67,12 +76,39 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#directDeclarator.
+    def enterDirectDeclarator(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#directDeclarator.
+    def exitDirectDeclarator(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#parameterTypeList.
+    def enterParameterTypeList(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#parameterTypeList.
+    def exitParameterTypeList(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#bitwiseXOrExpression.
     def enterBitwiseXOrExpression(self, ctx):
         pass
 
     # Exit a parse tree produced by HerocParserParser#bitwiseXOrExpression.
     def exitBitwiseXOrExpression(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#initDeclarator.
+    def enterInitDeclarator(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#initDeclarator.
+    def exitInitDeclarator(self, ctx):
         pass
 
 
@@ -85,12 +121,12 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by HerocParserParser#declarationVariable.
-    def enterDeclarationVariable(self, ctx):
+    # Enter a parse tree produced by HerocParserParser#initDeclaratorVariable.
+    def enterInitDeclaratorVariable(self, ctx):
         pass
 
-    # Exit a parse tree produced by HerocParserParser#declarationVariable.
-    def exitDeclarationVariable(self, ctx):
+    # Exit a parse tree produced by HerocParserParser#initDeclaratorVariable.
+    def exitInitDeclaratorVariable(self, ctx):
         pass
 
 
@@ -109,6 +145,24 @@ class HerocParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by HerocParserParser#argumentExpressionList.
     def exitArgumentExpressionList(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#statement.
+    def enterStatement(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#statement.
+    def exitStatement(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#expressionStatement.
+    def enterExpressionStatement(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#expressionStatement.
+    def exitExpressionStatement(self, ctx):
         pass
 
 
@@ -139,6 +193,15 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#identifierList.
+    def enterIdentifierList(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#identifierList.
+    def exitIdentifierList(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#expression.
     def enterExpression(self, ctx):
         pass
@@ -166,6 +229,24 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#iterationStatement.
+    def enterIterationStatement(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#iterationStatement.
+    def exitIterationStatement(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#functionDefinition.
+    def enterFunctionDefinition(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#functionDefinition.
+    def exitFunctionDefinition(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#conditionalExpression.
     def enterConditionalExpression(self, ctx):
         pass
@@ -181,15 +262,6 @@ class HerocParserListener(ParseTreeListener):
 
     # Exit a parse tree produced by HerocParserParser#assignmentExpression.
     def exitAssignmentExpression(self, ctx):
-        pass
-
-
-    # Enter a parse tree produced by HerocParserParser#declarationFunction.
-    def enterDeclarationFunction(self, ctx):
-        pass
-
-    # Exit a parse tree produced by HerocParserParser#declarationFunction.
-    def exitDeclarationFunction(self, ctx):
         pass
 
 
@@ -211,12 +283,21 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by HerocParserParser#declaration.
-    def enterDeclaration(self, ctx):
+    # Enter a parse tree produced by HerocParserParser#declarator.
+    def enterDeclarator(self, ctx):
         pass
 
-    # Exit a parse tree produced by HerocParserParser#declaration.
-    def exitDeclaration(self, ctx):
+    # Exit a parse tree produced by HerocParserParser#declarator.
+    def exitDeclarator(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#variableDeclaration.
+    def enterVariableDeclaration(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#variableDeclaration.
+    def exitVariableDeclaration(self, ctx):
         pass
 
 
@@ -247,12 +328,12 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by HerocParserParser#functionCall.
-    def enterFunctionCall(self, ctx):
+    # Enter a parse tree produced by HerocParserParser#initVariableDeclarationList.
+    def enterInitVariableDeclarationList(self, ctx):
         pass
 
-    # Exit a parse tree produced by HerocParserParser#functionCall.
-    def exitFunctionCall(self, ctx):
+    # Exit a parse tree produced by HerocParserParser#initVariableDeclarationList.
+    def exitInitVariableDeclarationList(self, ctx):
         pass
 
 
@@ -265,12 +346,48 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#parameterList.
+    def enterParameterList(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#parameterList.
+    def exitParameterList(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#parameterDeclaration.
+    def enterParameterDeclaration(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#parameterDeclaration.
+    def exitParameterDeclaration(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#blockItem.
     def enterBlockItem(self, ctx):
         pass
 
     # Exit a parse tree produced by HerocParserParser#blockItem.
     def exitBlockItem(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#initDeclaratorList.
+    def enterInitDeclaratorList(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#initDeclaratorList.
+    def exitInitDeclaratorList(self, ctx):
+        pass
+
+
+    # Enter a parse tree produced by HerocParserParser#jumpStatement.
+    def enterJumpStatement(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#jumpStatement.
+    def exitJumpStatement(self, ctx):
         pass
 
 

@@ -9,47 +9,96 @@ options {
 }
 
 program
-	:	declaration*
+	:	variableDeclaration*
+	|	functionDefinition*
 	;
 
-declaration
-	:	declarationVariable
-	|	declarationFunction
+variableDeclaration
+	:	LONG initVariableDeclarationList? ';'
 	;
 
-declarationVariable
-	:	LONG IDENTIFIER ';'
+initVariableDeclarationList
+	:	initDeclaratorVariable
+	|	initVariableDeclarationList ',' initDeclaratorVariable
 	;
 
-declarationFunction
-	:	IDENTIFIER '(' functionDeclarationArgsList? ')'
-		compoundStatement
+initDeclaratorVariable
+	:	declarator
+	|   declarator '=' initializer
 	;
 
-// Used only in declarationFunction
-functionDeclarationArgsList
-	:	IDENTIFIER
-	|	IDENTIFIER ',' functionDeclarationArgsList
-	;
+initializer
+    :   assignmentExpression
+    |   '{' initializerList '}'
+    |   '{' initializerList ',' '}'
+    ;
 
-functionCall
-	:	IDENTIFIER '(' expression? ')' ';'
-	;
+initializerList
+    :   initializer
+    |   initializerList ',' initializer
+    ;
 
-// Mainly for declarationFunction
-compoundStatement
-	:	'{' blockItemList? '}'
-	;
-	
-blockItemList
-	:	blockItem
-	|	blockItemList blockItem
-	;
+// Later add pointer
+declarator
+//    :   pointer? directDeclarator gccDeclaratorExtension*
+	:	directDeclarator
+    ;
 
-blockItem
-	:	declarationVariable
-	|	functionCall
-	;
+directDeclarator
+    :   IDENTIFIER
+    |   '(' declarator ')'
+    |   directDeclarator '[' assignmentExpression? ']'
+    
+//		Do I need this?
+//    |   directDeclarator '[' typeQualifierList? assignmentExpression? ']'
+//    |   directDeclarator '[' 'static' typeQualifierList? assignmentExpression ']'
+//    |   directDeclarator '[' typeQualifierList 'static' assignmentExpression ']'
+//    |   directDeclarator '[' typeQualifierList? '*' ']'
+
+//	For functions
+    |   directDeclarator '(' parameterTypeList ')'
+    |   directDeclarator '(' identifierList? ')'
+    ;
+
+parameterTypeList
+    :   parameterList
+    |   parameterList ',' '...'
+    ;
+
+parameterList
+    :   parameterDeclaration
+    |   parameterList ',' parameterDeclaration
+    ;
+
+parameterDeclaration
+    :   declarator
+//		Do I need it?
+//    |   declarationSpecifiers2 abstractDeclarator?
+    ;
+
+identifierList
+    :   IDENTIFIER
+    |   identifierList ',' IDENTIFIER
+    ;
+
+functionDefinition
+    :   declarator declarationList? compoundStatement
+    ;
+    
+declarationList
+    :   initDeclaratorList? ';'
+    |   declarationList initDeclaratorList? ';'
+    ;
+
+initDeclaratorList
+    :   initDeclarator
+    |   initDeclaratorList ',' initDeclarator
+    ;
+
+initDeclarator
+    :   declarator
+    |   declarator '=' initializer
+    ;
 
 // ------------------------------------------------------------------
 // EXPRESSIONS
@@ -162,9 +211,9 @@ postfixExpression
     |   postfixExpression '(' argumentExpressionList? ')'
     |   postfixExpression '++'
     |   postfixExpression '--'
-//    NO IDEA WHY I NEED THIS
-//    |   '{' initializerList '}'
-//    |   '{' initializerList ',' '}'
+//   Probably Function definition
+    |   '{' initializerList '}'
+    |   '{' initializerList ',' '}'
 //    |   postfixExpression '.' IDENTIFIER -- NOT POSSIBLE IN HEROC
 //    |   postfixExpression '->' IDENTIFIER -- NOT POSSIBLE IN HEROC
     ;
@@ -180,18 +229,50 @@ primaryExpression
     |   STRING+
     |   '(' expression ')'
     ;
-
+ 
 // ------------------------------------------------------------------
-// INITIALIZERS
-// ------------------------------------------------------------------
+// Main block of codes
+// ------------------------------------------------------------------    
 
-initializer
-    :   assignmentExpression
-    |   '{' initializerList '}'
-    |   '{' initializerList ',' '}'
+statement
+    :   compoundStatement
+    |   expressionStatement
+    |   selectionStatement
+    |   iterationStatement
+    |   jumpStatement
     ;
 
-initializerList
-    :   initializer
-    |   initializerList ',' initializer
+compoundStatement
+	:	'{' blockItemList? '}'
+	;
+	
+blockItemList
+	:	blockItem
+	|	blockItemList blockItem
+	;
+
+blockItem
+	:	variableDeclaration
+	|	statement
+	;
+
+expressionStatement
+    :   expression? ';'
+    ;
+
+selectionStatement
+    :   'if' '(' expression ')' statement ('else' statement)?
+    ;
+
+iterationStatement
+    :   'while' '(' expression ')' statement
+    |   'do' statement 'while' '(' expression ')' ';'
+    |   'for' '(' expression? ';' expression? ';' expression? ')' statement
+    |   'for' '(' variableDeclaration expression? ';' expression? ')' statement
+    ;
+
+jumpStatement
+    :   'continue' ';'
+    |   'break' ';'
+    |   'return' expression? ';'
     ;
