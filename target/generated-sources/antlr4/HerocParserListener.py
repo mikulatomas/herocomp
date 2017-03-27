@@ -193,6 +193,15 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#pointer.
+    def enterPointer(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#pointer.
+    def exitPointer(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#identifierList.
     def enterIdentifierList(self, ctx):
         pass

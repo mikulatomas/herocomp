@@ -38,10 +38,13 @@ initializerList
     |   initializerList ',' initializer
     ;
 
-// Later add pointer
+
 declarator
-//    :   pointer? directDeclarator gccDeclaratorExtension*
-	:	directDeclarator
+    :   pointer? directDeclarator
+    ;
+
+pointer
+    :   '*' pointer
     ;
 
 directDeclarator
