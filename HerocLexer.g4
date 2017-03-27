@@ -89,9 +89,16 @@ IDENTIFIER_NONDIGIT
 	:	[a-zA-Z_]
 	;
 
-	
+
+CONSTANT
+	:	INT_CONSTANT
+	| 	OCTAL_CONSTANT
+	|	HEX_CONSTANT
+	|	CHAR_CONSTANT
+	;
+
 /** Čísla */
-CONSTANT:               DIGIT+;
+INT_CONSTANT:           DIGIT+;
 OCTAL_CONSTANT:         '0' OCTAL_DIGIT+ ;
  
 HEX_CONSTANT:           HEX_PREFIX HEX_DIGIT+;
@@ -103,7 +110,7 @@ fragment OCTAL_DIGIT:    [0-7];
 fragment HEX_DIGIT:      [0-9a-fA-F];
 
 /** ASCII a string */
-CHAR:                   '\'' CHAR_SYMBOL '\'';
+CHAR_CONSTANT:                   '\'' CHAR_SYMBOL '\'';
 STRING:                 '\"' (CHAR_SYMBOL | ESCAPE)* '\"';
 fragment ESCAPE:        '\\' CHAR_SYMBOL;
 fragment CHAR_SYMBOL:    '\u0000' .. '\u007F';

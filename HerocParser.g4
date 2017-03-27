@@ -33,7 +33,7 @@ functionDeclarationArgsList
 	;
 
 functionCall
-	:	IDENTIFIER '(' expressionList? ')' ';'
+	:	IDENTIFIER '(' expression? ')' ';'
 	;
 
 // Mainly for declarationFunction
@@ -51,26 +51,147 @@ blockItem
 	|	functionCall
 	;
 
-binaryMathOperations: PLUS | MINUS | STAR | DIV;
-unaryMathOperations: PLUS_PLUS | MINUS_MINUS;
+// ------------------------------------------------------------------
+// EXPRESSIONS
+// ------------------------------------------------------------------
 
-// Add pointer later
+unaryOperator
+    :   '&' | '*' | '+' | '-' | '~' | '!'
+    ;
+    
+assignmentOperator
+    :   '=' | '*=' | '/=' | '%=' | '+=' | '-=' | '<<=' | '>>=' | '&=' | '^=' | '|='
+    ;
+
+// If expression is constant skip assignment operators in priorities table
+constantExpression
+	:	conditionalExpression
+	;
+
+// Start table of operators from bottom (from lowest priority)
 expression
-	:	IDENTIFIER
-	|	CONSTANT
-	|	OCTAL_CONSTANT
-	|	HEX_CONSTANT
-	|	CHAR
-	|	STRING
-	|	expression unaryMathOperations
-	|	expression binaryMathOperations expression
+	:	assignmentExpression
+	|	expression ',' assignmentExpression
 	;
 
-expressionList
-	:	expression
-	|	expression ',' expressionList
-	;
+// Continue to conditionalExpressions in table or create assignment
+assignmentExpression
+    :   conditionalExpression
+    |   unaryExpression assignmentOperator assignmentExpression
+    ;
 
+// Conditional Expression is next in table of priority, we can skip to logical or expression
+conditionalExpression
+    :   logicalOrExpression ('?' expression ':' conditionalExpression)?
+    ;
 
+// Possible skip to AND expression or loop
+logicalOrExpression
+    :   logicalAndExpression
+    |   logicalOrExpression '||' logicalAndExpression
+    ;
 
+// Possible skip to Bitwise OR expression or loop
+logicalAndExpression
+    :   bitwiseOrExpression
+    |   logicalAndExpression '&&' bitwiseOrExpression
+    ;
 
+bitwiseOrExpression
+    :   bitwiseXOrExpression
+    |   bitwiseOrExpression '|' bitwiseXOrExpression
+    ;
+
+bitwiseXOrExpression
+    :   andExpression
+    |   bitwiseXOrExpression '^' andExpression
+    ;
+
+andExpression
+    :   equalityExpression
+    |   andExpression '&' equalityExpression
+    ;
+
+equalityExpression
+    :   relationalExpression
+    |   equalityExpression '==' relationalExpression
+    |   equalityExpression '!=' relationalExpression
+    ;
+
+relationalExpression
+    :   shiftExpression
+    |   relationalExpression '<' shiftExpression
+    |   relationalExpression '>' shiftExpression
+    |   relationalExpression '<=' shiftExpression
+    |   relationalExpression '>=' shiftExpression
+    ;
+
+shiftExpression
+    :   additiveExpression
+    |   shiftExpression '<<' additiveExpression
+    |   shiftExpression '>>' additiveExpression
+    ;
+
+additiveExpression
+    :   multiplicativeExpression
+    |   additiveExpression '+' multiplicativeExpression
+    |   additiveExpression '-' multiplicativeExpression
+    ;
+
+// Skipping castExpression here becouse of Heroc
+multiplicativeExpression
+    :   unaryExpression
+    |   multiplicativeExpression '*' unaryExpression
+    |   multiplicativeExpression '/' unaryExpression
+    |   multiplicativeExpression '%' unaryExpression
+    ;
+
+unaryExpression
+    :   postfixExpression
+    |   '++' unaryExpression
+    |   '--' unaryExpression
+    |   unaryOperator unaryExpression
+    |   'sizeof' '(' LONG ')'
+    |   '&&' IDENTIFIER // GCC extension address of label - IDK if we need it for HEROC
+    //    |   'sizeof' unaryExpression - NOT POSSIBLE IN HEROC
+    ;
+
+postfixExpression
+    :   primaryExpression
+    |   postfixExpression '[' expression ']'
+    |   postfixExpression '(' argumentExpressionList? ')'
+    |   postfixExpression '++'
+    |   postfixExpression '--'
+//    NO IDEA WHY I NEED THIS
+//    |   '{' initializerList '}'
+//    |   '{' initializerList ',' '}'
+//    |   postfixExpression '.' IDENTIFIER -- NOT POSSIBLE IN HEROC
+//    |   postfixExpression '->' IDENTIFIER -- NOT POSSIBLE IN HEROC
+    ;
+
+argumentExpressionList
+    :   assignmentExpression
+    |   argumentExpressionList ',' assignmentExpression
+    ;
+
+primaryExpression
+    :   IDENTIFIER
+    |   CONSTANT
+    |   STRING+
+    |   '(' expression ')'
+    ;
+
+// ------------------------------------------------------------------
+// INITIALIZERS
+// ------------------------------------------------------------------
+
+initializer
+    :   assignmentExpression
+    |   '{' initializerList '}'
+    |   '{' initializerList ',' '}'
+    ;
+
+initializerList
+    :   initializer
+    |   initializerList ',' initializer
+    ;
