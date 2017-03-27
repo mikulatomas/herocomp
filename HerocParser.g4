@@ -9,8 +9,8 @@ options {
 }
 
 program
-	:	variableDeclaration*
-	|	functionDefinition*
+	:	variableDeclaration program*
+	|	functionDefinition program*
 	;
 
 variableDeclaration
