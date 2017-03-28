@@ -91,7 +91,7 @@ identifierList
     ;
 
 functionDefinition
-    :   declarator declarationList? compoundStatement
+    :   IDENTIFIER '(' identifierList? ')' compoundStatement
     ;
     
 declarationList
