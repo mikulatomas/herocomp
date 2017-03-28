@@ -9,8 +9,14 @@ options {
 }
 
 program
-	:	variableDeclaration program?
-	|	functionDefinition program?
+	:	source? EOF
+	;
+
+source
+	:	variableDeclaration
+	|	functionDefinition
+	|	source variableDeclaration
+	|	source functionDefinition
 	;
 
 variableDeclaration

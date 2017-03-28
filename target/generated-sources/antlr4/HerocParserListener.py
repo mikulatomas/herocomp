@@ -76,6 +76,15 @@ class HerocParserListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by HerocParserParser#source.
+    def enterSource(self, ctx):
+        pass
+
+    # Exit a parse tree produced by HerocParserParser#source.
+    def exitSource(self, ctx):
+        pass
+
+
     # Enter a parse tree produced by HerocParserParser#directDeclarator.
     def enterDirectDeclarator(self, ctx):
         pass
