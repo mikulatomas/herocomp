@@ -1,4 +1,4 @@
-lexer grammar HerocLexer;
+lexer grammar Lexer;
 
 options {
 	language = Python3;

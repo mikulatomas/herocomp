@@ -1,8 +1,8 @@
 /**
  * Define a grammar called Hello
  */
-grammar HerocParser;
-import HerocLexer;
+grammar Heroc;
+import Lexer;
 
 options { 
 	language=Python3;
