@@ -1,5 +1,6 @@
 # Generated from Heroc.g4 by ANTLR 4.6
 from antlr4 import *
+
 if __name__ is not None and "." in __name__:
     from .HerocParser import HerocParser
 else:
@@ -10,7 +11,7 @@ class HerocListener(ParseTreeListener):
 
     # Enter a parse tree produced by HerocParser#program.
     def enterProgram(self, ctx:HerocParser.ProgramContext):
-        pass
+        print("enterProgram")
 
     # Exit a parse tree produced by HerocParser#program.
     def exitProgram(self, ctx:HerocParser.ProgramContext):
@@ -420,5 +421,3 @@ class HerocListener(ParseTreeListener):
     # Exit a parse tree produced by HerocParser#jumpStatement.
     def exitJumpStatement(self, ctx:HerocParser.JumpStatementContext):
         pass
-
-
