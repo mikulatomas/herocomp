@@ -8,7 +8,7 @@ options {
 	language=Python3;
 }
 
-program
+sourcefile
 	:	source? EOF
 	;
 
@@ -20,7 +20,7 @@ source
 	;
 
 variableDeclaration
-	:	LONG initVariableDeclarationList? ';'
+	:	LONG initVariableDeclarationList? SEMI
 	;
 
 initVariableDeclarationList
@@ -95,8 +95,8 @@ functionDefinition
     ;
     
 declarationList
-    :   initDeclaratorList? ';'
-    |   declarationList initDeclaratorList? ';'
+    :   initDeclaratorList? SEMI
+    |   declarationList initDeclaratorList? SEMI
     ;
 
 initDeclaratorList
@@ -245,6 +245,7 @@ primaryExpression
 
 statement
     :   compoundStatement
+    |	functionCallStatement
     |   expressionStatement
     |   selectionStatement
     |   iterationStatement
@@ -252,21 +253,25 @@ statement
     ;
 
 compoundStatement
-	:	'{' blockItemList? '}'
+	:	'{' blockItem* '}'
 	;
 	
-blockItemList
-	:	blockItem
-	|	blockItemList blockItem
-	;
+//blockItemList
+//	:	blockItem
+//	|	blockItemList blockItem
+//	;
 
 blockItem
 	:	variableDeclaration
 	|	statement
 	;
 
+functionCallStatement
+	:	IDENTIFIER '(' argumentExpressionList? ')' SEMI
+	;
+
 expressionStatement
-    :   expression? ';'
+    :   expression? SEMI
     ;
 
 selectionStatement
@@ -275,13 +280,13 @@ selectionStatement
 
 iterationStatement
     :   'while' '(' expression ')' statement
-    |   'do' statement 'while' '(' expression ')' ';'
-    |   'for' '(' expression? ';' expression? ';' expression? ')' statement
-    |   'for' '(' variableDeclaration expression? ';' expression? ')' statement
+    |   'do' statement 'while' '(' expression ')' SEMI
+    |   'for' '(' expression? SEMI expression? SEMI expression? ')' statement
+    |   'for' '(' variableDeclaration expression? SEMI expression? ')' statement
     ;
 
 jumpStatement
-    :   'continue' ';'
-    |   'break' ';'
-    |   'return' expression? ';'
+    :   'continue' SEMI
+    |   'break' SEMI
+    |   'return' expression? SEMI
     ;

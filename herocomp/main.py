@@ -1,7 +1,7 @@
 import sys
-from AST import AST
 
 from antlr4 import *
+from AST_first import AST
 from HerocLexer import HerocLexer
 from HerocListener import HerocListener
 from HerocParser import HerocParser
@@ -16,17 +16,17 @@ def main(argv):
     lexer = HerocLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = HerocParser(stream)
-    tree = parser.program()
+    tree = parser.sourcefile()
 
-    print(tree.toStringTree(recog=parser))
+    # print(tree.toStringTree(recog=parser))
 
-    listener = HerocListener()
-    walker = ParseTreeWalker()
-    walker.walk(listener, tree)
+    # listener = HerocListener()
+    # walker = ParseTreeWalker()
+    # walker.walk(listener, tree)
+    
+    ast = AST(tree)
 
-    print(AST(tree))
-    # print('result_stack=', listener.stack)
-
+    print(ast)
 
 if __name__ == '__main__':
     main(sys.argv)
