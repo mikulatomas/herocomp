@@ -260,8 +260,8 @@ def serializedATN():
         buf.write("\27\2\u021c\u021b\3\2\2\2\u021c\u021d\3\2\2\2\u021d\u021e")
         buf.write("\3\2\2\2\u021e\u021f\7\67\2\2\u021fW\3\2\2\2\u0220\u0221")
         buf.write("\7\t\2\2\u0221\u0222\7\61\2\2\u0222\u0223\5,\27\2\u0223")
-        buf.write("\u0224\7\62\2\2\u0224\u0227\5N(\2\u0225\u0226\7\7\2\2")
-        buf.write("\u0226\u0228\5N(\2\u0227\u0225\3\2\2\2\u0227\u0228\3\2")
+        buf.write("\u0224\7\62\2\2\u0224\u0227\5P)\2\u0225\u0226\7\7\2\2")
+        buf.write("\u0226\u0228\5P)\2\u0227\u0225\3\2\2\2\u0227\u0228\3\2")
         buf.write("\2\2\u0228Y\3\2\2\2\u0229\u022a\7\r\2\2\u022a\u022b\7")
         buf.write("\61\2\2\u022b\u022c\5,\27\2\u022c\u022d\7\62\2\2\u022d")
         buf.write("\u022e\5N(\2\u022e\u0254\3\2\2\2\u022f\u0230\7\6\2\2\u0230")
@@ -3621,11 +3621,11 @@ class HerocParser ( Parser ):
             return self.getTypedRuleContext(HerocParser.ExpressionContext,0)
 
 
-        def statement(self, i:int=None):
+        def compoundStatement(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(HerocParser.StatementContext)
+                return self.getTypedRuleContexts(HerocParser.CompoundStatementContext)
             else:
-                return self.getTypedRuleContext(HerocParser.StatementContext,i)
+                return self.getTypedRuleContext(HerocParser.CompoundStatementContext,i)
 
 
         def getRuleIndex(self):
@@ -3646,6 +3646,7 @@ class HerocParser ( Parser ):
 
         localctx = HerocParser.SelectionStatementContext(self, self._ctx, self.state)
         self.enterRule(localctx, 86, self.RULE_selectionStatement)
+        self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 542
@@ -3657,15 +3658,15 @@ class HerocParser ( Parser ):
             self.state = 545
             self.match(HerocParser.RIGHT_PAREN)
             self.state = 546
-            self.statement()
+            self.compoundStatement()
             self.state = 549
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,55,self._ctx)
-            if la_ == 1:
+            _la = self._input.LA(1)
+            if _la==HerocParser.ELSE:
                 self.state = 547
                 self.match(HerocParser.ELSE)
                 self.state = 548
-                self.statement()
+                self.compoundStatement()
 
 
         except RecognitionException as re:
