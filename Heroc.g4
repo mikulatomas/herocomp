@@ -24,8 +24,8 @@ variableDeclaration
 	;
 
 initVariableDeclarationList
-	:	initDeclaratorVariable
-	|	initVariableDeclarationList ',' initDeclaratorVariable
+	:	initDeclaratorVariable (',' initDeclaratorVariable)*
+//	|	initVariableDeclarationList ',' initDeclaratorVariable
 	;
 
 initDeclaratorVariable
@@ -40,8 +40,8 @@ initializer
     ;
 
 initializerList
-    :   initializer
-    |   initializerList ',' initializer
+    :   initializer (',' initializer)*
+//    |   initializerList ',' initializer
     ;
 
 
@@ -65,43 +65,45 @@ directDeclarator
 //    |   directDeclarator '[' typeQualifierList? '*' ']'
 
 //	For functions
-    |   directDeclarator '(' parameterTypeList ')'
-    |   directDeclarator '(' identifierList? ')'
+//    |   directDeclarator '(' parameterTypeList ')'
+//    |   directDeclarator '(' identifierList? ')'
     ;
 
-parameterTypeList
-    :   parameterList
-    |   parameterList ',' '...'
-    ;
+//parameterTypeList
+//    :   parameterList
+//    |   parameterList ',' '...'
+//    ;
+//
+//parameterList
+//    :   parameterDeclaration (',' parameterDeclaration)*
+////    |   parameterList ',' parameterDeclaration
+//    ;
 
-parameterList
-    :   parameterDeclaration
-    |   parameterList ',' parameterDeclaration
-    ;
-
-parameterDeclaration
-    :   declarator
+//COMMEN
+//parameterDeclaration
+//    :   declarator
 //		Do I need it?
 //    |   declarationSpecifiers2 abstractDeclarator?
-    ;
+//    ;
 
 identifierList
-    :   IDENTIFIER
-    |   identifierList ',' IDENTIFIER
+    :   IDENTIFIER (',' IDENTIFIER)*
+//    |   identifierList ',' IDENTIFIER
     ;
 
 functionDefinition
     :   IDENTIFIER '(' identifierList? ')' compoundStatement
     ;
-    
-declarationList
-    :   initDeclaratorList? SEMI
-    |   declarationList initDeclaratorList? SEMI
-    ;
+
+// NOT USED    
+//declarationList
+//    :   initDeclaratorList? SEMI
+//    |   declarationList initDeclaratorList? SEMI
+//    ;
 
 initDeclaratorList
-    :   initDeclarator
-    |   initDeclaratorList ',' initDeclarator
+    :   initDeclarator (',' initDeclarator)*
+//    |   initDeclaratorList ',' initDeclarator
     ;
 
 initDeclarator
@@ -220,7 +222,7 @@ postfixExpression
     |   postfixExpression '(' argumentExpressionList? ')'
     |   postfixExpression '++'
     |   postfixExpression '--'
-//   Probably Function definition
+//   Assign array to variable
     |   '{' initializerList '}'
     |   '{' initializerList ',' '}'
 //    |   postfixExpression '.' IDENTIFIER -- NOT POSSIBLE IN HEROC
@@ -228,8 +230,8 @@ postfixExpression
     ;
 
 argumentExpressionList
-    :   assignmentExpression
-    |   argumentExpressionList ',' assignmentExpression
+    :   assignmentExpression (',' assignmentExpression)*
+//    |   argumentExpressionList ',' assignmentExpression
     ;
 
 primaryExpression
@@ -253,13 +255,12 @@ statement
     ;
 
 compoundStatement
-	:	'{' blockItem* '}'
+	:	'{' blockItemList? '}'
 	;
 	
-//blockItemList
-//	:	blockItem
-//	|	blockItemList blockItem
-//	;
+blockItemList
+	:	blockItem+
+	;
 
 blockItem
 	:	variableDeclaration
