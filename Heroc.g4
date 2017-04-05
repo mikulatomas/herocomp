@@ -20,7 +20,7 @@ source
 	;
 
 variableDeclaration
-	:	LONG initVariableDeclarationList? SEMI
+	:	LONG initVariableDeclarationList SEMI
 	;
 
 initVariableDeclarationList
@@ -50,12 +50,13 @@ declarator
     ;
 
 pointer
-    :   '*' pointer
+    :   '*'+
     ;
 
 directDeclarator
     :   IDENTIFIER
-    |   '(' declarator ')'
+//    Probably not required
+//    |   '(' declarator ')'
     |   directDeclarator '[' assignmentExpression? ']'
     
 //		Do I need this?
