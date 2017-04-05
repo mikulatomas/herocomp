@@ -22,15 +22,33 @@ source
 variableDeclaration
 	:	LONG initVariableDeclarationList SEMI
 	;
+	
 
 initVariableDeclarationList
 	:	initDeclaratorVariable (',' initDeclaratorVariable)*
-//	|	initVariableDeclarationList ',' initDeclaratorVariable
 	;
 
 initDeclaratorVariable
-	:	declarator
-	|   declarator '=' initializer
+	:	pointer? initDeclaratorVariableSimple
+	|	pointer? initDeclaratorVariableSimpleWithValue
+	|	pointer? initDeclaratorArray
+	|	pointer? initDeclaratorArrayWithValue
+	;
+
+initDeclaratorVariableSimple
+	:	IDENTIFIER
+	;
+
+initDeclaratorVariableSimpleWithValue
+	: 	IDENTIFIER '=' assignmentExpression
+	;
+	
+initDeclaratorArray
+	:	IDENTIFIER ('[' assignmentExpression? ']')+
+	;
+
+initDeclaratorArrayWithValue
+	: 	IDENTIFIER ('[' assignmentExpression? ']')+ '=' initializer
 	;
 
 initializer
@@ -41,75 +59,19 @@ initializer
 
 initializerList
     :   initializer (',' initializer)*
-//    |   initializerList ',' initializer
     ;
-
-
-declarator
-    :   pointer? directDeclarator
-    ;
-
+   
 pointer
     :   '*'+
     ;
 
-directDeclarator
-    :   IDENTIFIER
-//    Probably not required
-//    |   '(' declarator ')'
-    |   directDeclarator '[' assignmentExpression? ']'
-    
-//		Do I need this?
-//    |   directDeclarator '[' typeQualifierList? assignmentExpression? ']'
-//    |   directDeclarator '[' 'static' typeQualifierList? assignmentExpression ']'
-//    |   directDeclarator '[' typeQualifierList 'static' assignmentExpression ']'
-//    |   directDeclarator '[' typeQualifierList? '*' ']'
-
-//	For functions
-//    |   directDeclarator '(' parameterTypeList ')'
-//    |   directDeclarator '(' identifierList? ')'
-    ;
-
-//parameterTypeList
-//    :   parameterList
-//    |   parameterList ',' '...'
-//    ;
-//
-//parameterList
-//    :   parameterDeclaration (',' parameterDeclaration)*
-////    |   parameterList ',' parameterDeclaration
-//    ;
-
-//COMMEN
-//parameterDeclaration
-//    :   declarator
-//		Do I need it?
-//    |   declarationSpecifiers2 abstractDeclarator?
-//    ;
 
 identifierList
     :   IDENTIFIER (',' IDENTIFIER)*
-//    |   identifierList ',' IDENTIFIER
     ;
 
 functionDefinition
     :   IDENTIFIER '(' identifierList? ')' compoundStatement
-    ;
-
-// NOT USED    
-//declarationList
-//    :   initDeclaratorList? SEMI
-//    |   declarationList initDeclaratorList? SEMI
-//    ;
-
-initDeclaratorList
-    :   initDeclarator (',' initDeclarator)*
-//    |   initDeclaratorList ',' initDeclarator
-    ;
-
-initDeclarator
-    :   declarator
-    |   declarator '=' initializer
     ;
 
 // ------------------------------------------------------------------
