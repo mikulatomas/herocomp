@@ -40,19 +40,19 @@ initDeclaratorVariableSimple
 	;
 
 initDeclaratorVariableSimpleWithValue
-	: 	IDENTIFIER '=' assignmentExpression
+	: 	IDENTIFIER '=' expression
 	;
 	
 initDeclaratorArray
-	:	IDENTIFIER ('[' assignmentExpression? ']')+
+	:	IDENTIFIER ('[' expression? ']')+
 	;
 
 initDeclaratorArrayWithValue
-	: 	IDENTIFIER ('[' assignmentExpression? ']')+ '=' initializer
+	: 	IDENTIFIER ('[' expression? ']')+ '=' initializer
 	;
 
 initializer
-    :   assignmentExpression
+    :   expression
     |   '{' initializerList '}'
     |   '{' initializerList ',' '}'
     ;
@@ -92,15 +92,15 @@ constantExpression
 	;
 
 // Start table of operators from bottom (from lowest priority)
-expression
-	:	assignmentExpression
-	|	expression ',' assignmentExpression
-	;
+//expression
+//	:	assignmentExpression
+//	|	expression ',' assignmentExpression
+//	;
 
 // Continue to conditionalExpressions in table or create assignment
-assignmentExpression
+expression
     :   conditionalExpression
-    |   unaryExpression assignmentOperator assignmentExpression
+    |   unaryExpression assignmentOperator expression
     ;
 
 // Conditional Expression is next in table of priority, we can skip to logical or expression
@@ -193,7 +193,7 @@ postfixExpression
     ;
 
 argumentExpressionList
-    :   assignmentExpression (',' assignmentExpression)*
+    :   expression (',' expression)*
 //    |   argumentExpressionList ',' assignmentExpression
     ;
 
