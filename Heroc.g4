@@ -32,7 +32,7 @@ initDeclaratorVariable
 	:	pointer? initDeclaratorVariableSimple
 	|	pointer? initDeclaratorVariableSimpleWithValue
 	|	pointer? initDeclaratorArray
-	|	pointer? initDeclaratorArrayWithValue
+//	|	pointer? initDeclaratorArrayWithValue
 	;
 
 initDeclaratorVariableSimple
@@ -45,11 +45,12 @@ initDeclaratorVariableSimpleWithValue
 	
 initDeclaratorArray
 	:	IDENTIFIER ('[' expression? ']')+
+	|	IDENTIFIER ('[' expression? ']')+ '=' '{' (initializerList)? '}'
 	;
 
-initDeclaratorArrayWithValue
-	: 	IDENTIFIER ('[' expression? ']')+ '=' '{' initializerList '}'
-	;
+//initDeclaratorArrayWithValue
+//	: 	IDENTIFIER ('[' expression? ']')+ '=' '{' (initializerList)? '}'
+//	;
 
 initializer
     :   expression
