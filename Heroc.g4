@@ -48,7 +48,7 @@ initDeclaratorArray
 	;
 
 initDeclaratorArrayWithValue
-	: 	IDENTIFIER ('[' expression? ']')+ '=' initializer
+	: 	IDENTIFIER ('[' expression? ']')+ '=' '{' initializerList '}'
 	;
 
 initializer
