@@ -30,18 +30,19 @@ initVariableDeclarationList
 
 initDeclaratorVariable
 	:	pointer? initDeclaratorVariableSimple
-	|	pointer? initDeclaratorVariableSimpleWithValue
+//	|	pointer? initDeclaratorVariableSimpleWithValue
 	|	pointer? initDeclaratorArray
 //	|	pointer? initDeclaratorArrayWithValue
 	;
 
 initDeclaratorVariableSimple
 	:	IDENTIFIER
+	|	IDENTIFIER '=' expression
 	;
 
-initDeclaratorVariableSimpleWithValue
-	: 	IDENTIFIER '=' expression
-	;
+//initDeclaratorVariableSimpleWithValue
+//	: 	IDENTIFIER '=' expression
+//	;
 	
 initDeclaratorArray
 	:	IDENTIFIER ('[' expression? ']')+
