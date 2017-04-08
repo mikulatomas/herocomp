@@ -34,6 +34,16 @@ class HerocVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by HerocParser#initDeclaratorVariableSimple.
+    def visitInitDeclaratorVariableSimple(self, ctx:HerocParser.InitDeclaratorVariableSimpleContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by HerocParser#initDeclaratorArray.
+    def visitInitDeclaratorArray(self, ctx:HerocParser.InitDeclaratorArrayContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by HerocParser#initializer.
     def visitInitializer(self, ctx:HerocParser.InitializerContext):
         return self.visitChildren(ctx)
@@ -44,33 +54,8 @@ class HerocVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by HerocParser#declarator.
-    def visitDeclarator(self, ctx:HerocParser.DeclaratorContext):
-        return self.visitChildren(ctx)
-
-
     # Visit a parse tree produced by HerocParser#pointer.
     def visitPointer(self, ctx:HerocParser.PointerContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#directDeclarator.
-    def visitDirectDeclarator(self, ctx:HerocParser.DirectDeclaratorContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#parameterTypeList.
-    def visitParameterTypeList(self, ctx:HerocParser.ParameterTypeListContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#parameterList.
-    def visitParameterList(self, ctx:HerocParser.ParameterListContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#parameterDeclaration.
-    def visitParameterDeclaration(self, ctx:HerocParser.ParameterDeclarationContext):
         return self.visitChildren(ctx)
 
 
@@ -81,21 +66,6 @@ class HerocVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by HerocParser#functionDefinition.
     def visitFunctionDefinition(self, ctx:HerocParser.FunctionDefinitionContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#declarationList.
-    def visitDeclarationList(self, ctx:HerocParser.DeclarationListContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#initDeclaratorList.
-    def visitInitDeclaratorList(self, ctx:HerocParser.InitDeclaratorListContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#initDeclarator.
-    def visitInitDeclarator(self, ctx:HerocParser.InitDeclaratorContext):
         return self.visitChildren(ctx)
 
 
@@ -116,11 +86,6 @@ class HerocVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by HerocParser#expression.
     def visitExpression(self, ctx:HerocParser.ExpressionContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#assignmentExpression.
-    def visitAssignmentExpression(self, ctx:HerocParser.AssignmentExpressionContext):
         return self.visitChildren(ctx)
 
 
@@ -206,6 +171,11 @@ class HerocVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by HerocParser#compoundStatement.
     def visitCompoundStatement(self, ctx:HerocParser.CompoundStatementContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by HerocParser#blockItemList.
+    def visitBlockItemList(self, ctx:HerocParser.BlockItemListContext):
         return self.visitChildren(ctx)
 
 

@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from antlr4 import *
@@ -9,6 +10,8 @@ from tree.TreeVisitor import TreeVisitor
 
 
 def main(argv):
+    logging.basicConfig(level=logging.INFO)
+
     if len(sys.argv) > 1:
         input_stream = FileStream(sys.argv[1])
     else:
@@ -20,10 +23,12 @@ def main(argv):
     tree = parser.sourcefile()
 
     # print(tree.toStringTree(recog=parser))
-
+    
     # listener = HerocListener()
     treeVisitor = TreeVisitor()
-    treeVisitor.visit(tree);
+    ast = treeVisitor.visit(tree);
+    print()
+    print(ast)
 
     # ast = AST(tree)
     #
