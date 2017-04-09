@@ -81,7 +81,7 @@ functionDefinition
 // ------------------------------------------------------------------
 
 unaryOperator
-    :   '&' | '*' | '+' | '-' | '~' | '!'
+    :   '&' | '*' | '+' | '-' | '~' | '!' | '--' | '++'
     ;
     
 assignmentOperator
@@ -173,11 +173,9 @@ multiplicativeExpression
 
 unaryExpression
     :   postfixExpression
-    |   '++' unaryExpression
-    |   '--' unaryExpression
     |   unaryOperator unaryExpression
     |   'sizeof' '(' LONG ')'
-    |   '&&' IDENTIFIER // GCC extension address of label - IDK if we need it for HEROC
+//    |   '&&' IDENTIFIER // GCC extension address of label - IDK if we need it for HEROC
     //    |   'sizeof' unaryExpression - NOT POSSIBLE IN HEROC
     ;
 
