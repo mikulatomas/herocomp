@@ -2,9 +2,9 @@
 
 
 class Node():
-    def __init__(self, statements=[], parent=None):
+    def __init__(self, parent=None):
         self.parent = parent
-        self.statements = statements
+        self.statements = []
         self.depth = 0
 
     def addStatement(self, statementNode):
@@ -17,7 +17,7 @@ class Node():
 
     def printStatements(self):
         statementsString = ""
-        
+
         if self.statements is not None:
             for statement in self.statements:
                 statement.depth = self.depth + 1
@@ -30,5 +30,5 @@ class Node():
     def generateTabsForDepth(self):
         tabs = ""
         for i in range(self.depth):
-            tabs += "\t"
+            tabs += "   "
         return tabs

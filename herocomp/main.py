@@ -23,7 +23,7 @@ def main(argv):
     tree = parser.sourcefile()
 
     # print(tree.toStringTree(recog=parser))
-    
+
     # listener = HerocListener()
     treeVisitor = TreeVisitor()
     ast = treeVisitor.visit(tree);

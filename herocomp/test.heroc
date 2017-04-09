@@ -1,1 +1,1 @@
-long a;
+long a = 1++;
