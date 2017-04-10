@@ -6,6 +6,8 @@ from HerocLexer import HerocLexer
 from HerocParser import HerocParser
 from HerocVisitor import HerocVisitor
 from tree.AST import AST
+from tree.Block import Block
+from tree.Function import Function
 from tree.Identifier import Identifier
 from tree.Node import Node
 from tree.Number import Number
@@ -386,3 +388,69 @@ class TreeVisitor(HerocVisitor):
             return String(value=str(child))
         else:
             return self.visit(ctx.getChild(1))
+
+    def visitCompoundStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        block = Block()
+
+        if isinstance(ctx.getChild(1), HerocParser.BlockItemListContext):
+            items = self.visit(ctx.getChild(1))
+
+            for item in items:
+                # In case of variable
+                if isinstance(item, list):
+                    block.addVariableList(item)
+                else:
+                    block.addStatement(item)
+
+        return block
+
+    def visitBlockItemList(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        items = []
+
+        for i in range(ctx.getChildCount()):
+            items.append(self.visit(ctx.getChild(i)))
+
+        return items
+
+    def visitBlockItem(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        return self.visit(ctx.getChild(0))
+
+    def visitFunctionDefinition(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        identifier = Identifier(str(ctx.getChild(0)))
+        arguments = []
+
+        for i in range(1, ctx.getChildCount()):
+            child = ctx.getChild(i)
+
+            if isinstance(child, HerocParser.IdentifierListContext):
+                arguments = self.visit(child)
+            elif isinstance(child, HerocParser.CompoundStatementContext):
+                block = self.visit(child)
+
+        function = Function(identifier=identifier)
+        function.addArgumentsList(arguments)
+        function.addStatement(block)
+
+        return function
+
+    def visitIdentifierList(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        identifiers = []
+
+        for i in range(ctx.getChildCount()):
+            child = ctx.getChild(i)
+            token_type = child.getSymbol().type
+
+            if token_type is HerocLexer.IDENTIFIER:
+                identifiers.append(Identifier(name=str(child)))
+
+        return identifiers

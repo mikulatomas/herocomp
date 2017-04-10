@@ -1,1 +1,1 @@
-long a = sizeof(long);
+main(a,b){long a;}
