@@ -33,5 +33,7 @@ class OperationType(Enum):
     INCREMENT = '++'
     DECREMENT = '--'
 
+    SUBSCRIPT = '[]'
+
     def __str__(self):
         return 'operation(' + self.value + ')'

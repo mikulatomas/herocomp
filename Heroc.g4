@@ -182,7 +182,8 @@ unaryExpression
 postfixExpression
     :   primaryExpression
     |   postfixExpression '[' expression ']'
-    |   postfixExpression '(' argumentExpressionList? ')'
+// Probably not required
+//    |   postfixExpression '(' argumentExpressionList? ')'
     |   postfixExpression '++'
     |   postfixExpression '--'
 //   Assign array to variable

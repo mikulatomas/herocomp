@@ -23,6 +23,7 @@ from tree.operations.OperationType import OperationType
 from tree.operations.PointerOperation import PointerOperation
 from tree.operations.RelationalOperation import RelationalOperation
 from tree.operations.ShiftOperation import ShiftOperation
+from tree.operations.SubscriptOperation import SubscriptOperation
 from tree.Variable import Variable
 from tree.VariableType import VariableType
 
@@ -195,14 +196,14 @@ class TreeVisitor(HerocVisitor):
         logging.info(str(sys._getframe().f_code.co_name))
 
         # Go to ConditionalExpression
-        if isinstance(ctx.getChild(0), HerocParser.ConditionalExpressionContext):
+        if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
 
     def visitConditionalExpression(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))
 
         # Go to next layer
-        if isinstance(ctx.getChild(0), HerocParser.LogicalOrExpressionContext):
+        if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
 
     def visitLogicalOrExpression(self, ctx):
@@ -360,6 +361,13 @@ class TreeVisitor(HerocVisitor):
                                              postfix=True)
 
             operation.addStatement(self.visit(ctx.getChild(0)))
+            return operation
+        elif isinstance(ctx.getChild(2), HerocParser.ExpressionContext):
+            # Subscript postfix operation
+            operation = SubscriptOperation(operation=OperationType.SUBSCRIPT)
+            operation.addStatement(self.visit(ctx.getChild(0)))
+
+            operation.addStatement(self.visit(ctx.getChild(2)))
             return operation
         # TODO rest of the postfix
 
