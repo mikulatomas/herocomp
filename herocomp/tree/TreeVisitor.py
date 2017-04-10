@@ -8,6 +8,7 @@ from HerocVisitor import HerocVisitor
 from tree.AST import AST
 from tree.Block import Block
 from tree.Function import Function
+from tree.FunctionCall import FunctionCall
 from tree.Identifier import Identifier
 from tree.Node import Node
 from tree.Number import Number
@@ -382,8 +383,20 @@ class TreeVisitor(HerocVisitor):
         if token_type is HerocLexer.IDENTIFIER:
             return Identifier(name=str(child))
         elif token_type is HerocLexer.CONSTANT:
-            # TODO implemet hexa number init
-            return Number(value=int(str(child)))
+            number = str(child)
+
+            # Case of char
+            if '\'' in number:
+                return Number(ord(number[1]))
+
+            if number[0] is '0' and len(number) > 1:
+                if 'x' in number.lower():
+                    return Number(int(number, 16))
+                else:
+                    return Number(int(number, 8))
+            else:
+                return Number(value=int(number))
+
         elif token_type is HerocLexer.STRING:
             return String(value=str(child))
         else:
@@ -454,3 +467,34 @@ class TreeVisitor(HerocVisitor):
                 identifiers.append(Identifier(name=str(child)))
 
         return identifiers
+
+    def visitFunctionCallStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        identifier = Identifier(str(ctx.getChild(0)))
+        arguments = []
+
+        for i in range(1, ctx.getChildCount()):
+            child = ctx.getChild(i)
+
+            if isinstance(child, HerocParser.ArgumentExpressionListContext):
+                arguments = self.visit(child)
+
+        function_call = FunctionCall(identifier=identifier)
+        print(repr(arguments))
+        function_call.addStatementList(arguments)
+
+        return function_call
+
+    def visitArgumentExpressionList(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        arguments = []
+
+        for i in range(ctx.getChildCount()):
+            child = ctx.getChild(i)
+
+            if isinstance(child, HerocParser.ExpressionContext):
+                arguments.append(self.visit(child))
+
+        return arguments

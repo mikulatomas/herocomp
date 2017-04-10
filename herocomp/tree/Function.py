@@ -15,9 +15,6 @@ class Function(Node):
         for node in argumentNodeList:
             self.addArgument(node)
 
-    def __str__(self):
-        return "Function: {}".format(self.name)
-
     def printArguments(self):
         argumentsString = ""
 
