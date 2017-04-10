@@ -24,6 +24,7 @@ from tree.operations.PointerOperation import PointerOperation
 from tree.operations.RelationalOperation import RelationalOperation
 from tree.operations.ShiftOperation import ShiftOperation
 from tree.operations.SubscriptOperation import SubscriptOperation
+from tree.String import String
 from tree.Variable import Variable
 from tree.VariableType import VariableType
 
@@ -314,7 +315,6 @@ class TreeVisitor(HerocVisitor):
             operation_type = self.visit(ctx.getChild(0))
             operation = None
 
-            # TODO finish another operations
             if operation_type is OperationType.LOGICAL_NOT:
                 operation = LogicalNotOperation(operation=operation_type)
             elif operation_type is OperationType.REFERENCE:
@@ -330,8 +330,9 @@ class TreeVisitor(HerocVisitor):
 
             operation.addStatement(self.visit(ctx.getChild(1)))
             return operation
-
-        # TODO - sizeof
+        else:
+            # sizeof return constant value - 8
+            return Number(8)
 
     def visitUnaryOperator(self, ctx):
         operation_type = ctx.getChild(0).getSymbol().type
@@ -382,7 +383,6 @@ class TreeVisitor(HerocVisitor):
             # TODO implemet hexa number init
             return Number(value=int(str(child)))
         elif token_type is HerocLexer.STRING:
-            # TODO implement String Node
-            pass
+            return String(value=str(child))
         else:
             return self.visit(ctx.getChild(1))
