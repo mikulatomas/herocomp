@@ -2,14 +2,22 @@ import inspect
 import logging
 import sys
 
+import antlr4
 from HerocLexer import HerocLexer
 from HerocParser import HerocParser
 from HerocVisitor import HerocVisitor
+from tree.Assignment import Assignment
+from tree.AssignmentType import AssignmentType
 from tree.AST import AST
 from tree.Block import Block
+from tree.DoWhileLoop import DoWhileLoop
+from tree.ForLoop import ForLoop
 from tree.Function import Function
 from tree.FunctionCall import FunctionCall
 from tree.Identifier import Identifier
+from tree.IfStatement import IfStatement
+from tree.JumpStatement import JumpStatement
+from tree.JumpStatementType import JumpStatementType
 from tree.Node import Node
 from tree.Number import Number
 from tree.operations.AdditiveOperation import AdditiveOperation
@@ -30,6 +38,7 @@ from tree.operations.SubscriptOperation import SubscriptOperation
 from tree.String import String
 from tree.Variable import Variable
 from tree.VariableType import VariableType
+from tree.WhileLoop import WhileLoop
 
 
 class TreeVisitor(HerocVisitor):
@@ -202,6 +211,34 @@ class TreeVisitor(HerocVisitor):
         # Go to ConditionalExpression
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
+        else:
+            # Assign
+            left_side = self.visit(ctx.getChild(0))
+            assignment_operator = self.visit(ctx.getChild(1))
+            right_side = self.visit(ctx.getChild(2))
+
+            assignment = Assignment(operation=assignment_operator)
+            assignment.addStatement(left_side)
+            assignment.addStatement(right_side)
+
+            return assignment
+
+    def visitAssignmentOperator(self, ctx):
+        operation_type = ctx.getChild(0).getSymbol().type
+
+        operations = {HerocLexer.ASSIGN: AssignmentType.ASSIGN,
+                      HerocLexer.STAR_ASSIGN: AssignmentType.MULTIPLY_ASSIGN,
+                      HerocLexer.DIV_ASSIGN: AssignmentType.DIV_ASSIGN,
+                      HerocLexer.MOD_ASSIGN: AssignmentType.MOD_ASSIGN,
+                      HerocLexer.PLUS_ASSIGN: AssignmentType.PLUS_ASSIGN,
+                      HerocLexer.MINUS_ASSIGN: AssignmentType.MINUS_ASSIGN,
+                      HerocLexer.LEFT_SHIFT_ASSIGN: AssignmentType.LEFT_SHIFT_ASSIGN,
+                      HerocLexer.RIGHT_SHIFT_ASSIGN: AssignmentType.RIGHT_SHIFT_ASSIGN,
+                      HerocLexer.AND_ASSIGN: AssignmentType.AND_ASSIGN,
+                      HerocLexer.XOR_ASSIGN: AssignmentType.XOR_ASSIGN,
+                      HerocLexer.OR_ASSIGN: AssignmentType.OR_ASSIGN}
+
+        return operations.get(operation_type)
 
     def visitConditionalExpression(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))
@@ -498,3 +535,66 @@ class TreeVisitor(HerocVisitor):
                 arguments.append(self.visit(child))
 
         return arguments
+
+    def visitStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        child = ctx.getChild(0)
+        return self.visit(child)
+
+    def visitExpressionStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        return self.visit(ctx.getChild(0))
+
+    def visitIterationStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        loop_type = str(ctx.getChild(0))
+        loop = None
+
+        if loop_type == 'for':
+            loop = ForLoop()
+        elif loop_type == 'while':
+            loop = WhileLoop()
+        elif loop_type == 'do':
+            loop = DoWhileLoop()
+
+        for i in range(1, ctx.getChildCount()):
+            child = ctx.getChild(i)
+
+            if not isinstance(child, antlr4.tree.Tree.TerminalNodeImpl):
+                loop.addStatement(self.visit(child))
+
+        return loop
+
+    def visitSelectionStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        if_statement = IfStatement()
+
+        for i in range(2, ctx.getChildCount()):
+            child = ctx.getChild(i)
+
+            if not isinstance(child, antlr4.tree.Tree.TerminalNodeImpl):
+                if_statement.addStatement(self.visit(child))
+
+        return if_statement
+
+    def visitJumpStatement(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        jump_statement = JumpStatement()
+
+        jump_statement_type = ctx.getChild(0).getSymbol().type
+
+        jump_statement_types = {HerocLexer.RETURN: JumpStatementType.RETURN,
+                               HerocLexer.CONTINUE: JumpStatementType.CONTINUE,
+                               HerocLexer.BREAK: JumpStatementType.BREAK}
+
+        jump_statement.jump_statement_type = jump_statement_types.get(jump_statement_type)
+
+        if ctx.getChildCount() > 2:
+            jump_statement.addStatement(self.visit(ctx.getChild(1)))
+
+        return jump_statement

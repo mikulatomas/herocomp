@@ -236,7 +236,7 @@ functionCallStatement
 	;
 
 expressionStatement
-    :   expression? SEMI
+    :   expression SEMI
     ;
 
 selectionStatement

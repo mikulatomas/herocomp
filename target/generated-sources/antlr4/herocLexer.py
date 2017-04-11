@@ -195,7 +195,7 @@ class HerocLexer(Lexer):
     NOT = 11
     NOT_EQUAL = 12
     MOD = 13
-    MOD_ASIGN = 14
+    MOD_ASSIGN = 14
     AND = 15
     AND_AND = 16
     AND_ASSIGN = 17
@@ -259,10 +259,10 @@ class HerocLexer(Lexer):
 
     symbolicNames = [ "<INVALID>",
             "BREAK", "CONTINUE", "DO", "ELSE", "FOR", "IF", "LONG", "RETURN", 
-            "SIZEOF", "WHILE", "NOT", "NOT_EQUAL", "MOD", "MOD_ASIGN", "AND", 
-            "AND_AND", "AND_ASSIGN", "STAR", "STAR_ASSIGN", "PLUS", "PLUS_PLUS", 
-            "PLUS_ASSIGN", "MINUS", "MINUS_MINUS", "MINUS_ASSIGN", "DIV", 
-            "DIV_ASSIGN", "COLON", "LESS", "LEFT_SHIFT", "LEFT_SHIFT_ASSIGN", 
+            "SIZEOF", "WHILE", "NOT", "NOT_EQUAL", "MOD", "MOD_ASSIGN", 
+            "AND", "AND_AND", "AND_ASSIGN", "STAR", "STAR_ASSIGN", "PLUS", 
+            "PLUS_PLUS", "PLUS_ASSIGN", "MINUS", "MINUS_MINUS", "MINUS_ASSIGN", 
+            "DIV", "DIV_ASSIGN", "COLON", "LESS", "LEFT_SHIFT", "LEFT_SHIFT_ASSIGN", 
             "LESS_EQUAL", "ASSIGN", "EQUAL", "GREATER", "GREATER_EQUAL", 
             "RIGHT_SHIFT", "RIGHT_SHIFT_ASSIGN", "QUESTION", "CARET", "XOR_ASSIGN", 
             "OR", "OR_ASSIGN", "OR_OR", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", 
@@ -273,19 +273,19 @@ class HerocLexer(Lexer):
 
     ruleNames = [ "BREAK", "CONTINUE", "DO", "ELSE", "FOR", "IF", "LONG", 
                   "RETURN", "SIZEOF", "WHILE", "NOT", "NOT_EQUAL", "MOD", 
-                  "MOD_ASIGN", "AND", "AND_AND", "AND_ASSIGN", "STAR", "STAR_ASSIGN", 
-                  "PLUS", "PLUS_PLUS", "PLUS_ASSIGN", "MINUS", "MINUS_MINUS", 
-                  "MINUS_ASSIGN", "DIV", "DIV_ASSIGN", "COLON", "LESS", 
-                  "LEFT_SHIFT", "LEFT_SHIFT_ASSIGN", "LESS_EQUAL", "ASSIGN", 
-                  "EQUAL", "GREATER", "GREATER_EQUAL", "RIGHT_SHIFT", "RIGHT_SHIFT_ASSIGN", 
-                  "QUESTION", "CARET", "XOR_ASSIGN", "OR", "OR_ASSIGN", 
-                  "OR_OR", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", "LEFT_BRACKET", 
-                  "RIGHT_BRACKET", "LEFT_BRACE", "RIGHT_BRACE", "SEMI", 
-                  "COMMA", "IDENTIFIER", "IDENTIFIER_NONDIGIT", "CONSTANT", 
-                  "INT_CONSTANT", "OCTAL_CONSTANT", "HEX_CONSTANT", "HEX_PREFIX", 
-                  "DIGIT", "NONZERO_DIGIT", "OCTAL_DIGIT", "HEX_DIGIT", 
-                  "CHAR_CONSTANT", "STRING", "ESCAPE", "CHAR_SYMBOL", "WHITESPACE", 
-                  "NEWLINE", "COMMENT" ]
+                  "MOD_ASSIGN", "AND", "AND_AND", "AND_ASSIGN", "STAR", 
+                  "STAR_ASSIGN", "PLUS", "PLUS_PLUS", "PLUS_ASSIGN", "MINUS", 
+                  "MINUS_MINUS", "MINUS_ASSIGN", "DIV", "DIV_ASSIGN", "COLON", 
+                  "LESS", "LEFT_SHIFT", "LEFT_SHIFT_ASSIGN", "LESS_EQUAL", 
+                  "ASSIGN", "EQUAL", "GREATER", "GREATER_EQUAL", "RIGHT_SHIFT", 
+                  "RIGHT_SHIFT_ASSIGN", "QUESTION", "CARET", "XOR_ASSIGN", 
+                  "OR", "OR_ASSIGN", "OR_OR", "TILDE", "LEFT_PAREN", "RIGHT_PAREN", 
+                  "LEFT_BRACKET", "RIGHT_BRACKET", "LEFT_BRACE", "RIGHT_BRACE", 
+                  "SEMI", "COMMA", "IDENTIFIER", "IDENTIFIER_NONDIGIT", 
+                  "CONSTANT", "INT_CONSTANT", "OCTAL_CONSTANT", "HEX_CONSTANT", 
+                  "HEX_PREFIX", "DIGIT", "NONZERO_DIGIT", "OCTAL_DIGIT", 
+                  "HEX_DIGIT", "CHAR_CONSTANT", "STRING", "ESCAPE", "CHAR_SYMBOL", 
+                  "WHITESPACE", "NEWLINE", "COMMENT" ]
 
     grammarFileName = "Heroc.g4"
 

@@ -1,4 +1,4 @@
-# Generated from Heroc.g4 by ANTLR 4.6
+# Generated from Lexer.g4 by ANTLR 4.6
 from antlr4 import *
 from io import StringIO
 
@@ -175,7 +175,7 @@ def serializedATN():
         return buf.getvalue()
 
 
-class HerocLexer(Lexer):
+class Lexer(Lexer):
 
     atn = ATNDeserializer().deserialize(serializedATN())
 
@@ -287,7 +287,7 @@ class HerocLexer(Lexer):
                   "HEX_DIGIT", "CHAR_CONSTANT", "STRING", "ESCAPE", "CHAR_SYMBOL", 
                   "WHITESPACE", "NEWLINE", "COMMENT" ]
 
-    grammarFileName = "Heroc.g4"
+    grammarFileName = "Lexer.g4"
 
     def __init__(self, input=None):
         super().__init__(input)

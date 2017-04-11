@@ -21,7 +21,7 @@ NOT :           '!';
 NOT_EQUAL :      '!=';
  
 MOD :           '%';
-MOD_ASIGN :     '%=';
+MOD_ASSIGN :     '%=';
  
 AND :           '&';
 AND_AND :        '&&';
