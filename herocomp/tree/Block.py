@@ -1,3 +1,5 @@
+from tree.JumpStatement import JumpStatement
+from tree.JumpStatementType import JumpStatementType
 from tree.Node import Node
 
 
@@ -26,3 +28,16 @@ class Block(Node):
         statementsString = self.printStatements()
 
         return "Block: {0} {1}".format(variablesString, statementsString)
+
+    def getCode(self):
+        code = ""
+
+        # Init local variables
+
+        for statement in self.statements:
+            if isinstance(statement, JumpStatement):
+                if statement.jump_statement_type == JumpStatementType.RETURN:
+                    code += statement.getCode()
+                    break
+
+        return code

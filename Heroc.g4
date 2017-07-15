@@ -29,9 +29,10 @@ initVariableDeclarationList
 	;
 
 initDeclaratorVariable
-	:	pointer? initDeclaratorVariableSimple
+	:	pointer? initDeclaratorArray
+	|	pointer? initDeclaratorVariableSimple
 //	|	pointer? initDeclaratorVariableSimpleWithValue
-	|	pointer? initDeclaratorArray
+	
 //	|	pointer? initDeclaratorArrayWithValue
 	;
 
@@ -46,7 +47,7 @@ initDeclaratorVariableSimple
 	
 initDeclaratorArray
 	:	IDENTIFIER ('[' expression? ']')+
-	|	IDENTIFIER ('[' expression? ']')+ '=' '{' (initializerList)? '}'
+	|	IDENTIFIER ('[' expression? ']')* '=' '{' (initializerList)? '}'
 	;
 
 //initDeclaratorArrayWithValue
@@ -81,7 +82,7 @@ functionDefinition
 // ------------------------------------------------------------------
 
 unaryOperator
-    :   '&' | '*' | '~' | '!' | '--' | '++'
+    :   '&' | '*' | '~' | '!' | '--' | '++' | '-' | '+'
     ;
     
 assignmentOperator
@@ -107,7 +108,8 @@ expression
 
 // Conditional Expression is next in table of priority, we can skip to logical or expression
 conditionalExpression
-    :   logicalOrExpression ('?' expression ':' conditionalExpression)?
+//    :   logicalOrExpression ('?' expression ':' conditionalExpression)?
+	:	logicalOrExpression ('?' expression ':' expression)?
     ;
 
 // Possible skip to AND expression or loop
@@ -182,11 +184,11 @@ unaryExpression
 postfixExpression
     :   primaryExpression
     |   postfixExpression '[' expression ']'
-// Probably not required
-//    |   postfixExpression '(' argumentExpressionList? ')'
+    |	postfixExpression '(' argumentExpressionList? ')'
+//   	|	functionCallStatement
     |   postfixExpression '++'
     |   postfixExpression '--'
-//   Assign array to variable
+//   Assign array to variable or create new array
     |   '{' initializerList '}'
     |   '{' initializerList ',' '}'
 //    |   postfixExpression '.' IDENTIFIER -- NOT POSSIBLE IN HEROC
@@ -194,9 +196,14 @@ postfixExpression
     ;
 
 argumentExpressionList
-    :   expression (',' expression)*
+    :   argumentExpression (',' argumentExpression)*
 //    |   argumentExpressionList ',' assignmentExpression
     ;
+
+argumentExpression
+	:   expression
+//	|	functionCallStatement
+	;
 
 primaryExpression
     :   IDENTIFIER
@@ -211,8 +218,8 @@ primaryExpression
 
 statement
     :   compoundStatement
-    |	functionCallStatement
-    |   expressionStatement
+	//|	functionCallStatement SEMI
+    |   expressionStatement SEMI
     |   selectionStatement
     |   iterationStatement
     |   jumpStatement
@@ -231,12 +238,12 @@ blockItem
 	|	statement
 	;
 
-functionCallStatement
-	:	IDENTIFIER '(' argumentExpressionList? ')' SEMI
-	;
+//functionCallStatement
+//	:	IDENTIFIER '(' argumentExpressionList? ')'
+//	;
 
 expressionStatement
-    :   expression SEMI
+    :   expression
     ;
 
 selectionStatement

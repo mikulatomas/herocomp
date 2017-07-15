@@ -7,7 +7,5 @@ main ()
     	long c = b;
     	b = a + b;
     	a = c;
-    	print_long (a);
-    	print_nl ();
     }
 }

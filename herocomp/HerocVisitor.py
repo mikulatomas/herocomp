@@ -159,6 +159,11 @@ class HerocVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by HerocParser#argumentExpression.
+    def visitArgumentExpression(self, ctx:HerocParser.ArgumentExpressionContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by HerocParser#primaryExpression.
     def visitPrimaryExpression(self, ctx:HerocParser.PrimaryExpressionContext):
         return self.visitChildren(ctx)
@@ -181,11 +186,6 @@ class HerocVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by HerocParser#blockItem.
     def visitBlockItem(self, ctx:HerocParser.BlockItemContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by HerocParser#functionCallStatement.
-    def visitFunctionCallStatement(self, ctx:HerocParser.FunctionCallStatementContext):
         return self.visitChildren(ctx)
 
 

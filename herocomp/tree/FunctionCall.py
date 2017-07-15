@@ -2,7 +2,7 @@ from tree.Node import Node
 
 
 class FunctionCall(Node):
-    def __init__(self, identifier, parent=None):
+    def __init__(self, identifier=None, parent=None):
         self.identifier = identifier
         super(FunctionCall, self).__init__(parent)
 

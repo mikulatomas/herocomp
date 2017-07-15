@@ -1,3 +1,4 @@
+from asm.Asm import *
 from tree.JumpStatementType import JumpStatementType
 from tree.Node import Node
 
@@ -11,3 +12,10 @@ class JumpStatement(Node):
         valuesString = self.printStatements()
 
         return "JumpStatement {}: {}".format(self.jump_statement_type, valuesString)
+
+    def getCode(self):
+        code = ""
+        if self.jump_statement_type == JumpStatementType.RETURN:
+            code += leave()
+            code += ret()
+        return code

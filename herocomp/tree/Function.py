@@ -1,3 +1,6 @@
+from asm.Asm import *
+from asm.Registers import Registers
+from tree.Block import Block
 from tree.Node import Node
 
 
@@ -26,6 +29,21 @@ class Function(Node):
                 argumentsString += str(argument)
 
         return argumentsString
+
+    def getCode(self):
+        code = ""
+
+        code += label(self.identifier.name)
+        code += push(Registers.RBP)
+        code += mov(Registers.RSP, Registers.RBP)
+
+        for statement in self.statements:
+            if isinstance(statement, Block):
+                code += statement.getCode()
+        # code += pop(Registers.RBP)
+        # code += ret()
+
+        return code
 
     def __str__(self):
         blockString = self.printStatements()

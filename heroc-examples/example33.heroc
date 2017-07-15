@@ -79,8 +79,8 @@ long maze = {
 
 long was_here [1817];
 long correct_path [1817];
-int start_x = 39, start_y = 22;
-int end_x = 39, end_y = 0;
+long start_x = 39, start_y = 22;
+long end_x = 39, end_y = 0;
 
 walk (x, y)
 {
@@ -89,7 +89,7 @@ walk (x, y)
 	return 1;
     }
     if (maze [x + 79 * y] == 1 || was_here [x + 79 * y]) {
-	return 0;  
+	return 0;
     }
     was_here [x + 79 * y] = 1;
     if (walk (x - 1, y) ||

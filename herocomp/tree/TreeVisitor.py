@@ -6,10 +6,12 @@ import antlr4
 from HerocLexer import HerocLexer
 from HerocParser import HerocParser
 from HerocVisitor import HerocVisitor
+from tree.Array import Array
 from tree.Assignment import Assignment
 from tree.AssignmentType import AssignmentType
 from tree.AST import AST
 from tree.Block import Block
+from tree.ConditionalStatement import ConditionalStatement
 from tree.DoWhileLoop import DoWhileLoop
 from tree.ForLoop import ForLoop
 from tree.Function import Function
@@ -22,6 +24,7 @@ from tree.Node import Node
 from tree.Number import Number
 from tree.operations.AdditiveOperation import AdditiveOperation
 from tree.operations.AndOperation import AndOperation
+from tree.operations.BitwiseNotOperation import BitwiseNotOperation
 from tree.operations.BitwiseOrOperation import BitwiseOrOperation
 from tree.operations.BitwiseXOrOperation import BitwiseXOrOperation
 from tree.operations.EqualityOperation import EqualityOperation
@@ -35,6 +38,7 @@ from tree.operations.PointerOperation import PointerOperation
 from tree.operations.RelationalOperation import RelationalOperation
 from tree.operations.ShiftOperation import ShiftOperation
 from tree.operations.SubscriptOperation import SubscriptOperation
+from tree.operations.UnaryAdditiveOperation import UnaryAdditiveOperation
 from tree.String import String
 from tree.Variable import Variable
 from tree.VariableType import VariableType
@@ -132,7 +136,7 @@ class TreeVisitor(HerocVisitor):
         variable = Variable(identifier=identifier,
                             variable_type=VariableType.VARIABLE)
 
-        variable.addStatementList([init_value])
+        variable.addStatement(init_value)
         return variable
 
     def visitInitDeclaratorArray(self, ctx):
@@ -140,7 +144,8 @@ class TreeVisitor(HerocVisitor):
 
         identifier = Identifier(str(ctx.getChild(0)))
         array_size = None
-        values = []
+        array_values = []
+        array = Array()
 
         for i in range(1, ctx.getChildCount()):
             child = ctx.getChild(i)
@@ -148,20 +153,22 @@ class TreeVisitor(HerocVisitor):
             if isinstance(child, HerocParser.ExpressionContext):
                 array_size = self.visit(child)
             elif isinstance(child, HerocParser.InitializerListContext):
-                values = self.visit(child)
+                array_values = self.visit(child)
 
         # QUESTION Here I can throw error when len(values) is > than array_size
         if array_size is None:
-            if len(values) > 0:
-                array_size = Number(len(values))
+            if len(array_values) > 0:
+                array_size = Number(len(array_values))
             else:
                 array_size = Number()
 
-        variable = Variable(identifier=identifier,
-                            variable_type=VariableType.ARRAY,
-                            array_size=array_size)
+        array.setArraySize(array_size)
+        array.addStatementList(array_values)
 
-        variable.addStatementList(values)
+        variable = Variable(identifier=identifier,
+                            variable_type=VariableType.ARRAY)
+
+        variable.addStatement(array)
         return variable
 
     def visitInitializerList(self, ctx):
@@ -246,6 +253,14 @@ class TreeVisitor(HerocVisitor):
         # Go to next layer
         if ctx.getChildCount() == 1:
             return self.visit(ctx.getChild(0))
+        else:
+            conditional_statement = ConditionalStatement()
+
+            conditional_statement.addStatement(self.visit(ctx.getChild(0)))
+            conditional_statement.addStatement(self.visit(ctx.getChild(2)))
+            conditional_statement.addStatement(self.visit(ctx.getChild(4)))
+
+            return conditional_statement
 
     def visitLogicalOrExpression(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))
@@ -367,6 +382,10 @@ class TreeVisitor(HerocVisitor):
                 operation = IncrementalOperation(operation=operation_type)
             elif operation_type is OperationType.DECREMENT:
                 operation = IncrementalOperation(operation=operation_type)
+            elif operation_type is OperationType.PLUS:
+                operation = UnaryAdditiveOperation(operation=operation_type)
+            elif operation_type is OperationType.MINUS:
+                operation = UnaryAdditiveOperation(operation=operation_type)
 
             operation.addStatement(self.visit(ctx.getChild(1)))
             return operation
@@ -382,7 +401,9 @@ class TreeVisitor(HerocVisitor):
                       HerocLexer.AND: OperationType.DEREFERENCE,
                       HerocLexer.TILDE: OperationType.BITWISE_NOT,
                       HerocLexer.PLUS_PLUS: OperationType.INCREMENT,
-                      HerocLexer.MINUS_MINUS: OperationType.DECREMENT}
+                      HerocLexer.MINUS_MINUS: OperationType.DECREMENT,
+                      HerocLexer.MINUS: OperationType.MINUS,
+                      HerocLexer.PLUS: OperationType.PLUS}
 
         return operations.get(operation_type)
 
@@ -410,7 +431,40 @@ class TreeVisitor(HerocVisitor):
 
             operation.addStatement(self.visit(ctx.getChild(2)))
             return operation
-        # TODO rest of the postfix
+        elif isinstance(ctx.getChild(1), HerocParser.InitializerListContext):
+            array = Array()
+            array_values = self.visit(ctx.getChild(1))
+
+            if len(array_values) > 0:
+                array_size = Number(len(array_values))
+            else:
+                array_size = Number()
+
+            array.setArraySize(array_size)
+            array.addStatementList(array_values)
+
+            return array
+        elif ctx.getChildCount() >= 3 and not isinstance(ctx.getChild(2), HerocParser.ExpressionContext):
+            # Function call
+            child = ctx.getChild(0)
+
+            if isinstance(child, antlr4.tree.Tree.TerminalNodeImpl):
+                identifier = Identifier(str(ctx.getChild(0)))
+            else:
+                identifier = self.visit(child)
+
+            arguments = []
+
+            for i in range(1, ctx.getChildCount()):
+                child = ctx.getChild(i)
+
+                if isinstance(child, HerocParser.ArgumentExpressionListContext):
+
+                    arguments = self.visit(child)
+
+            function_call = FunctionCall(identifier=identifier)
+            function_call.addStatementList(arguments)
+            return function_call
 
     def visitPrimaryExpression(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))
@@ -505,23 +559,22 @@ class TreeVisitor(HerocVisitor):
 
         return identifiers
 
-    def visitFunctionCallStatement(self, ctx):
-        logging.info(str(sys._getframe().f_code.co_name))
-
-        identifier = Identifier(str(ctx.getChild(0)))
-        arguments = []
-
-        for i in range(1, ctx.getChildCount()):
-            child = ctx.getChild(i)
-
-            if isinstance(child, HerocParser.ArgumentExpressionListContext):
-                arguments = self.visit(child)
-
-        function_call = FunctionCall(identifier=identifier)
-        print(repr(arguments))
-        function_call.addStatementList(arguments)
-
-        return function_call
+    # def visitFunctionCallStatement(self, ctx):
+    #     logging.info(str(sys._getframe().f_code.co_name))
+    #
+    #     identifier = Identifier(str(ctx.getChild(0)))
+    #     arguments = []
+    #
+    #     for i in range(1, ctx.getChildCount()):
+    #         child = ctx.getChild(i)
+    #
+    #         if isinstance(child, HerocParser.ArgumentExpressionListContext):
+    #             arguments = self.visit(child)
+    #
+    #     function_call = FunctionCall(identifier=identifier)
+    #     function_call.addStatementList(arguments)
+    #
+    #     return function_call
 
     def visitArgumentExpressionList(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))
@@ -531,10 +584,15 @@ class TreeVisitor(HerocVisitor):
         for i in range(ctx.getChildCount()):
             child = ctx.getChild(i)
 
-            if isinstance(child, HerocParser.ExpressionContext):
+            if isinstance(child, HerocParser.ArgumentExpressionContext):
                 arguments.append(self.visit(child))
 
         return arguments
+
+    def visitArgumentExpression(self, ctx):
+        logging.info(str(sys._getframe().f_code.co_name))
+
+        return self.visit(ctx.getChild(0))
 
     def visitStatement(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))

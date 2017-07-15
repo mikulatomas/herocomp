@@ -1,12 +1,6 @@
+
 main ()
 {
-    /* nice triangle, for-style with breaks */
-    long n;
-    for (n = 1;;) {
-	line_of_stars (10 - n);
-	n ++;
-	if (n > 10) {
-	    break;
-	}
-    }
+    /* a stupid way to print a greeting */
+    {1,2,3}
 }

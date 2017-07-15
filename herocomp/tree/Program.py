@@ -1,3 +1,4 @@
+from asm.Asm import *
 from tree.Node import Node
 
 
@@ -13,6 +14,17 @@ class Program(Node):
     def addVariableList(self, variableNodeList):
         for node in variableNodeList:
             self.addVariable(node)
+
+    def getCode(self):
+        code = ""
+
+        code += global_directive("main")
+        code += text_directive()
+
+        for statement in self.statements:
+            code += statement.getCode()
+
+        return code
 
     def __str__(self):
         variablesString = ""

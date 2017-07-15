@@ -6,16 +6,11 @@ class Variable(Node):
     def __init__(self,
                  identifier,
                  variable_type=VariableType.VARIABLE,
-                 array_size=None,
                  parent=None):
 
-        self.variable_type = variable_type
         self.identifier = identifier
         self.identifier.parent = self
-        self.array_size = array_size
-
-        if self.variable_type is VariableType.ARRAY:
-            self.array_size.parent = self
+        self.variable_type = variable_type
 
         super(Variable, self).__init__(parent=parent)
 
@@ -23,13 +18,6 @@ class Variable(Node):
         valuesString = self.printStatements()
         self.identifier.depth = self.depth + 1
 
-        if self.variable_type == VariableType.ARRAY:
-            self.array_size.depth = self.depth + 1
-            return "Variable {}: \n{}\n{} {}".format(self.variable_type,
-                                                     self.array_size.generateTabsForDepth() + str(self.array_size),
-                                                     self.identifier.generateTabsForDepth() + str(self.identifier),
-                                                     valuesString)
-        else:
-            return "Variable {}: \n{} {}".format(self.variable_type,
-                                                 self.identifier.generateTabsForDepth() + str(self.identifier),
-                                                 valuesString)
+        return "Variable {}: \n{} {}".format(self.variable_type,
+                                             self.identifier.generateTabsForDepth() + str(self.identifier),
+                                             valuesString)

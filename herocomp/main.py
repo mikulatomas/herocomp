@@ -1,7 +1,9 @@
 import logging
 import sys
+from os.path import basename
 
 from antlr4 import *
+from HerocErrorListener import HerocErrorListener
 # from AST_first import AST
 from HerocLexer import HerocLexer
 # from HerocListener import HerocListener
@@ -9,30 +11,33 @@ from HerocParser import HerocParser
 from tree.TreeVisitor import TreeVisitor
 
 
-def main(argv):
-    logging.basicConfig(level=logging.INFO)
-
-    if len(sys.argv) > 1:
-        input_stream = FileStream(sys.argv[1])
-    else:
-        input_stream = InputStream(sys.stdin.readline())
-
+def load_source_to_ast(filename):
+    input_stream = FileStream(filename)
     lexer = HerocLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = HerocParser(stream)
-    tree = parser.sourcefile()
+    parser._listeners = [HerocErrorListener()]
 
-    # print(tree.toStringTree(recog=parser))
+    try:
+        tree = parser.sourcefile()
+    except:
+        return None
 
-    # listener = HerocListener()
     treeVisitor = TreeVisitor()
-    ast = treeVisitor.visit(tree);
-    print()
-    print(ast)
+    ast = treeVisitor.visit(tree)
 
-    # ast = AST(tree)
-    #
-    # print(ast)
+    return ast
+
+
+def main(argv):
+    # logging.basicConfig(level=logging.INFO)
+    filename = sys.argv[1]
+    show_ast = sys.argv[2]
+    ast = load_source_to_ast(filename)
+    print(ast.getCode(basename(filename)))
+    if show_ast == str(1):
+        print(ast)
+
 
 if __name__ == '__main__':
     main(sys.argv)

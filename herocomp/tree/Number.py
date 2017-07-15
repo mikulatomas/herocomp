@@ -2,7 +2,7 @@ from tree.Node import Node
 
 
 class Number(Node):
-    def __init__(self, value=0, parent=None):
+    def __init__(self, value=None, parent=None):
         self.value = value
         super(Number, self).__init__(parent)
 
