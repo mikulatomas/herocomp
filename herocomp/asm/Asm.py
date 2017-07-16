@@ -36,3 +36,7 @@ def ret():
 
 def leave():
     return "\tleave\n"
+
+    
+def call(name):
+    return "\tcall\t{0}\n".format(name)

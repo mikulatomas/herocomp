@@ -13,7 +13,7 @@ class JumpStatement(Node):
 
         return "JumpStatement {}: {}".format(self.jump_statement_type, valuesString)
 
-    def getCode(self):
+    def get_code(self):
         code = ""
         if self.jump_statement_type == JumpStatementType.RETURN:
             code += leave()

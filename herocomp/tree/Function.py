@@ -1,6 +1,6 @@
+import tree
 from asm.Asm import *
 from asm.Registers import Registers
-from tree.Block import Block
 from tree.Node import Node
 
 
@@ -8,6 +8,7 @@ class Function(Node):
     def __init__(self, identifier, parent=None):
         self.identifier = identifier
         self.arguments = []
+        self.variables_offset = 0
         super(Function, self).__init__(parent)
 
     def addArgument(self, argumentNode):
@@ -30,7 +31,7 @@ class Function(Node):
 
         return argumentsString
 
-    def getCode(self):
+    def get_code(self):
         code = ""
 
         code += label(self.identifier.name)
@@ -38,8 +39,9 @@ class Function(Node):
         code += mov(Registers.RSP, Registers.RBP)
 
         for statement in self.statements:
-            if isinstance(statement, Block):
-                code += statement.getCode()
+            if isinstance(statement, tree.Block.Block):
+                block_code, has_return = statement.get_code()
+                code += block_code
         # code += pop(Registers.RBP)
         # code += ret()
 

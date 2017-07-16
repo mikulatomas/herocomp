@@ -15,14 +15,14 @@ class Program(Node):
         for node in variableNodeList:
             self.addVariable(node)
 
-    def getCode(self):
+    def get_code(self):
         code = ""
 
         code += global_directive("main")
         code += text_directive()
 
         for statement in self.statements:
-            code += statement.getCode()
+            code += statement.get_code()
 
         return code
 

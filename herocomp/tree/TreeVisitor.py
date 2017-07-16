@@ -60,7 +60,9 @@ class TreeVisitor(HerocVisitor):
             # Variables are recieved in list
             if isinstance(r, list):
                 logging.info("Adding variables")
-                ast.root.addVariableList(r)
+                # ast.root.addVariableList(r)
+                for variable in r:
+                    ast.root.addStatement(variable)
             else:
                 logging.info("Adding statement")
                 ast.root.addStatement(r)
@@ -125,18 +127,22 @@ class TreeVisitor(HerocVisitor):
 
         identifier = Identifier(str(ctx.getChild(0)))
 
-        # If have a value
-        if ctx.getChildCount() == 3:
-            # Expression
-            init_value = self.visit(ctx.getChild(2))
-        else:
-            # Default value to 0
-            init_value = Number()
-
         variable = Variable(identifier=identifier,
                             variable_type=VariableType.VARIABLE)
 
-        variable.addStatement(init_value)
+        # If have a value
+        if ctx.getChildCount() == 3:
+            # Expression
+            assignment = Assignment(AssignmentType.ASSIGN)
+            init_value = self.visit(ctx.getChild(2))
+            assignment.addStatement(identifier)
+            assignment.addStatement(init_value)
+            variable.addStatement(assignment)
+        # else:
+        #     # Default value to 0
+        #     init_value = Number()
+        #     variable.addStatement(init_)
+
         return variable
 
     def visitInitDeclaratorArray(self, ctx):
@@ -164,11 +170,14 @@ class TreeVisitor(HerocVisitor):
 
         array.setArraySize(array_size)
         array.addStatementList(array_values)
+        assignment = Assignment(AssignmentType.ASSIGN)
+        assignment.addStatement(array)
+
 
         variable = Variable(identifier=identifier,
                             variable_type=VariableType.ARRAY)
 
-        variable.addStatement(array)
+        variable.addStatement(assignment)
         return variable
 
     def visitInitializerList(self, ctx):
@@ -504,7 +513,9 @@ class TreeVisitor(HerocVisitor):
             for item in items:
                 # In case of variable
                 if isinstance(item, list):
-                    block.addVariableList(item)
+                    # block.addVariableList(item)
+                    for variable in item:
+                        block.addStatement(variable)
                 else:
                     block.addStatement(item)
 

@@ -1,22 +1,22 @@
-	.file	"main.c"
-	.text
-	.globl	main
-	.type	main, @function
+.file	"main.c"
+.global	main
+.text
 main:
-.LFB0:
-	.cfi_startproc
-	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movq	$1, -8(%rbp)
-	movl	$0, %eax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE0:
-	.size	main, .-main
-	.ident	"GCC: (Debian 6.3.0-18) 6.3.0 20170516"
-	.section	.note.GNU-stack,"",@progbits
+pushq	%rbp
+movq	%rsp, %rbp
+movq	$1, %rax
+movq	%rax, %r15
+movq	%r15, -8(%rbp)
+movq	$10, %rax
+movq	%rax, %r15
+movq	%r15, -16(%rbp)
+movq	-8(%rbp), %rax
+movq	%rax, %r15
+movq	%r15, -40(%rbp)
+movq	%rax, %r15
+movq	%r15, -32(%rbp)
+movq	%rax, %r15
+movq	%r15, -24(%rbp)
+leave
+ret
+.ident	"HEROCOMP - Tomas Mikula 2017"

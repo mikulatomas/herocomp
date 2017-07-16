@@ -1,3 +1,6 @@
+import tree
+from asm.Asm import *
+from asm.Registers import Registers
 from tree.Node import Node
 
 
@@ -8,3 +11,24 @@ class Identifier(Node):
 
     def __str__(self):
         return "Identifier: {}".format(self.name)
+
+    def get_stack_offset(self):
+        parent = self.parent
+        offset = None
+
+        while parent.parent != None:
+            if isinstance(parent, tree.Block.Block):
+                try:
+                    offset = parent.variables_table.get_variable_offset(self.name)
+                except ValueError as e:
+                    pass
+            parent = parent.parent
+
+        if offset is None:
+            error_string = "Variable {0} is not declared".format(self.name)
+            raise ValueError(error_string)
+
+        return offset
+
+    def get_code(self):
+        return mov(str(self.get_stack_offset()) + Registers.RBP.dereference(), Registers.RAX)

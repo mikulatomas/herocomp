@@ -34,7 +34,7 @@ def main(argv):
     filename = sys.argv[1]
     show_ast = sys.argv[2]
     ast = load_source_to_ast(filename)
-    print(ast.getCode(basename(filename)))
+    print(ast.get_code(basename(filename)))
     if show_ast == str(1):
         print(ast)
 

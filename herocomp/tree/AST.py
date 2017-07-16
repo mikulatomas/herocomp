@@ -10,12 +10,12 @@ class AST():
     def __str__(self):
         return str(self.root)
 
-    def getCode(self, filename):
+    def get_code(self, filename):
         code = ""
 
         code += filename_directive(filename)
 
-        code += self.root.getCode()
+        code += self.root.get_code()
 
         code += compiler_ident_directive()
         return code
