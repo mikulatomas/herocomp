@@ -29,9 +29,9 @@ class Variable(Node):
             #     assignment = self.statements[0]
                 # assignment
                 # if isinstance(assignment.statements[0], tree.Number.Number):
-                #     code += mov(assignment.statements[0].get_asm_value(), str(self.variable_offset) + Registers.RBP.dereference())
+                #     code += movq(assignment.statements[0].get_asm_value(), str(self.variable_offset) + Registers.RBP.dereference())
                 # elif isinstance(assignment.statements[0], tree.Identifier.Identifier):
-                #     code += mov(assignment.statements[0].get_asm_value(), str(self.variable_offset) + Registers.RBP.dereference())
+                #     code += movq(assignment.statements[0].get_asm_value(), str(self.variable_offset) + Registers.RBP.dereference())
 
 
         return code

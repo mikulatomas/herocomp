@@ -15,4 +15,9 @@ class Number(Node):
         return "$" + str(self.value)
 
     def get_code(self):
-        return mov(self.get_asm_value(), Registers.RAX)
+        return movq(self.get_asm_value(), Registers.RAX)
+
+    def fill_operation_stack(self):
+        stack = []
+        stack.append(self)
+        return stack

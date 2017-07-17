@@ -35,7 +35,7 @@ class Block(Node):
         # return "Block: {0} {1}".format(variablesString, statementsString)
         return "Block: {0}".format(statementsString)
 
-    def getVariableOffset(self):
+    def get_variable_offset(self):
         parent = self.parent
 
         while not isinstance(parent, Function):
@@ -56,7 +56,7 @@ class Block(Node):
                     code += statement.get_code()
                     return code, True
             elif isinstance(statement, tree.Variable.Variable):
-                statement.variable_offset = self.getVariableOffset()
+                statement.variable_offset = self.get_variable_offset()
                 self. variables_table.add_variable(statement.identifier.name, statement.variable_offset)
                 code += statement.get_code()
             elif isinstance(statement, tree.Block.Block):

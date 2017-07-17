@@ -31,12 +31,30 @@ class Function(Node):
 
         return argumentsString
 
+    def get_number_of_local_variables(self, statement, number_of_variables=0):
+        for node in statement.statements:
+            if isinstance(node, tree.Variable.Variable):
+                number_of_variables += 1
+            elif isinstance(node, tree.JumpStatement.JumpStatement):
+                if node.jump_statement_type == tree.JumpStatementType.JumpStatementType.RETURN:
+                    return number_of_variables, True
+            else:
+                number_of_variables, has_return = self.get_number_of_local_variables(node, number_of_variables)
+                if has_return:
+                    break
+
+        return number_of_variables, False
+
+
     def get_code(self):
         code = ""
 
         code += label(self.identifier.name)
         code += push(Registers.RBP)
-        code += mov(Registers.RSP, Registers.RBP)
+        code += movq(Registers.RSP, Registers.RBP)
+
+        number_of_local_variables, has_return = self.get_number_of_local_variables(self)
+        code += sub("$" + str(number_of_local_variables * 8), Registers.RSP)
 
         for statement in self.statements:
             if isinstance(statement, tree.Block.Block):

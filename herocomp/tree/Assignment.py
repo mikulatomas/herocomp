@@ -27,12 +27,12 @@ class Assignment(Node):
 
         code += value.get_code()
         # Maybe for dereference
-        code += mov(Registers.RAX, Registers.R15)
+        code += movq(Registers.RAX, Registers.R15)
 
         if isinstance(destination, tree.Identifier.Identifier):
             if isinstance(self.parent, tree.Variable.Variable):
-                code += mov(Registers.R15, str(self.parent.variable_offset) + Registers.RBP.dereference())
+                code += movq(Registers.R15, str(self.parent.variable_offset) + Registers.RBP.dereference())
             else:
-                code += mov(Registers.R15, str(destination.get_stack_offset()) + Registers.RBP.dereference())
+                code += movq(Registers.R15, str(destination.get_stack_offset()) + Registers.RBP.dereference())
 
         return code

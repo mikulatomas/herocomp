@@ -31,4 +31,9 @@ class Identifier(Node):
         return offset
 
     def get_code(self):
-        return mov(str(self.get_stack_offset()) + Registers.RBP.dereference(), Registers.RAX)
+        return movq(str(self.get_stack_offset()) + Registers.RBP.dereference(), Registers.RAX)
+
+    def fill_operation_stack(self):
+        stack = []
+        stack.append(self)
+        return stack
