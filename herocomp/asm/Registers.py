@@ -4,6 +4,7 @@ from enum import Enum
 class Registers(Enum):
     RAX = "%rax"
     EAX = "%eax"
+    ECX = "%ecx"
     RBX = "%rbx"
     RCX = "%rcx"
     RDX = "%rdx"
@@ -16,6 +17,7 @@ class Registers(Enum):
     R9 = "%r9"
     R10 = "%r10"
     R11 = "%r11"
+    R11B = "%r11b"
     R12 = "%r12"
     R13 = "%r13"
     R14 = "%r14"

@@ -1,267 +1,47 @@
-	.file	"example01.heroc"
+	.file	"main.c"
 	.global	main
 	.text
 main:
 	pushq	%rbp
 	movq	%rsp, %rbp
-	subq	$0, %rsp
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$72, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$5, %rax
-	pushq	%rax
-	movq	$4, %rax
-	pushq	%rax
-	movq	$6, %rax
-	pushq	%rax
-	popq	%r10
-	popq	%r11
-	pushq	%rdx
-	pushq	%rcx
-	movq	%r11, %rcx
-	movq	%r10, %rdx
-	sall	%cl, %edx
-	movl	%edx, %eax
-	cltq
-	popq	%rcx
-	popq	%rdx
-	pushq	%rax
-	popq	%r10
-	popq	%r11
-	cmpq	$0, %r10
-	movq	$0, %r12
-	cmove	%r12, %r10
-	cmpq	$0, %r11
-	movq	$0, %r12
-	cmove	%r12, %r11
-	orq	%r10, %r11
-	pushq	%r11
-	popq	%rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$108, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$108, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$111, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$44, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$32, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$87, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$111, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$114, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$108, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$28, %rax
-	pushq	%rax
-	movq	$7, %rax
-	pushq	%rax
+	subq	$8, %rsp
+	movq	$120, %rax
+	movq	%rax, %r15
+	movq	%r15, -8(%rbp)
+	push	%rdi
+	push	%rsi
+	push	%rdx
+	push	%rcx
+	push	%r8
+	push	%r9
 	movq	$1, %rax
 	pushq	%rax
-	popq	%r10
-	popq	%r11
-	pushq	%rdx
-	pushq	%rcx
-	movq	%r11, %rcx
-	movq	%r10, %rdx
-	sall	%cl, %edx
-	movl	%edx, %eax
-	cltq
-	popq	%rcx
-	popq	%rdx
+	movq	-8(%rbp), %rax
 	pushq	%rax
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
-	popq	%rax
+	pop	%rax
 	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	movq	$33, %rax
-	movq	%rax, %rdi
-	call	print_char
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
-	pushq	%rdi
-	pushq	%rsi
-	pushq	%rdx
-	pushq	%rcx
-	pushq	%r8
-	pushq	%r9
-	call	print_nl
-	popq	%r9
-	popq	%r8
-	popq	%rcx
-	popq	%rdx
-	popq	%rsi
-	popq	%rdi
+	movq	$2, %rax
+	pushq	%rax
+	movq	-8(%rbp), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	subq	%r10, %r11
+	pushq	%r11
+	pop	%rax
+	movq	%rax, %rsi
+	call	print_two_longs
+	pop	%r9
+	pop	%r8
+	pop	%rcx
+	pop	%rdx
+	pop	%rsi
+	pop	%rdi
+	leave	
+	ret	
 	.ident	"HEROCOMP - Tomas Mikula 2017"
 

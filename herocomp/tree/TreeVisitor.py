@@ -6,45 +6,45 @@ import antlr4
 from HerocLexer import HerocLexer
 from HerocParser import HerocParser
 from HerocVisitor import HerocVisitor
-from tree.Array import Array
-from tree.Assignment import Assignment
-from tree.AssignmentType import AssignmentType
 from tree.AST import AST
-from tree.Block import Block
-from tree.ConditionalStatement import ConditionalStatement
-from tree.DoWhileLoop import DoWhileLoop
-from tree.ForLoop import ForLoop
-from tree.Function import Function
-from tree.FunctionCall import FunctionCall
-from tree.Identifier import Identifier
-from tree.IfStatement import IfStatement
-from tree.JumpStatement import JumpStatement
-from tree.JumpStatementType import JumpStatementType
-from tree.Node import Node
-from tree.Number import Number
-from tree.operations.BinaryOperation import BinaryOperation
-# from tree.operations.AdditiveOperation import AdditiveOperation
-# from tree.operations.AndOperation import AndOperation
-# from tree.operations.BitwiseNotOperation import BitwiseNotOperation
-# from tree.operations.BitwiseOrOperation import BitwiseOrOperation
-# from tree.operations.BitwiseXOrOperation import BitwiseXOrOperation
-# from tree.operations.EqualityOperation import EqualityOperation
-# from tree.operations.IncrementalOperation import IncrementalOperation
-# from tree.operations.LogicalAndOperation import LogicalAndOperation
-# from tree.operations.LogicalNotOperation import LogicalNotOperation
-# from tree.operations.LogicalOrOperation import LogicalOrOperation
-# from tree.operations.MultiplicativeOperation import MultiplicativeOperation
-from tree.operations.OperationType import OperationType
-from tree.operations.UnaryOperation import UnaryOperation
-# from tree.operations.PointerOperation import PointerOperation
-# from tree.operations.RelationalOperation import RelationalOperation
-# from tree.operations.ShiftOperation import ShiftOperation
-# from tree.operations.SubscriptOperation import SubscriptOperation
-# from tree.operations.UnaryAdditiveOperation import UnaryAdditiveOperation
-from tree.String import String
-from tree.Variable import Variable
-from tree.VariableType import VariableType
-from tree.WhileLoop import WhileLoop
+from tree.nodes.types.Array import Array
+from tree.nodes.Assignment import Assignment
+from tree.nodes.AssignmentType import AssignmentType
+from tree.nodes.Block import Block
+from tree.nodes.ConditionalStatement import ConditionalStatement
+from tree.nodes.loops.DoWhileLoop import DoWhileLoop
+from tree.nodes.loops.ForLoop import ForLoop
+from tree.nodes.Function import Function
+from tree.nodes.FunctionCall import FunctionCall
+from tree.nodes.types.Identifier import Identifier
+from tree.nodes.IfStatement import IfStatement
+from tree.nodes.loops.JumpStatement import JumpStatement
+from tree.nodes.loops.JumpStatementType import JumpStatementType
+from tree.nodes.Node import Node
+from tree.nodes.types.Number import Number
+from tree.nodes.operations.BinaryOperation import BinaryOperation
+# from tree.nodes.operations.AdditiveOperation import AdditiveOperation
+# from tree.nodes.operations.AndOperation import AndOperation
+# from tree.nodes.operations.BitwiseNotOperation import BitwiseNotOperation
+# from tree.nodes.operations.BitwiseOrOperation import BitwiseOrOperation
+# from tree.nodes.operations.BitwiseXOrOperation import BitwiseXOrOperation
+# from tree.nodes.operations.EqualityOperation import EqualityOperation
+# from tree.nodes.operations.IncrementalOperation import IncrementalOperation
+# from tree.nodes.operations.LogicalAndOperation import LogicalAndOperation
+# from tree.nodes.operations.LogicalNotOperation import LogicalNotOperation
+# from tree.nodes.operations.LogicalOrOperation import LogicalOrOperation
+# from tree.nodes.operations.MultiplicativeOperation import MultiplicativeOperation
+from tree.nodes.operations.OperationType import OperationType
+from tree.nodes.operations.UnaryOperation import UnaryOperation
+# from tree.nodes.operations.PointerOperation import PointerOperation
+# from tree.nodes.operations.RelationalOperation import RelationalOperation
+# from tree.nodes.operations.ShiftOperation import ShiftOperation
+# from tree.nodes.operations.SubscriptOperation import SubscriptOperation
+# from tree.nodes.operations.UnaryAdditiveOperation import UnaryAdditiveOperation
+from tree.nodes.types.String import String
+from tree.nodes.types.Variable import Variable
+from tree.nodes.types.VariableType import VariableType
+from tree.nodes.loops.WhileLoop import WhileLoop
 
 
 class TreeVisitor(HerocVisitor):

@@ -25,3 +25,5 @@ void print_nl ()
 {
     printf ("\n");
 }
+
+void print_two_longs(long x, long y) { printf("%li %li", x, y); }

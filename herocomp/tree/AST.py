@@ -1,6 +1,6 @@
 from asm.Asm import *
-from tree.Node import Node
-from tree.Program import Program
+from tree.nodes.Node import Node
+from tree.nodes.Program import Program
 
 
 class AST():

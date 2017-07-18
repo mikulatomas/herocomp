@@ -1,4 +1,5 @@
 main() {
-    print_char ((1 << 7) - 28);
-    return 0;
+  long a = 120;
+  print_two_longs(a - 1, a - 2);
+  return 0;
 }
