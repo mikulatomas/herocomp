@@ -38,3 +38,8 @@ class BinaryOperation(Node):
                 stack.append(value)
 
         return stack
+
+    def __str__(self):
+        statementsString = self.printStatements()
+        return "BinaryOperation {}: {}".format(self.operation,
+                                                 statementsString)

@@ -22,23 +22,25 @@ from tree.JumpStatement import JumpStatement
 from tree.JumpStatementType import JumpStatementType
 from tree.Node import Node
 from tree.Number import Number
-from tree.operations.AdditiveOperation import AdditiveOperation
-from tree.operations.AndOperation import AndOperation
-from tree.operations.BitwiseNotOperation import BitwiseNotOperation
-from tree.operations.BitwiseOrOperation import BitwiseOrOperation
-from tree.operations.BitwiseXOrOperation import BitwiseXOrOperation
-from tree.operations.EqualityOperation import EqualityOperation
-from tree.operations.IncrementalOperation import IncrementalOperation
-from tree.operations.LogicalAndOperation import LogicalAndOperation
-from tree.operations.LogicalNotOperation import LogicalNotOperation
-from tree.operations.LogicalOrOperation import LogicalOrOperation
-from tree.operations.MultiplicativeOperation import MultiplicativeOperation
+from tree.operations.BinaryOperation import BinaryOperation
+# from tree.operations.AdditiveOperation import AdditiveOperation
+# from tree.operations.AndOperation import AndOperation
+# from tree.operations.BitwiseNotOperation import BitwiseNotOperation
+# from tree.operations.BitwiseOrOperation import BitwiseOrOperation
+# from tree.operations.BitwiseXOrOperation import BitwiseXOrOperation
+# from tree.operations.EqualityOperation import EqualityOperation
+# from tree.operations.IncrementalOperation import IncrementalOperation
+# from tree.operations.LogicalAndOperation import LogicalAndOperation
+# from tree.operations.LogicalNotOperation import LogicalNotOperation
+# from tree.operations.LogicalOrOperation import LogicalOrOperation
+# from tree.operations.MultiplicativeOperation import MultiplicativeOperation
 from tree.operations.OperationType import OperationType
-from tree.operations.PointerOperation import PointerOperation
-from tree.operations.RelationalOperation import RelationalOperation
-from tree.operations.ShiftOperation import ShiftOperation
-from tree.operations.SubscriptOperation import SubscriptOperation
-from tree.operations.UnaryAdditiveOperation import UnaryAdditiveOperation
+from tree.operations.UnaryOperation import UnaryOperation
+# from tree.operations.PointerOperation import PointerOperation
+# from tree.operations.RelationalOperation import RelationalOperation
+# from tree.operations.ShiftOperation import ShiftOperation
+# from tree.operations.SubscriptOperation import SubscriptOperation
+# from tree.operations.UnaryAdditiveOperation import UnaryAdditiveOperation
 from tree.String import String
 from tree.Variable import Variable
 from tree.VariableType import VariableType
@@ -277,7 +279,7 @@ class TreeVisitor(HerocVisitor):
         operation_dict = {HerocLexer.OR_OR: OperationType.LOGICAL_OR}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=LogicalOrOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitLogicalAndExpression(self, ctx):
@@ -286,7 +288,7 @@ class TreeVisitor(HerocVisitor):
         operation_dict = {HerocLexer.AND_AND: OperationType.LOGICAL_AND}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=LogicalAndOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitBitwiseOrExpression(self, ctx):
@@ -295,7 +297,7 @@ class TreeVisitor(HerocVisitor):
         operation_dict = {HerocLexer.OR: OperationType.OR}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=BitwiseOrOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitBitwiseXOrExpression(self, ctx):
@@ -304,7 +306,7 @@ class TreeVisitor(HerocVisitor):
         operation_dict = {HerocLexer.CARET: OperationType.XOR}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=BitwiseXOrOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitAndExpression(self, ctx):
@@ -313,7 +315,7 @@ class TreeVisitor(HerocVisitor):
         operation_dict = {HerocLexer.AND: OperationType.AND}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=AndOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitEqualityExpression(self, ctx):
@@ -323,7 +325,7 @@ class TreeVisitor(HerocVisitor):
                           HerocLexer.NOT_EQUAL: OperationType.NOT_EQUAL}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=EqualityOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitRelationalExpression(self, ctx):
@@ -335,7 +337,7 @@ class TreeVisitor(HerocVisitor):
                           HerocLexer.GREATER_EQUAL: OperationType.GREATER_EQUAL}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=RelationalOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitShiftExpression(self, ctx):
@@ -345,7 +347,7 @@ class TreeVisitor(HerocVisitor):
                           HerocLexer.RIGHT_SHIFT: OperationType.RIGHT_SHIFT}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=ShiftOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitAdditiveExpression(self, ctx):
@@ -355,7 +357,7 @@ class TreeVisitor(HerocVisitor):
                           HerocLexer.MINUS: OperationType.MINUS}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=AdditiveOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitMultiplicativeExpression(self, ctx):
@@ -366,7 +368,7 @@ class TreeVisitor(HerocVisitor):
                           HerocLexer.MOD: OperationType.MODULO}
 
         return self.__visitBinaryExpressionHelper(ctx=ctx,
-                                                  operation_class=MultiplicativeOperation,
+                                                  operation_class=BinaryOperation,
                                                   operation_dict=operation_dict)
 
     def visitUnaryExpression(self, ctx):
@@ -377,24 +379,24 @@ class TreeVisitor(HerocVisitor):
             return self.visit(ctx.getChild(0))
         elif isinstance(ctx.getChild(0), HerocParser.UnaryOperatorContext):
             operation_type = self.visit(ctx.getChild(0))
-            operation = None
+            operation = UnaryOperation(operation=operation_type)
 
-            if operation_type is OperationType.LOGICAL_NOT:
-                operation = LogicalNotOperation(operation=operation_type)
-            elif operation_type is OperationType.REFERENCE:
-                operation = PointerOperation(operation=operation_type)
-            elif operation_type is OperationType.DEREFERENCE:
-                operation = PointerOperation(operation=operation_type)
-            elif operation_type is OperationType.BITWISE_NOT:
-                operation = BitwiseNotOperation(operation=operation_type)
-            elif operation_type is OperationType.INCREMENT:
-                operation = IncrementalOperation(operation=operation_type)
-            elif operation_type is OperationType.DECREMENT:
-                operation = IncrementalOperation(operation=operation_type)
-            elif operation_type is OperationType.PLUS:
-                operation = UnaryAdditiveOperation(operation=operation_type)
-            elif operation_type is OperationType.MINUS:
-                operation = UnaryAdditiveOperation(operation=operation_type)
+            # if operation_type is OperationType.LOGICAL_NOT:
+            #     operation = LogicalNotOperation(operation=operation_type)
+            # elif operation_type is OperationType.REFERENCE:
+            #     operation = PointerOperation(operation=operation_type)
+            # elif operation_type is OperationType.DEREFERENCE:
+            #     operation = PointerOperation(operation=operation_type)
+            # elif operation_type is OperationType.BITWISE_NOT:
+            #     operation = BitwiseNotOperation(operation=operation_type)
+            # elif operation_type is OperationType.INCREMENT:
+            #     operation = IncrementalOperation(operation=operation_type)
+            # elif operation_type is OperationType.DECREMENT:
+            #     operation = IncrementalOperation(operation=operation_type)
+            # elif operation_type is OperationType.PLUS:
+            #     operation = UnaryAdditiveOperation(operation=operation_type)
+            # elif operation_type is OperationType.MINUS:
+            #     operation = UnaryAdditiveOperation(operation=operation_type)
 
             operation.addStatement(self.visit(ctx.getChild(1)))
             return operation
@@ -428,14 +430,14 @@ class TreeVisitor(HerocVisitor):
             operations = {HerocLexer.PLUS_PLUS: OperationType.INCREMENT,
                           HerocLexer.MINUS_MINUS: OperationType.DECREMENT}
 
-            operation = IncrementalOperation(operation=operations.get(operation_type),
+            operation = UnaryOperation(operation=operations.get(operation_type),
                                              postfix=True)
 
             operation.addStatement(self.visit(ctx.getChild(0)))
             return operation
         elif isinstance(ctx.getChild(2), HerocParser.ExpressionContext):
             # Subscript postfix operation
-            operation = SubscriptOperation(operation=OperationType.SUBSCRIPT)
+            operation = UnaryOperation(operation=OperationType.SUBSCRIPT)
             operation.addStatement(self.visit(ctx.getChild(0)))
 
             operation.addStatement(self.visit(ctx.getChild(2)))
