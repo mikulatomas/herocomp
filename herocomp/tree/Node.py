@@ -2,7 +2,10 @@
 
 
 class Node():
+    node_number = 0
     def __init__(self, parent=None):
+        self.number = Node.node_number
+        Node.node_number += 1
         self.parent = parent
         self.statements = []
         self.depth = 0

@@ -11,11 +11,8 @@ class Number(Node):
     def __str__(self):
         return "Number: {0}".format(self.value)
 
-    def get_asm_value(self):
-        return "$" + str(self.value)
-
     def get_code(self):
-        return movq(self.get_asm_value(), Registers.RAX)
+        return instruction("movq", number_constant(self.value), Registers.RAX)
 
     def fill_operation_stack(self):
         stack = []

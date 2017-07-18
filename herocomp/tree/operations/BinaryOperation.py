@@ -22,9 +22,9 @@ class BinaryOperation(Node):
             else:
                 # argumet
                 code += item.get_code()
-                code += push(Registers.RAX)
+                code += instruction("pushq", Registers.RAX)
 
-        code += pop(Registers.RAX)
+        code += instruction("pop", Registers.RAX)
 
         return code
 

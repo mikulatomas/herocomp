@@ -50,11 +50,11 @@ class Function(Node):
         code = ""
 
         code += label(self.identifier.name)
-        code += push(Registers.RBP)
-        code += movq(Registers.RSP, Registers.RBP)
+        code += instruction("pushq", Registers.RBP)
+        code += instruction("movq", Registers.RSP, Registers.RBP)
 
         number_of_local_variables, has_return = self.get_number_of_local_variables(self)
-        code += sub("$" + str(number_of_local_variables * 8), Registers.RSP)
+        code += instruction("subq", number_constant(number_of_local_variables * 8), Registers.RSP)
 
         for statement in self.statements:
             if isinstance(statement, tree.Block.Block):

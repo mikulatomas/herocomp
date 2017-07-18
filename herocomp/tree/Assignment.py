@@ -19,7 +19,7 @@ class Assignment(Node):
         code = ""
 
         destination = self.statements[0]
-        
+
         if not isinstance(destination, tree.Identifier.Identifier):
             raise ValueError("Left side of assignment {0} has to be identifier!")
 
@@ -27,12 +27,14 @@ class Assignment(Node):
 
         code += value.get_code()
         # Maybe for dereference
-        code += movq(Registers.RAX, Registers.R15)
+        code += instruction("movq", Registers.RAX, Registers.R15)
 
         if isinstance(destination, tree.Identifier.Identifier):
             if isinstance(self.parent, tree.Variable.Variable):
-                code += movq(Registers.R15, str(self.parent.variable_offset) + Registers.RBP.dereference())
+                destination_addres = str(self.parent.variable_offset) + Registers.RBP.dereference()
             else:
-                code += movq(Registers.R15, str(destination.get_stack_offset()) + Registers.RBP.dereference())
+                destination_addres = str(destination.get_stack_offset()) + Registers.RBP.dereference()
+
+            code += instruction("movq", Registers.R15, destination_addres)
 
         return code

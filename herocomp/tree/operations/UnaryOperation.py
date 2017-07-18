@@ -7,3 +7,6 @@ class UnaryOperation(Node):
         self.operation = operation
         self.postfix = postfix
         super(UnaryOperation, self).__init__(parent=parent)
+        
+    def get_code(self):
+        return "not_implemented"

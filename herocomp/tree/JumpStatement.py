@@ -16,6 +16,6 @@ class JumpStatement(Node):
     def get_code(self):
         code = ""
         if self.jump_statement_type == JumpStatementType.RETURN:
-            code += leave()
-            code += ret()
+            code += instruction("leave")
+            code += instruction("ret")
         return code

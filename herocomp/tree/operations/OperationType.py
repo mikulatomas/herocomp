@@ -5,6 +5,7 @@ from asm.Registers import Registers
 
 
 class OperationType(Enum):
+
     PLUS = '+'
     MINUS = '-'
     MULTIPLY = '*'
@@ -48,52 +49,71 @@ class OperationType(Enum):
         # Logic
         elif (self.name == self.OR.name):
             return self._logic_code()
+        # Arithmetic
+        elif (self.name == self.MINUS.name):
+            return self._arithmetic_code()
+        else:
+            # delete later
+            return "not implemented\n"
+
+    def _arithmetic_code(self):
+        code = ""
+
+        code += instruction("popq", Registers.R11)
+        code += instruction("popq", Registers.R10)
+
+        if (self.name == self.MINUS.name):
+            code += instruction("subq", Registers.R10, Registers.R11)
+
+        code += instruction("pushq", Registers.R11)
+
+        return code
 
     def _shift_code(self):
         code = ""
 
-        code += pop(Registers.R10)
-        code += pop(Registers.R11)
-        code += push(Registers.RDX)
-        code += push(Registers.RCX)
+        code += instruction("popq", Registers.R10)
+        code += instruction("popq", Registers.R11)
+        code += instruction("pushq", Registers.RDX)
+        code += instruction("pushq", Registers.RCX)
 
-        code += movq(Registers.R11, Registers.RCX)
-        code += movq(Registers.R10, Registers.RDX)
+        code += instruction("movq", Registers.R11, Registers.RCX)
+        code += instruction("movq", Registers.R10, Registers.RDX)
 
         if self.name == self.LEFT_SHIFT.name:
-            code += sall(Registers.CL, Registers.EDX)
+            code += instruction("sall", Registers.CL, Registers.EDX)
         elif self.name == self.RIGHT_SHIFT.name:
-            code += sarl(Registers.CL, Registers.EDX)
+            code += instruction("sarl", Registers.CL, Registers.EDX)
 
-        code += movl(Registers.EDX, Registers.EAX)
+        code += instruction("movl", Registers.EDX, Registers.EAX)
 
         # Promote to 64bit
-        code += cltq()
+        code += instruction("cltq")
 
-        code += pop(Registers.RCX)
-        code += pop(Registers.RDX)
-        code += push(Registers.RAX)
+        code += instruction("popq", Registers.RCX)
+        code += instruction("popq", Registers.RDX)
+        code += instruction("pushq", Registers.RAX)
 
         return code
 
     def _logic_code(self):
         code = ""
 
-        code += pop(Registers.R10)
-        code += pop(Registers.R11)
+        code += instruction("popq", Registers.R10)
+        code += instruction("popq", Registers.R11)
 
-        code += cmp("$0", Registers.R10)
+        code += instruction("cmpq", number_constant(0), Registers.R10)
         # code += movq("$1", Registers.R10)
-        code += movq("$0", Registers.R12)
-        code += cmove(Registers.R12, Registers.R10)
+        code += instruction("movq", number_constant(0), Registers.R12)
+        code += instruction("cmove", Registers.R12, Registers.R10)
 
-        code += cmp("$0", Registers.R11)
-        # code += cmp("$1", Registers.R11)
-        code += movq("$0", Registers.R12)
-        code += cmove(Registers.R12, Registers.R11)
+        code += instruction("cmpq", number_constant(0), Registers.R11)
+        # code += cmpq("$1", Registers.R11)
+        code += instruction("movq", number_constant(0), Registers.R12)
+        code += instruction("cmove", Registers.R12, Registers.R11)
 
-        code += orq(Registers.R10, Registers.R11)
+        code += instruction("orq", Registers.R10, Registers.R11)
 
-        code += push(Registers.R11)
+        code += instruction("pushq", Registers.R11)
 
         return code

@@ -21,7 +21,7 @@ class FunctionCall(Node):
         not_save_registers = [Registers.RDI, Registers.RSI, Registers.RDX, Registers.RCX, Registers.R8, Registers.R9]
 
         for register in not_save_registers:
-            code += push(register)
+            code += instruction("push", register)
 
         # Pass arguments
         arguments_register_order = [Registers.RDI, Registers.RSI, Registers.RDX, Registers.RCX, Registers.R8, Registers.R9]
@@ -30,14 +30,15 @@ class FunctionCall(Node):
         for argument in self.statements:
             code += argument.get_code()
             if argument_possition <= 6:
-                code += movq(Registers.RAX, arguments_register_order[argument_possition])
+                code += instruction("movq", Registers.RAX, arguments_register_order[argument_possition])
             else:
                 # stack
                 pass
             argument_possition += 1
 
         # Later implement pointr tu function
-        code += call(self.identifier.name)
+
+        code += instruction("call", self.identifier.name)
 
         number_arguments_on_stack = len(self.statements) - 6
 
@@ -47,6 +48,6 @@ class FunctionCall(Node):
 
         # Restore Registers
         for register in reversed(not_save_registers):
-            code += pop(register)
+            code += instruction("pop", register)
 
         return code
