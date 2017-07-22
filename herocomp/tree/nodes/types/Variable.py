@@ -23,8 +23,12 @@ class Variable(Node):
 
         if self.variable_type == VariableType.VARIABLE:
             # If variable has assignment
-            for statement in self.statements:
-                code += statement.get_code()
+            if len(self.statements) != 0:
+                for statement in self.statements:
+                    code += statement.get_code()
+            else:
+                pass
+
             # if len(self.statements) == 1:
             #     assignment = self.statements[0]
                 # assignment

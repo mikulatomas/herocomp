@@ -5,10 +5,20 @@ from tree.nodes.types.VariableType import VariableType
 
 
 class ForLoop(Loop):
-    def __init__(self, parent=None):
+    def __init__(self, inicialization, condition, incrementation, parent=None):
+        self.inicialization = inicialization
+        if self.inicialization is not None:
+            self.inicialization.parent = self
+        self.condition = condition
+        if self.condition is not None:
+            self.condition.parent = self
+        self.incrementation = incrementation
+        if self.incrementation is not None:
+            self.incrementation.parent = self
         super(ForLoop, self).__init__(parent=parent)
 
     def __str__(self):
+        # TODO print
         valuesString = self.printStatements()
 
         return "ForLoop: {}".format(valuesString)
@@ -16,15 +26,23 @@ class ForLoop(Loop):
     def get_code(self):
         code = ""
 
-        code += self.statements[0].get_code()
+        if self.inicialization is not None:
+            code += self.inicialization.get_code()
+
         code += label(self.start_label())
-        code += self.statements[1].get_code()
-        code += instruction("cmpq", number_constant(0), Registers.RAX)
-        code += instruction("je", self.end_label())
-        block_code, has_return = self.statements[3].get_code()
+
+        if self.condition is not None:
+            code += self.condition.get_code()
+            code += instruction("cmpq", number_constant(0), Registers.RAX)
+            code += instruction("je", self.end_label())
+
+        block_code, has_return = self.statements[0].get_code()
         code += block_code
-        code += label(self.next_label())
-        code += self.statements[2].get_code()
+
+        if self.incrementation is not None:
+            code += label(self.next_label())
+            code += self.incrementation.get_code()
+
         code += instruction("jmp", self.start_label())
         code += label(self.end_label())
 

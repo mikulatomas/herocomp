@@ -35,3 +35,8 @@ class Node():
         for i in range(self.depth):
             tabs += "   "
         return tabs
+
+    def fill_operation_stack(self):
+        stack = []
+        stack.append(self)
+        return stack

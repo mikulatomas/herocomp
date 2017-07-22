@@ -18,7 +18,7 @@ class BinaryOperation(Node):
 
             if isinstance(item, OperationType):
                 # operation
-                code += item.get_operation_code()
+                code += item.get_binary_operation_code()
             else:
                 # argumet
                 code += item.get_code()

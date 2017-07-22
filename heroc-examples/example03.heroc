@@ -5,6 +5,7 @@ swap (a, b)
     _aux = *a;
     *a = *b;
     *b = _aux;
+    return 0;
 }
 
 main ()
@@ -22,4 +23,5 @@ main ()
     print_nl ();
     print_long (b);
     print_nl ();
+    return;
 }

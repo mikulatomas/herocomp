@@ -9,6 +9,7 @@ class Function(Node):
         self.identifier = identifier
         self.arguments = []
         self.variables_offset = 0
+        self.arguments_table = {}
         super(Function, self).__init__(parent)
 
     def addArgument(self, argumentNode):
@@ -45,9 +46,28 @@ class Function(Node):
 
         return number_of_variables, False
 
+    def build_arguments_table(self):
+        table = {}
+
+        arguments_register_order = [Registers.RDI, Registers.RSI, Registers.RDX, Registers.RCX, Registers.R8, Registers.R9]
+        stack_offset = 16
+
+        for i in range(len(self.arguments)):
+            if i < 7:
+                location = str(arguments_register_order[i])
+            else:
+                location = str(stack_offset) + Registers.RBP.dereference()
+                stack_offset += 8
+
+            table[self.arguments[i].name] = location
+
+        return table
+
 
     def get_code(self):
         code = ""
+
+        self.arguments_table = self.build_arguments_table()
 
         code += label(self.identifier.name)
         code += instruction("pushq", Registers.RBP)

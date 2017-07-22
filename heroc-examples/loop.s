@@ -1,4 +1,4 @@
-	.file	"example03.c"
+	.file	"loop.c"
 	.text
 	.globl	main
 	.type	main, @function
@@ -11,12 +11,7 @@ main:
 	movq	%rsp, %rbp
 	.cfi_def_cfa_register 6
 	movq	$0, -8(%rbp)
-	jmp	.L2
-.L3:
 	addq	$1, -8(%rbp)
-.L2:
-	cmpq	$19, -8(%rbp)
-	jle	.L3
 	movl	$0, %eax
 	popq	%rbp
 	.cfi_def_cfa 7, 8

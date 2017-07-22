@@ -7,21 +7,19 @@ from HerocLexer import HerocLexer
 from HerocParser import HerocParser
 from HerocVisitor import HerocVisitor
 from tree.AST import AST
-from tree.nodes.types.Array import Array
 from tree.nodes.Assignment import Assignment
 from tree.nodes.AssignmentType import AssignmentType
 from tree.nodes.Block import Block
 from tree.nodes.ConditionalStatement import ConditionalStatement
-from tree.nodes.loops.DoWhileLoop import DoWhileLoop
-from tree.nodes.loops.ForLoop import ForLoop
 from tree.nodes.Function import Function
 from tree.nodes.FunctionCall import FunctionCall
-from tree.nodes.types.Identifier import Identifier
 from tree.nodes.IfStatement import IfStatement
+from tree.nodes.loops.DoWhileLoop import DoWhileLoop
+from tree.nodes.loops.ForLoop import ForLoop
 from tree.nodes.loops.JumpStatement import JumpStatement
 from tree.nodes.loops.JumpStatementType import JumpStatementType
+from tree.nodes.loops.WhileLoop import WhileLoop
 from tree.nodes.Node import Node
-from tree.nodes.types.Number import Number
 from tree.nodes.operations.BinaryOperation import BinaryOperation
 # from tree.nodes.operations.AdditiveOperation import AdditiveOperation
 # from tree.nodes.operations.AndOperation import AndOperation
@@ -36,6 +34,9 @@ from tree.nodes.operations.BinaryOperation import BinaryOperation
 # from tree.nodes.operations.MultiplicativeOperation import MultiplicativeOperation
 from tree.nodes.operations.OperationType import OperationType
 from tree.nodes.operations.UnaryOperation import UnaryOperation
+from tree.nodes.types.Array import Array
+from tree.nodes.types.Identifier import Identifier
+from tree.nodes.types.Number import Number
 # from tree.nodes.operations.PointerOperation import PointerOperation
 # from tree.nodes.operations.RelationalOperation import RelationalOperation
 # from tree.nodes.operations.ShiftOperation import ShiftOperation
@@ -44,7 +45,6 @@ from tree.nodes.operations.UnaryOperation import UnaryOperation
 from tree.nodes.types.String import String
 from tree.nodes.types.Variable import Variable
 from tree.nodes.types.VariableType import VariableType
-from tree.nodes.loops.WhileLoop import WhileLoop
 
 
 class TreeVisitor(HerocVisitor):
@@ -408,8 +408,8 @@ class TreeVisitor(HerocVisitor):
         operation_type = ctx.getChild(0).getSymbol().type
 
         operations = {HerocLexer.NOT: OperationType.LOGICAL_NOT,
-                      HerocLexer.STAR: OperationType.REFERENCE,
-                      HerocLexer.AND: OperationType.DEREFERENCE,
+                      HerocLexer.AND: OperationType.REFERENCE,
+                      HerocLexer.STAR: OperationType.DEREFERENCE,
                       HerocLexer.TILDE: OperationType.BITWISE_NOT,
                       HerocLexer.PLUS_PLUS: OperationType.INCREMENT,
                       HerocLexer.MINUS_MINUS: OperationType.DECREMENT,
@@ -625,7 +625,37 @@ class TreeVisitor(HerocVisitor):
         loop = None
 
         if loop_type == 'for':
-            loop = ForLoop()
+            inicialization = None
+            condition = None
+            incrementation = None
+            body = None
+
+            for i in range(1, ctx.getChildCount()):
+                if not isinstance(ctx.getChild(i), antlr4.tree.Tree.TerminalNodeImpl):
+                    previous_char = ctx.getChild(i-1).getText()
+                    try:
+                        next_char = ctx.getChild(i+1).getText()
+                    except Exception as e:
+                        next_char = None
+
+
+                    if previous_char == "(":
+                        inicialization = self.visit(ctx.getChild(i))
+                    elif previous_char == ";" and next_char == ";":
+                        condition = self.visit(ctx.getChild(i))
+                    elif previous_char == ";" and next_char == ")":
+                        incrementation = self.visit(ctx.getChild(i))
+                    else:
+                        body = self.visit(ctx.getChild(i))
+
+
+
+            loop = ForLoop(inicialization, condition, incrementation)
+
+            if body is not None:
+                loop.addStatement(body)
+
+            return loop
         elif loop_type == 'while':
             loop = WhileLoop()
         elif loop_type == 'do':
@@ -633,8 +663,8 @@ class TreeVisitor(HerocVisitor):
 
         for i in range(1, ctx.getChildCount()):
             child = ctx.getChild(i)
-
             if not isinstance(child, antlr4.tree.Tree.TerminalNodeImpl):
+
                 loop.addStatement(self.visit(child))
 
         return loop

@@ -25,15 +25,43 @@ class Identifier(Node):
             parent = parent.parent
 
         if offset is None:
-            error_string = "Variable {0} is not declared".format(self.name)
+            error_string = "Variable {0} is not declared a".format(self.name)
             raise ValueError(error_string)
 
         return offset
 
-    def get_code(self):
-        return instruction("movq", str(self.get_stack_offset()) + Registers.RBP.dereference(), Registers.RAX)
+    def _get_argument_location(self):
+        parent = self.parent
+        location = None
 
-    def fill_operation_stack(self):
-        stack = []
-        stack.append(self)
-        return stack
+        while parent.parent != None:
+            if isinstance(parent, tree.nodes.Function.Function):
+                location = parent.arguments_table.get(self.name)
+                break
+
+            parent = parent.parent
+
+        if location is None:
+            error_string = "Variable {0} is not an argument of the function".format(self.name)
+            raise ValueError(error_string)
+
+        return location
+
+    def get_value_address(self):
+        try:
+            offset = self.get_stack_offset()
+            return str(offset) + Registers.RBP.dereference()
+        except Exception as e:
+            # Try to find in function argument
+            try:
+                return self._get_argument_location()
+            except Exception as e:
+                raise
+
+    def get_code(self):
+        return instruction("movq", self.get_value_address(), Registers.RAX)
+
+    # def fill_operation_stack(self):
+    #     stack = []
+    #     stack.append(self)
+    #     return stack

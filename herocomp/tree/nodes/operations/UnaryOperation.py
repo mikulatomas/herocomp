@@ -1,3 +1,5 @@
+from asm.Asm import *
+from asm.Registers import Registers
 from tree.nodes.Node import Node
 from tree.nodes.operations.OperationType import OperationType
 
@@ -9,7 +11,11 @@ class UnaryOperation(Node):
         super(UnaryOperation, self).__init__(parent=parent)
 
     def get_code(self):
-        return "not_implemented"
+        code = ""
+
+        code += self.operation.get_unary_operation_code(self.postfix, self.statements[0])
+
+        return code
 
     def __str__(self):
         statementsString = self.printStatements()
