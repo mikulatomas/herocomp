@@ -1,3 +1,4 @@
+import tree
 from asm.Asm import *
 from tree.nodes.loops.JumpStatementType import JumpStatementType
 from tree.nodes.Node import Node
@@ -13,9 +14,29 @@ class JumpStatement(Node):
 
         return "JumpStatement {}: {}".format(self.jump_statement_type, valuesString)
 
+    def _get_outer_loop(self):
+        parent = self.parent
+        loop = None
+
+        while parent.parent is not None:
+            if isinstance(parent, tree.nodes.loops.Loop.Loop):
+                loop = parent
+                break
+
+            parent = parent.parent
+
+        if loop is None:
+            error_string = "Jump statement out of loop"
+            raise ValueError(error_string)
+
+        return loop
+
     def get_code(self):
         code = ""
         if self.jump_statement_type == JumpStatementType.RETURN:
             code += instruction("leave")
             code += instruction("ret")
+        elif self.jump_statement_type == JumpStatementType.BREAK:
+            outer_loop = self._get_outer_loop()
+            code += instruction("jmp", outer_loop.end_label())
         return code

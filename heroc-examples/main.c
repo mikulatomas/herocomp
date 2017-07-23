@@ -6,14 +6,15 @@ line_of_stars (n)
 	print_char (42);
     }
     print_nl ();
+    return;
 }
 
 main ()
 {
-    /* nice triangle, while-style */
-    long n = 9;
-    while (n >= 0) {
-	line_of_stars (n);
-	n --;
+    /* nice triangle, for-style */
+    long n;
+    for (n = 1; n <= 10; n ++) {
+	line_of_stars (10 - n);
     }
+    return;
 }

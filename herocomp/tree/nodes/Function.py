@@ -10,6 +10,7 @@ class Function(Node):
         self.arguments = []
         self.variables_offset = 0
         self.arguments_table = {}
+        self.has_return_statement = False
         super(Function, self).__init__(parent)
 
     def addArgument(self, argumentNode):
@@ -80,6 +81,11 @@ class Function(Node):
             if isinstance(statement, tree.nodes.Block.Block):
                 block_code, has_return = statement.get_code()
                 code += block_code
+                self.has_return_statement = has_return
+
+        if not has_return:
+            code += instruction("leave")
+            code += instruction("ret")
         # code += pop(Registers.RBP)
         # code += ret()
 

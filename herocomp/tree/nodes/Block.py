@@ -55,6 +55,9 @@ class Block(Node):
                 if statement.jump_statement_type == JumpStatementType.RETURN:
                     code += statement.get_code()
                     return code, True
+                else:
+                    code += statement.get_code()
+                    return code, False
             elif isinstance(statement, tree.nodes.types.Variable.Variable):
                 statement.variable_offset = self.get_variable_offset()
                 self. variables_table.add_variable(statement.identifier.name, statement.variable_offset)
