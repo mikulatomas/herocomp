@@ -1,20 +1,23 @@
 
-line_of_stars (n)
+fac_iter (n, accum)
 {
-    long i;
-    for (; ! (n < 0); n --) {
-	print_char (42);
+    if (n <= 0) {
+	return accum;
     }
-    print_nl ();
-    return;
+    return fac_iter (n - 1, accum * n);
+}
+
+fac (n)
+{
+    return fac_iter (n, 1);
 }
 
 main ()
 {
-    /* nice triangle, for-style */
+    /* factorial: tail recursion */
     long n;
-    for (n = 1; n <= 10; n ++) {
-	line_of_stars (10 - n);
+    for (n = 0; n < 10; n ++) {
+	print_long (fac (n));
+	print_nl ();
     }
-    return;
 }

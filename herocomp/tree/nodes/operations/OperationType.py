@@ -49,11 +49,15 @@ class OperationType(Enum):
             return self._shift_code()
         # Logic
         elif ((self.name == self.OR.name) or
-              (self.name == self.XOR.name)):
+              (self.name == self.XOR.name) or
+              (self.name == self.AND.name) or
+              (self.name == self.LOGICAL_OR.name) or
+              (self.name == self.LOGICAL_AND.name)):
             return self._logic_code()
         # Arithmetic
         elif ((self.name == self.MINUS.name) or
-              (self.name == self.PLUS.name)):
+              (self.name == self.PLUS.name) or
+              (self.name == self.MULTIPLY.name)):
             return self._arithmetic_code()
         # Relational
         elif ((self.name == self.LESS.name) or
@@ -63,6 +67,7 @@ class OperationType(Enum):
               (self.name == self.EQUAL.name) or
               (self.name == self.NOT_EQUAL.name)):
             return self._relational_code()
+
         else:
             # delete later
             return "{0} : not implemented\n".format(self.value)
@@ -81,9 +86,20 @@ class OperationType(Enum):
         # Negation
         elif (self.name == self.LOGICAL_NOT.name):
             return self._negation_code(operand)
+        # MINUS
+        elif (self.name == self.MINUS.name):
+            return self._minus_code(operand)
         else:
             # delete later
             return "{0} : not implemented\n".format(self.value)
+
+    def _minus_code(self, operand):
+        code = ""
+
+        code += operand.get_code()
+        code += instruction("negq", Registers.RAX)
+
+        return code
 
     def _negation_code(self, operand):
         code = ""
@@ -127,7 +143,7 @@ class OperationType(Enum):
             code += instruction("pushq", Registers.RAX)
 
         code += instruction(operator, Registers.RAX)
-        
+
         # Probably only for inc/dec
         code += instruction("movq", Registers.RAX, operand.get_value_address())
 
@@ -175,6 +191,8 @@ class OperationType(Enum):
             operation = "subq"
         elif (self.name == self.PLUS.name):
             operation = "addq"
+        elif (self.name == self.MULTIPLY.name):
+            operation = "imulq"
 
         code += instruction(operation, Registers.R10, Registers.R11)
 
@@ -225,11 +243,11 @@ class OperationType(Enum):
         code += instruction("movq", number_constant(0), Registers.R12)
         code += instruction("cmove", Registers.R12, Registers.R11)
 
-        if self.name == self.OR.name:
+        if self.name == self.OR.name or self.name == self.LOGICAL_OR.name:
             operation = "orq"
         elif self.name == self.XOR.name:
             operation = "xorq"
-        elif self.name == self.AND.name:
+        elif self.name == self.AND.name or self.name == self.LOGICAL_AND.name:
             operation = "andq"
         code += instruction(operation, Registers.R10, Registers.R11)
 

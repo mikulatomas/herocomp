@@ -68,20 +68,34 @@ class Function(Node):
     def get_code(self):
         code = ""
 
-        self.arguments_table = self.build_arguments_table()
-
         code += label(self.identifier.name)
         code += instruction("pushq", Registers.RBP)
         code += instruction("movq", Registers.RSP, Registers.RBP)
 
-        number_of_local_variables, has_return = self.get_number_of_local_variables(self)
-        code += instruction("subq", number_constant(number_of_local_variables * 8), Registers.RSP)
+        self.arguments_table = self.build_arguments_table()
 
         for statement in self.statements:
             if isinstance(statement, tree.nodes.Block.Block):
-                block_code, has_return = statement.get_code()
-                code += block_code
-                self.has_return_statement = has_return
+                body = statement
+                break
+
+        number_of_local_variables, has_return = self.get_number_of_local_variables(self)
+
+
+        for argument in self.arguments:
+            self.variables_offset -= 8
+            body.variables_table.add_variable(argument.name, self.variables_offset)
+            code += instruction("movq", self.arguments_table.get(argument.name), str(self.variables_offset) + Registers.RBP.dereference())
+            number_of_local_variables += 1
+
+
+        code += instruction("subq", number_constant(number_of_local_variables * 8), Registers.RSP)
+
+        # for statement in self.statements:
+        #     if isinstance(statement, tree.nodes.Block.Block):
+        block_code, has_return = body.get_code()
+        code += block_code
+        self.has_return_statement = has_return
 
         if not has_return:
             code += instruction("leave")

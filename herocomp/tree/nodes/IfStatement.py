@@ -18,12 +18,12 @@ class IfStatement(Node):
 
         code += self.statements[0].get_code()
         code += instruction("cmpq", number_constant(0), Registers.RAX)
-        code += instruction("je", self.start_label())
+        code += instruction("je", self.else_label())
         # then block
         block_code, has_return = self.statements[1].get_code()
         code += block_code
         code += instruction("jmp", self.end_label())
-        code += label(self.start_label())
+        code += label(self.else_label())
 
         # else block
         if len(self.statements) == 3:
@@ -34,7 +34,7 @@ class IfStatement(Node):
 
         return code
 
-    def start_label(self):
+    def else_label(self):
         return "IF{0}_ELSE".format(self.number)
 
     def end_label(self):

@@ -60,7 +60,7 @@ class Block(Node):
                     return code, False
             elif isinstance(statement, tree.nodes.types.Variable.Variable):
                 statement.variable_offset = self.get_variable_offset()
-                self. variables_table.add_variable(statement.identifier.name, statement.variable_offset)
+                self.variables_table.add_variable(statement.identifier.name, statement.variable_offset)
                 code += statement.get_code()
             elif isinstance(statement, tree.nodes.Block.Block):
                 block_code, has_return = statement.get_code()
