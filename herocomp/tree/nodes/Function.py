@@ -11,6 +11,7 @@ class Function(Node):
         self.variables_offset = 0
         self.arguments_table = {}
         self.has_return_statement = False
+        self.number_of_local_variables = 0
         super(Function, self).__init__(parent)
 
     def addArgument(self, argumentNode):
@@ -79,17 +80,17 @@ class Function(Node):
                 body = statement
                 break
 
-        number_of_local_variables, has_return = self.get_number_of_local_variables(self)
+        self.number_of_local_variables, has_return = self.get_number_of_local_variables(self)
 
 
         for argument in self.arguments:
             self.variables_offset -= 8
             body.variables_table.add_variable(argument.name, self.variables_offset)
             code += instruction("movq", self.arguments_table.get(argument.name), str(self.variables_offset) + Registers.RBP.dereference())
-            number_of_local_variables += 1
+            self.number_of_local_variables += 1
 
 
-        code += instruction("subq", number_constant(number_of_local_variables * 8), Registers.RSP)
+        code += instruction("subq", number_constant(self.number_of_local_variables * 8), Registers.RSP)
 
         # for statement in self.statements:
         #     if isinstance(statement, tree.nodes.Block.Block):
