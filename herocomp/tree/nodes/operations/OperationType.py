@@ -1,5 +1,6 @@
 from enum import Enum
 
+import tree
 from asm.Asm import *
 from asm.Registers import Registers
 
@@ -72,7 +73,7 @@ class OperationType(Enum):
             # delete later
             return "{0} : not implemented\n".format(self.value)
 
-    def get_unary_operation_code(self, is_postfix, operand):
+    def get_unary_operation_code(self, is_postfix, operand, expression, parent):
         # Incremental/Decremental
         if ((self.name == self.DECREMENT.name) or
             (self.name == self.INCREMENT.name)):
@@ -86,12 +87,33 @@ class OperationType(Enum):
         # Negation
         elif (self.name == self.LOGICAL_NOT.name):
             return self._negation_code(operand)
-        # MINUS
+        # Minus
         elif (self.name == self.MINUS.name):
             return self._minus_code(operand)
+        # Array subscript
+        elif (self.name == self.SUBSCRIPT.name):
+            return self._subscript_code(operand, expression, parent)
         else:
             # delete later
             return "{0} : not implemented\n".format(self.value)
+
+    def _subscript_code(self, operand, expression, parent):
+        code = ""
+
+        code += operand.get_code()
+        code += instruction("pushq", Registers.RAX)
+        code += expression.get_code()
+        # CHECK REGISTER
+        code += instruction("popq", Registers.R12)
+        code += instruction("imulq", number_constant(8), Registers.RAX)
+        code += instruction("addq", Registers.RAX, Registers.R12)
+
+        if isinstance(parent, tree.nodes.Assignment.Assignment):
+            code += instruction("movq", Registers.R12, Registers.RAX)
+        else:
+            code += instruction("movq", Registers.R12.dereference(), Registers.RAX)
+
+        return code
 
     def _minus_code(self, operand):
         code = ""

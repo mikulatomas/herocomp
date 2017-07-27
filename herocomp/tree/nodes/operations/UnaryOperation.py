@@ -13,7 +13,12 @@ class UnaryOperation(Node):
     def get_code(self):
         code = ""
 
-        code += self.operation.get_unary_operation_code(self.postfix, self.statements[0])
+        if len(self.statements) > 1:
+            expression = self.statements[1]
+        else:
+            expression = None
+
+        code += self.operation.get_unary_operation_code(self.postfix, self.statements[0], expression, self.parent)
 
         return code
 

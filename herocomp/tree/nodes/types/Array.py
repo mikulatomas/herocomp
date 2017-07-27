@@ -15,7 +15,7 @@ class Array(Node):
 
     def setArraySize(self, array_size):
         self.array_size = array_size
-        # self.array_size.parent = self
+        self.array_size.parent = self
 
     def __str__(self):
         valuesString = self.printStatements()
@@ -27,20 +27,31 @@ class Array(Node):
     def get_code(self):
         code = ""
 
-        parent = self.parent
-        while parent.parent is not None:
-            if isinstance(parent, tree.nodes.Block.Block):
-                block = parent
-            parent = parent.parent
+        # Find parent Block
+        block = self.find_parent_block()
+
+        # stack_offset = block.get_variable_offset()
+        # code += "OFFSET {0}\n".format(stack_offset)
+
+        code += instruction("subq", number_constant((self.array_size.value + 1) * 8), Registers.RSP)
 
         stack_offset = block.get_variable_offset()
 
-        code += instruction("subq", number_constant(self.array_size * 8), Registers.RSP)
-        
-        for i in range(len(self.statements) - 1, 1, -1):
+        # # First value
+        # i = len(self.statements) - 1
+        # code += self.statements[i].get_code()
+        # code += instruction("movq", Registers.RAX, str(stack_offset + 8) + Registers.RBP.dereference())
+
+        # Rest of the values
+        for i in range(len(self.statements) - 1, 0, -1):
             code += self.statements[i].get_code()
             code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
-            stack_offset -= 8
+            stack_offset = block.get_variable_offset()
+
+        # Last value
+        code += self.statements[0].get_code()
+        code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
+
 
         code += instruction("leaq", str(stack_offset) + Registers.RBP.dereference(), Registers.RAX)
 

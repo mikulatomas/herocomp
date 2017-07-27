@@ -21,7 +21,7 @@ class FunctionCall(Node):
         not_save_registers = [Registers.RDI, Registers.RSI, Registers.RDX, Registers.RCX, Registers.R8, Registers.R9]
 
         for register in not_save_registers:
-            code += instruction("push", register)
+            code += instruction("pushq", register)
 
         # Pass arguments
         arguments_register_order = [Registers.RDI, Registers.RSI, Registers.RDX, Registers.RCX, Registers.R8, Registers.R9]
@@ -48,6 +48,6 @@ class FunctionCall(Node):
 
         # Restore Registers
         for register in reversed(not_save_registers):
-            code += instruction("pop", register)
+            code += instruction("popq", register)
 
         return code

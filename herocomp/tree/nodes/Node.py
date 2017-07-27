@@ -1,4 +1,5 @@
 # Base class for storing Node informations in AST
+import tree
 
 
 class Node():
@@ -40,3 +41,13 @@ class Node():
         stack = []
         stack.append(self)
         return stack
+
+    def find_parent_block(self):
+        parent = self.parent
+        while parent.parent is not None:
+            if isinstance(parent, tree.nodes.Block.Block):
+                block = parent
+                break
+            parent = parent.parent
+
+        return parent

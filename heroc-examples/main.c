@@ -1,6 +1,8 @@
+long heap [3];
+long front = &heap;
 
 main ()
 {
-    /* factorial: tail recursion */
-    long n[] = {1,2,3};
+    heap[0] = 10;
+    heap[1] = 10;
 }

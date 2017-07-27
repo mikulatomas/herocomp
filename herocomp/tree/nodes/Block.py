@@ -5,6 +5,7 @@ from tree.nodes.loops.JumpStatement import JumpStatement
 from tree.nodes.loops.JumpStatementType import JumpStatementType
 from tree.nodes.Node import Node
 from tree.nodes.types.Variable import Variable
+from tree.nodes.types.VariableType import VariableType
 
 
 class Block(Node):
@@ -62,6 +63,13 @@ class Block(Node):
                 statement.variable_offset = self.get_variable_offset()
                 self.variables_table.add_variable(statement.identifier.name, statement.variable_offset)
                 code += statement.get_code()
+                
+                # Array variable
+                # if statement.variable_type == VariableType.ARRAY:
+                #     # TODO
+                #
+                #     code += statement.get_code()
+
             elif isinstance(statement, tree.nodes.Block.Block):
                 block_code, has_return = statement.get_code()
                 code += block_code

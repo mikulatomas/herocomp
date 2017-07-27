@@ -1,3 +1,5 @@
+from tree.nodes.types.VariableType import VariableType
+
 
 class VariablesTable():
     def __init__(self):

@@ -166,11 +166,15 @@ class TreeVisitor(HerocVisitor):
         # QUESTION Here I can throw error when len(values) is > than array_size
         if array_size is None:
             if len(array_values) > 0:
-                array_size = len(array_values)
+                array_size = Number(len(array_values))
             else:
-                array_size = 0
+                array_size = Number(0)
 
         array.setArraySize(array_size)
+        if array_size.value > 0 and len(array_values) == 0:
+            for i in range(array_size.value):
+                array_values.append(Number(0))
+
         array.addStatementList(array_values)
         assignment = Assignment(AssignmentType.ASSIGN)
         assignment.addStatement(identifier)
@@ -450,9 +454,14 @@ class TreeVisitor(HerocVisitor):
             if len(array_values) > 0:
                 array_size = Number(len(array_values))
             else:
-                array_size = Number()
+                array_size = Number(0)
 
             array.setArraySize(array_size)
+
+            if array_size.value > 0 and len(array_values) == 0:
+                for i in range(array_size.value):
+                    array_values.append(Number(0))
+
             array.addStatementList(array_values)
 
             return array

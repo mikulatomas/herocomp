@@ -16,7 +16,7 @@ class Identifier(Node):
         parent = self.parent
         offset = None
 
-        while parent.parent != None:
+        while parent.parent is not None:
             if isinstance(parent, tree.nodes.Block.Block):
                 try:
                     offset = parent.variables_table.get_variable_offset(self.name)
@@ -34,7 +34,7 @@ class Identifier(Node):
         parent = self.parent
         location = None
 
-        while parent.parent != None:
+        while parent.parent is not None:
             if isinstance(parent, tree.nodes.Function.Function):
                 location = parent.arguments_table.get(self.name)
                 break
@@ -60,8 +60,3 @@ class Identifier(Node):
 
     def get_code(self):
         return instruction("movq", self.get_value_address(), Registers.RAX)
-
-    # def fill_operation_stack(self):
-    #     stack = []
-    #     stack.append(self)
-    #     return stack
