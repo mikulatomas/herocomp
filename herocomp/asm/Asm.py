@@ -12,10 +12,14 @@ def text_directive():
 
 def data_directive():
     return "\t.data\n"
-    
+
 
 def quad_directive(arg):
     return "\t.quad\t{}\n".format(arg)
+
+
+def global_array(identifier, size):
+    return "\t.comm {0},{1},32\n".format(identifier, size * 8)
 
 
 def global_directive(arg):

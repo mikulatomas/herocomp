@@ -42,15 +42,23 @@ class Array(Node):
         # code += self.statements[i].get_code()
         # code += instruction("movq", Registers.RAX, str(stack_offset + 8) + Registers.RBP.dereference())
 
-        # Rest of the values
-        for i in range(len(self.statements) - 1, 0, -1):
-            code += self.statements[i].get_code()
-            code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
-            stack_offset = block.get_variable_offset()
 
-        # Last value
-        code += self.statements[0].get_code()
-        code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
+        if len(self.statements) == 0:
+            for i in range(self.array_size.value - 1):
+                code += instruction("movq", number_constant(0), str(stack_offset) + Registers.RBP.dereference())
+                stack_offset = block.get_variable_offset()
+
+            code += instruction("movq", number_constant(0), str(stack_offset) + Registers.RBP.dereference())
+        else:
+            # Rest of the values
+            for i in range(len(self.statements) - 1, 0, -1):
+                code += self.statements[i].get_code()
+                code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
+                stack_offset = block.get_variable_offset()
+
+            # Last value
+            code += self.statements[0].get_code()
+            code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
 
 
         code += instruction("leaq", str(stack_offset) + Registers.RBP.dereference(), Registers.RAX)

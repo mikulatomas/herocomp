@@ -171,15 +171,14 @@ class TreeVisitor(HerocVisitor):
                 array_size = Number(0)
 
         array.setArraySize(array_size)
-        if array_size.value > 0 and len(array_values) == 0:
-            for i in range(array_size.value):
-                array_values.append(Number(0))
+        # if array_size.value > 0 and len(array_values) == 0:
+        #     for i in range(array_size.value):
+        #         array_values.append(Number(0))
 
         array.addStatementList(array_values)
         assignment = Assignment(AssignmentType.ASSIGN)
         assignment.addStatement(identifier)
         assignment.addStatement(array)
-
 
         variable = Variable(identifier=identifier,
                             variable_type=VariableType.ARRAY)
@@ -458,9 +457,9 @@ class TreeVisitor(HerocVisitor):
 
             array.setArraySize(array_size)
 
-            if array_size.value > 0 and len(array_values) == 0:
-                for i in range(array_size.value):
-                    array_values.append(Number(0))
+            # if array_size.value > 0 and len(array_values) == 0:
+            #     for i in range(array_size.value):
+            #         array_values.append(Number(0))
 
             array.addStatementList(array_values)
 

@@ -43,21 +43,28 @@ class Variable(Node):
     def get_global_code(self):
         code = ""
 
-        code += label(self.identifier.name)
-
         if self.variable_type is VariableType.ARRAY:
             assignment = self.statements[0]
             array = assignment.statements[1]
 
-            for item in array.statements:
-                value = item.value
-                code += quad_directive(value)
+            if len(array.statements) > 0:
+                code += label(self.identifier.name)
+                for item in array.statements:
+                    value = item.value
+                    code += quad_directive(value)
+            else:
+                code += global_array(self.identifier.name, array.array_size.value)
         else:
+            code += label(self.identifier.name)
             if len(self.statements) > 0:
                 assignment = self.statements[0]
                 value = assignment.statements[1]
                 if isinstance(value, tree.nodes.types.Number.Number):
                     code += quad_directive(value.value)
+                elif isinstance(value, tree.nodes.types.Identifier.Identifier):
+                    code += quad_directive(value.name)
+                elif isinstance(value, tree.nodes.operations.UnaryOperation.UnaryOperation):
+                    code += quad_directive(value.statements[0].name)
             else:
                 code += quad_directive(0)
 
