@@ -1,8 +1,7 @@
-long heap [3];
-long front = &heap;
+long heap[] = {1,2};
 
 main ()
 {
-    heap[0] = 10;
-    heap[1] = 10;
+    heap[1] = 100;
+    print_long(heap[1]);
 }

@@ -44,7 +44,7 @@ main ()
     b = lalloc (20);
     fill_array (a, 666, 10);
     fill_array (b, 10, 10);
-    fill_array (b + 10, 90, 10);
+    fill_array (b + 10 * sizeof(long), 90, 10);
     print_array (a, 30);
     print_array (b, 20);
 }

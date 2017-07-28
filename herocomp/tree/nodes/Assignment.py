@@ -44,12 +44,14 @@ class Assignment(Node):
         # TODO FIX
         if isinstance(destination, tree.nodes.types.Identifier.Identifier):
             # TODO - prepsat na metodo z ident
-            if isinstance(self.parent, tree.nodes.types.Variable.Variable):
-                destination_addres = str(self.parent.variable_offset) + Registers.RBP.dereference()
-            else:
-                destination_addres = str(destination.get_stack_offset()) + Registers.RBP.dereference()
+            # if isinstance(self.parent, tree.nodes.types.Variable.Variable):
+            #     destination_address = str(self.parent.variable_offset) + Registers.RBP.dereference()
+            # else:
+            #     destination_address = str(destination.get_stack_offset()) + Registers.RBP.dereference()
 
-            code += instruction("movq", Registers.R15, destination_addres)
+            destination_address = destination.get_value_address()
+
+            code += instruction("movq", Registers.R15, destination_address)
         # if destination is dereference or array dereference
         elif isinstance(destination, tree.nodes.operations.UnaryOperation.UnaryOperation):
             if destination.operation is tree.nodes.operations.OperationType.OperationType.DEREFERENCE:
@@ -57,10 +59,9 @@ class Assignment(Node):
                 code += destination.statements[0].get_code()
                 code += instruction("movq", Registers.R15, Registers.RAX.dereference())
             if destination.operation is tree.nodes.operations.OperationType.OperationType.SUBSCRIPT:
+                destination_address = destination.statements[0].get_value_address()
                 code += destination.get_code()
-                code += instruction("movq", Registers.R15, Registers.RAX.dereference())
-
-
-
+                if Registers.RIP.value not in destination_address:
+                    code += instruction("movq", Registers.R15, Registers.RAX.dereference())
 
         return code

@@ -1,10 +1,12 @@
 from asm.Asm import *
+from tools.VariablesTable import VariablesTable
 from tree.nodes.Node import Node
 
 
 class Program(Node):
     def __init__(self, parent=None):
         self.variables = []
+        self.variables_table = VariablesTable()
         super(Program, self).__init__(parent)
 
     def addVariable(self, variableNode):
@@ -19,6 +21,15 @@ class Program(Node):
         code = ""
 
         code += global_directive("main")
+
+        if len(self.variables) > 0:
+            code += data_directive()
+
+            # Global variables
+            for variable in self.variables:
+                self.variables_table.add_variable(variable.identifier.name, variable.identifier.name)
+                code += variable.get_global_code()
+
         code += text_directive()
 
         for statement in self.statements:

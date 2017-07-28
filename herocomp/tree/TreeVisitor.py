@@ -62,9 +62,9 @@ class TreeVisitor(HerocVisitor):
             # Variables are recieved in list
             if isinstance(r, list):
                 logging.info("Adding variables")
-                # ast.root.addVariableList(r)
-                for variable in r:
-                    ast.root.addStatement(variable)
+                ast.root.addVariableList(r)
+                # for variable in r:
+                #     ast.root.addStatement(variable)
             else:
                 logging.info("Adding statement")
                 ast.root.addStatement(r)

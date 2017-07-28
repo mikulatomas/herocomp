@@ -100,18 +100,30 @@ class OperationType(Enum):
     def _subscript_code(self, operand, expression, parent):
         code = ""
 
-        code += operand.get_code()
-        code += instruction("pushq", Registers.RAX)
-        code += expression.get_code()
-        # CHECK REGISTER
-        code += instruction("popq", Registers.R12)
-        code += instruction("imulq", number_constant(8), Registers.RAX)
-        code += instruction("addq", Registers.RAX, Registers.R12)
+        operand_code = operand.get_code()
 
-        if isinstance(parent, tree.nodes.Assignment.Assignment):
-            code += instruction("movq", Registers.R12, Registers.RAX)
+        # Global array
+        if Registers.RIP.value in operand_code:
+            code += expression.get_code()
+            code += instruction("leaq", "(,{0},8)".format(Registers.RAX), Registers.RDX)
+            code += operand_code.replace("movq", "leaq")
+            if isinstance(parent, tree.nodes.Assignment.Assignment):
+                code += instruction("movq", Registers.R15, "({0},{1})".format(Registers.RDX, Registers.RAX))
+            else:
+                code += instruction("movq", "({0},{1})".format(Registers.RDX, Registers.RAX), Registers.RAX)
         else:
-            code += instruction("movq", Registers.R12.dereference(), Registers.RAX)
+            code += operand_code
+            code += instruction("pushq", Registers.RAX)
+            code += expression.get_code()
+            # CHECK REGISTER
+            code += instruction("popq", Registers.R12)
+            code += instruction("imulq", number_constant(8), Registers.RAX)
+            code += instruction("addq", Registers.RAX, Registers.R12)
+
+            if isinstance(parent, tree.nodes.Assignment.Assignment):
+                code += instruction("movq", Registers.R12, Registers.RAX)
+            else:
+                code += instruction("movq", Registers.R12.dereference(), Registers.RAX)
 
         return code
 

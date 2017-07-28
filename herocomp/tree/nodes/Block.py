@@ -61,9 +61,11 @@ class Block(Node):
                     return code, False
             elif isinstance(statement, tree.nodes.types.Variable.Variable):
                 statement.variable_offset = self.get_variable_offset()
+                # print(repr(statement.identifier.name))
+                # print(statement.variable_offset)
                 self.variables_table.add_variable(statement.identifier.name, statement.variable_offset)
                 code += statement.get_code()
-                
+
                 # Array variable
                 # if statement.variable_type == VariableType.ARRAY:
                 #     # TODO

@@ -10,6 +10,14 @@ def text_directive():
     return "\t.text\n"
 
 
+def data_directive():
+    return "\t.data\n"
+    
+
+def quad_directive(arg):
+    return "\t.quad\t{}\n".format(arg)
+
+
 def global_directive(arg):
     return "\t.global\t{0}\n".format(arg)
 

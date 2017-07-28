@@ -45,18 +45,40 @@ class Identifier(Node):
             error_string = "Variable {0} is not an argument of the function".format(self.name)
             raise ValueError(error_string)
 
-        return location
+        return location, None
+
+    def _get_global_variable(self):
+        parent = self.parent
+
+        while parent.parent is not None:
+            if isinstance(parent, tree.nodes.Program.Program):
+                break
+
+            parent = parent.parent
+
+        try:
+            address = parent.variables_table.get_variable_offset(self.name)
+        except ValueError as e:
+            error_string = "Variable {0} is not a global variable".format(self.name)
+            raise ValueError(error_string)
+
+        return address
 
     def get_value_address(self):
         try:
             offset = self.get_stack_offset()
             return str(offset) + Registers.RBP.dereference()
         except Exception as e:
-            # Try to find in function argument
             try:
                 return self._get_argument_location()
             except Exception as e:
-                raise
+                try:
+                    address = self._get_global_variable()
+                    return str(address) + Registers.RIP.dereference()
+                except Exception as e:
+                    raise
 
     def get_code(self):
-        return instruction("movq", self.get_value_address(), Registers.RAX)
+        address = self.get_value_address()
+
+        return instruction("movq", address, Registers.RAX)

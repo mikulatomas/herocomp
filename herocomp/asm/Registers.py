@@ -13,6 +13,7 @@ class Registers(Enum):
     RDI = "%rdi"
     RBP = "%rbp"
     RSP = "%rsp"
+    RIP = "%rip"
     R8 = "%r8"
     R9 = "%r9"
     R10 = "%r10"
