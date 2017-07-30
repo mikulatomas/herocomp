@@ -111,7 +111,8 @@ fragment HEX_DIGIT:      [0-9a-fA-F];
 
 /** ASCII a string */
 CHAR_CONSTANT:                   '\'' CHAR_SYMBOL '\'';
-STRING:                 '\"' (CHAR_SYMBOL | ESCAPE)* '\"';
+//STRING:                 '\"' (CHAR_SYMBOL | ESCAPE)* '\"';
+STRING : '"' (options{greedy=false;}:( ~('\\'|'"') | ('\\' '"')))* '"';
 fragment ESCAPE:        '\\' CHAR_SYMBOL;
 fragment CHAR_SYMBOL:    '\u0000' .. '\u007F';
 
