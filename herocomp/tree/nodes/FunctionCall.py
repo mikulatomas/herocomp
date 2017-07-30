@@ -12,7 +12,7 @@ class FunctionCall(Node):
         argumentsString = self.printStatements()
         self.identifier.depth = self.depth + 1
 
-        return "FunctionCall: \n{} {}".format(self.identifier.generateTabsForDepth() + str(self.identifier), argumentsString,)
+        return "FunctionCall: \n{} {}".format(self.identifier.generateTabsForDepth() + str(self.identifier), argumentsString)
 
     def get_code(self):
         code = ""

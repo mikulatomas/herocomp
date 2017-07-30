@@ -509,7 +509,15 @@ class TreeVisitor(HerocVisitor):
                 return Number(value=int(number))
 
         elif token_type is HerocLexer.STRING:
-            return String(value=str(child))
+            value = str(child)
+            value = value.replace("\"", "")
+            statements = []
+            for char in value:
+                statements.append(Number(ord(char)))
+
+            node = String(value=value)
+            node.addStatementList(statements)
+            return node
         else:
             return self.visit(ctx.getChild(1))
 

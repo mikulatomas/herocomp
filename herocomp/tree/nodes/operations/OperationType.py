@@ -49,16 +49,16 @@ class OperationType(Enum):
             (self.name == self.RIGHT_SHIFT.name)):
             return self._shift_code()
         # Logic
-        elif ((self.name == self.OR.name) or
-              (self.name == self.XOR.name) or
-              (self.name == self.AND.name) or
-              (self.name == self.LOGICAL_OR.name) or
+        elif ((self.name == self.LOGICAL_OR.name) or
               (self.name == self.LOGICAL_AND.name)):
             return self._logic_code()
         # Arithmetic
         elif ((self.name == self.MINUS.name) or
               (self.name == self.PLUS.name) or
-              (self.name == self.MULTIPLY.name)):
+              (self.name == self.MULTIPLY.name) or
+              (self.name == self.OR.name) or
+              (self.name == self.XOR.name) or
+              (self.name == self.AND.name)):
             return self._arithmetic_code()
         # Relational
         elif ((self.name == self.LESS.name) or
@@ -68,7 +68,9 @@ class OperationType(Enum):
               (self.name == self.EQUAL.name) or
               (self.name == self.NOT_EQUAL.name)):
             return self._relational_code()
-
+        # Modulo
+        elif ((self.name == self.MODULO.name)):
+            return self._modulo_code()
         else:
             # delete later
             return "{0} : not implemented\n".format(self.value)
@@ -93,9 +95,34 @@ class OperationType(Enum):
         # Array subscript
         elif (self.name == self.SUBSCRIPT.name):
             return self._subscript_code(operand, expression, parent)
+        # Complement
+        elif (self.name == self.BITWISE_NOT.name):
+            return self._complement_code(operand)
         else:
             # delete later
             return "{0} : not implemented\n".format(self.value)
+
+    def _complement_code(self, operand):
+        code = ""
+
+        code += operand.get_code()
+        code += instruction("notq", Registers.RAX)
+
+        return code
+
+    def _modulo_code(self):
+        code = ""
+
+        code += instruction("popq", Registers.RAX)
+        code += instruction("popq", Registers.R10)
+        code += instruction("pushq", Registers.RDX)
+        code += instruction("cdq")
+        code += instruction("idiv", Registers.R10)
+        code += instruction("popq", Registers.RAX)
+        code += instruction("pushq", Registers.RDX)
+        code += instruction("movq", Registers.RAX, Registers.RDX)
+
+        return code
 
     def _subscript_code(self, operand, expression, parent):
         code = ""
@@ -107,8 +134,9 @@ class OperationType(Enum):
             code += expression.get_code()
             code += instruction("leaq", "(,{0},8)".format(Registers.RAX), Registers.RDX)
             code += operand_code.replace("movq", "leaq")
-            if isinstance(parent, tree.nodes.Assignment.Assignment):
-                code += instruction("movq", Registers.R15, "({0},{1})".format(Registers.RDX, Registers.RAX))
+
+            if isinstance(parent, tree.nodes.Assignment.Assignment) and parent.statements[0] is operand.parent:
+                code += instruction("movq", Registers.R12, "({0},{1})".format(Registers.RDX, Registers.RAX))
             else:
                 code += instruction("movq", "({0},{1})".format(Registers.RDX, Registers.RAX), Registers.RAX)
         else:
@@ -116,14 +144,15 @@ class OperationType(Enum):
             code += instruction("pushq", Registers.RAX)
             code += expression.get_code()
             # CHECK REGISTER
-            code += instruction("popq", Registers.R12)
+            code += instruction("popq", Registers.R10)
             code += instruction("imulq", number_constant(8), Registers.RAX)
-            code += instruction("addq", Registers.RAX, Registers.R12)
-
-            if isinstance(parent, tree.nodes.Assignment.Assignment):
-                code += instruction("movq", Registers.R12, Registers.RAX)
+            code += instruction("addq", Registers.RAX, Registers.R10)
+            # print(repr(operand))
+            # print(repr(parent))
+            if isinstance(parent, tree.nodes.Assignment.Assignment) and parent.statements[0] is operand.parent:
+                code += instruction("movq", Registers.R10, Registers.RAX)
             else:
-                code += instruction("movq", Registers.R12.dereference(), Registers.RAX)
+                code += instruction("movq", Registers.R10.dereference(), Registers.RAX)
 
         return code
 
@@ -227,6 +256,12 @@ class OperationType(Enum):
             operation = "addq"
         elif (self.name == self.MULTIPLY.name):
             operation = "imulq"
+        elif (self.name == self.OR.name):
+            operation = "orq"
+        elif (self.name == self.XOR.name):
+            operation = "xorq"
+        elif (self.name == self.AND.name):
+            operation = "andq"
 
         code += instruction(operation, Registers.R10, Registers.R11)
 
@@ -268,20 +303,18 @@ class OperationType(Enum):
         code += instruction("popq", Registers.R11)
 
         code += instruction("cmpq", number_constant(0), Registers.R10)
-        # code += movq("$1", Registers.R10)
+        code += instruction("movq", number_constant(1), Registers.R10)
         code += instruction("movq", number_constant(0), Registers.R12)
         code += instruction("cmove", Registers.R12, Registers.R10)
 
         code += instruction("cmpq", number_constant(0), Registers.R11)
-        # code += cmpq("$1", Registers.R11)
+        code += instruction("movq", number_constant(1), Registers.R11)
         code += instruction("movq", number_constant(0), Registers.R12)
         code += instruction("cmove", Registers.R12, Registers.R11)
 
-        if self.name == self.OR.name or self.name == self.LOGICAL_OR.name:
+        if self.name == self.LOGICAL_OR.name:
             operation = "orq"
-        elif self.name == self.XOR.name:
-            operation = "xorq"
-        elif self.name == self.AND.name or self.name == self.LOGICAL_AND.name:
+        elif self.name == self.LOGICAL_AND.name:
             operation = "andq"
         code += instruction(operation, Registers.R10, Registers.R11)
 

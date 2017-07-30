@@ -24,7 +24,7 @@ class BinaryOperation(Node):
                 code += item.get_code()
                 code += instruction("pushq", Registers.RAX)
 
-        code += instruction("pop", Registers.RAX)
+        code += instruction("popq", Registers.RAX)
 
         return code
 
