@@ -32,15 +32,15 @@ def load_source_to_ast(filename):
 def main(argv):
     # logging.basicConfig(level=logging.INFO)
     filename = sys.argv[1]
-    show_ast = sys.argv[2]
-    compile_code = sys.argv[3]
+    # show_ast = sys.argv[2]
+    # compile_code = sys.argv[3]
     ast = load_source_to_ast(filename)
 
-    if show_ast == str(1):
-        print(ast)
-
-    if compile_code == str(1):
-        print(ast.get_code(basename(filename)))
+    # if show_ast == str(1):
+    #     print(ast)
+    #
+    # if compile_code == str(1):
+    print(ast.get_code(basename(filename)))
 
 
 if __name__ == '__main__':

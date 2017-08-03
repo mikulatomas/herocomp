@@ -1,36 +1,89 @@
-	.file	"example02.c"
+	.file	"example02.heroc"
+	.global	main
 	.text
-	.globl	main
-	.type	main, @function
 main:
-.LFB0:
-	.cfi_startproc
 	pushq	%rbp
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
 	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	movq	$0, -8(%rbp)
-	movq	$1, -16(%rbp)
-	movq	$0, -24(%rbp)
-	jmp	.L2
-.L3:
+	subq	$32, %rsp
+	movq	$0, %rax
+	movq	%rax, %r12
+	movq	%r12, -8(%rbp)
+	movq	$1, %rax
+	movq	%rax, %r12
+	movq	%r12, -16(%rbp)
+	movq	$0, %rax
+	movq	%rax, %r12
+	movq	%r12, -24(%rbp)
+LOOP39:
+	movq	$20, %rax
+	pushq	%rax
+	movq	-24(%rbp), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	cmpq	%r10, %r11
+	movq	$0, %rax
+	movq	$1, %r12
+	cmovlq	%r12, %rax
+	pushq	%rax
+	popq	%rax
+	cmpq	$0, %rax
+	je	LOOP39_END
 	movq	-16(%rbp), %rax
-	movq	%rax, -32(%rbp)
+	movq	%rax, %r12
+	movq	%r12, -32(%rbp)
+	movq	-16(%rbp), %rax
+	pushq	%rax
 	movq	-8(%rbp), %rax
-	addq	%rax, -16(%rbp)
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	addq	%r10, %r11
+	pushq	%r11
+	popq	%rax
+	movq	%rax, %r12
+	movq	%r12, -16(%rbp)
 	movq	-32(%rbp), %rax
-	movq	%rax, -8(%rbp)
-	addq	$1, -24(%rbp)
-.L2:
-	cmpq	$19, -24(%rbp)
-	jle	.L3
-	movl	$0, %eax
-	popq	%rbp
-	.cfi_def_cfa 7, 8
-	ret
-	.cfi_endproc
-.LFE0:
-	.size	main, .-main
-	.ident	"GCC: (Debian 6.3.0-18) 6.3.0 20170516"
-	.section	.note.GNU-stack,"",@progbits
+	movq	%rax, %r12
+	movq	%r12, -8(%rbp)
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	print_long
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	call	print_nl
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+LOOP39_NEXT:
+	movq	-24(%rbp), %rax
+	pushq	%rax
+	incq	%rax
+	movq	%rax, -24(%rbp)
+	popq	%rax
+	jmp	LOOP39
+LOOP39_END:
+	movq	$0, %rax
+	leave	
+	ret	
+	.ident	"HEROCOMP - Tomas Mikula 2017"
+

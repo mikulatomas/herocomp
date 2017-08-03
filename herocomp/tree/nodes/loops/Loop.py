@@ -12,7 +12,7 @@ class Loop(Node):
         return "LOOP{0}".format(self.number)
 
     def next_label(self):
-        return "LOOP{0}_NEXT".format(self.number)
+        return self.start_label()
 
     def end_label(self):
         return "LOOP{0}_END".format(self.number)

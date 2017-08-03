@@ -41,4 +41,7 @@ class JumpStatement(Node):
         elif self.jump_statement_type == JumpStatementType.BREAK:
             outer_loop = self._get_outer_loop()
             code += instruction("jmp", outer_loop.end_label())
+        elif self.jump_statement_type == JumpStatementType.CONTINUE:
+            outer_loop = self._get_outer_loop()
+            code += instruction("jmp", outer_loop.next_label())
         return code

@@ -37,10 +37,7 @@ class Array(Node):
 
         function.number_of_local_variables += self.array_size.value + 1
 
-        stack_offsets = []
-        stack_offset_i = 0
-        for i in range(len(self.statements)):
-            stack_offsets.append(block.get_variable_offset())
+
 
         # print(stack_offset)
 
@@ -48,16 +45,22 @@ class Array(Node):
         # i = len(self.statements) - 1
         # code += self.statements[i].get_code()
         # code += instruction("movq", Registers.RAX, str(stack_offset + 8) + Registers.RBP.dereference())
+        stack_offsets = []
+        stack_offset_i = 0
 
 
         if len(self.statements) == 0:
+            for i in range(self.array_size.value):
+                stack_offsets.append(block.get_variable_offset())
             for i in range(self.array_size.value - 1):
                 code += instruction("movq", number_constant(0), str(stack_offsets[stack_offset_i]) + Registers.RBP.dereference())
                 # stack_offset = block.get_variable_offset()
                 stack_offset_i += 1
 
-            code += instruction("movq", number_constant(0), str(stack_offset) + Registers.RBP.dereference())
+            code += instruction("movq", number_constant(0), str(stack_offsets[stack_offset_i]) + Registers.RBP.dereference())
         else:
+            for i in range(len(self.statements)):
+                stack_offsets.append(block.get_variable_offset())
             # Rest of the values
             for i in range(len(self.statements) - 1, 0, -1):
                 code += self.statements[i].get_code()

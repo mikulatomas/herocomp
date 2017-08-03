@@ -47,3 +47,6 @@ class ForLoop(Loop):
         code += label(self.end_label())
 
         return code
+
+    def next_label(self):
+        return "LOOP{0}_NEXT".format(self.number)
