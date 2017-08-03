@@ -1,3 +1,4 @@
+import tree
 from asm.Asm import *
 from tools.VariablesTable import VariablesTable
 from tree.nodes.Node import Node
@@ -7,6 +8,7 @@ class Program(Node):
     def __init__(self, parent=None):
         self.variables = []
         self.variables_table = VariablesTable()
+        self.functions_table = []
         super(Program, self).__init__(parent)
 
     def addVariable(self, variableNode):
@@ -27,12 +29,14 @@ class Program(Node):
 
             # Global variables
             for variable in self.variables:
-                self.variables_table.add_variable(variable.identifier.name, variable.identifier.name)
+                self.variables_table.add_variable(variable.identifier.name, variable.identifier.name, variable.variable_type)
                 code += variable.get_global_code()
 
         code += text_directive()
 
         for statement in self.statements:
+            if isinstance(statement, tree.nodes.Function.Function):
+                self.functions_table.append(statement.identifier.name)
             code += statement.get_code()
 
         return code

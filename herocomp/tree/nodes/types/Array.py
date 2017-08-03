@@ -29,13 +29,20 @@ class Array(Node):
 
         # Find parent Block
         block = self.find_parent_block()
-
+        function = self.find_parent_function()
         # stack_offset = block.get_variable_offset()
         # code += "OFFSET {0}\n".format(stack_offset)
 
-        code += instruction("subq", number_constant((self.array_size.value + 1) * 8), Registers.RSP)
+        # code += instruction("subq", number_constant((self.array_size.value + 1) * 8), Registers.RSP)
 
-        stack_offset = block.get_variable_offset()
+        function.number_of_local_variables += self.array_size.value + 1
+
+        stack_offsets = []
+        stack_offset_i = 0
+        for i in range(len(self.statements)):
+            stack_offsets.append(block.get_variable_offset())
+
+        # print(stack_offset)
 
         # # First value
         # i = len(self.statements) - 1
@@ -45,22 +52,25 @@ class Array(Node):
 
         if len(self.statements) == 0:
             for i in range(self.array_size.value - 1):
-                code += instruction("movq", number_constant(0), str(stack_offset) + Registers.RBP.dereference())
-                stack_offset = block.get_variable_offset()
+                code += instruction("movq", number_constant(0), str(stack_offsets[stack_offset_i]) + Registers.RBP.dereference())
+                # stack_offset = block.get_variable_offset()
+                stack_offset_i += 1
 
             code += instruction("movq", number_constant(0), str(stack_offset) + Registers.RBP.dereference())
         else:
             # Rest of the values
             for i in range(len(self.statements) - 1, 0, -1):
                 code += self.statements[i].get_code()
-                code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
-                stack_offset = block.get_variable_offset()
+                code += instruction("movq", Registers.RAX, str(stack_offsets[stack_offset_i]) + Registers.RBP.dereference())
+                stack_offset_i += 1
+                # stack_offset = block.get_variable_offset()
+                # print(stack_offset)
 
             # Last value
             code += self.statements[0].get_code()
-            code += instruction("movq", Registers.RAX, str(stack_offset) + Registers.RBP.dereference())
+            code += instruction("movq", Registers.RAX, str(stack_offsets[stack_offset_i]) + Registers.RBP.dereference())
 
 
-        code += instruction("leaq", str(stack_offset) + Registers.RBP.dereference(), Registers.RAX)
+        code += instruction("leaq", str(stack_offsets[stack_offset_i]) + Registers.RBP.dereference(), Registers.RAX)
 
         return code

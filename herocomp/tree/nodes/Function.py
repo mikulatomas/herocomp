@@ -89,12 +89,13 @@ class Function(Node):
             code += instruction("movq", self.arguments_table.get(argument.name), str(self.variables_offset) + Registers.RBP.dereference())
             self.number_of_local_variables += 1
 
+        block_code, has_return = body.get_code()
 
         code += instruction("subq", number_constant(self.number_of_local_variables * 8), Registers.RSP)
 
         # for statement in self.statements:
         #     if isinstance(statement, tree.nodes.Block.Block):
-        block_code, has_return = body.get_code()
+
         code += block_code
         self.has_return_statement = has_return
 

@@ -51,3 +51,13 @@ class Node():
             parent = parent.parent
 
         return parent
+
+    def find_parent_function(self):
+        parent = self.parent
+        while parent.parent is not None:
+            if isinstance(parent, tree.nodes.Function.Function):
+                block = parent
+                break
+            parent = parent.parent
+
+        return parent

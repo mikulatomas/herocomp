@@ -3,6 +3,7 @@ from enum import Enum
 import tree
 from asm.Asm import *
 from asm.Registers import Registers
+from tree.nodes.types.VariableType import VariableType
 
 
 class OperationType(Enum):
@@ -130,15 +131,19 @@ class OperationType(Enum):
         operand_code = operand.get_code()
 
         # Global array
-        if Registers.RIP.value in operand_code:
+        if (Registers.RIP.value in operand_code) and (operand.get_value_type() is VariableType.ARRAY):
             code += expression.get_code()
             code += instruction("leaq", "(,{0},8)".format(Registers.RAX), Registers.RDX)
             code += operand_code.replace("movq", "leaq")
 
             if isinstance(parent, tree.nodes.Assignment.Assignment) and parent.statements[0] is operand.parent:
                 code += instruction("movq", Registers.R12, "({0},{1})".format(Registers.RDX, Registers.RAX))
+
             else:
                 code += instruction("movq", "({0},{1})".format(Registers.RDX, Registers.RAX), Registers.RAX)
+
+                # if operand.get_value_type() is not VariableType.ARRAY:
+                #     code += instruction("movq", Registers.RAX.dereference(), Registers.RAX)
         else:
             code += operand_code
             code += instruction("pushq", Registers.RAX)
@@ -177,6 +182,12 @@ class OperationType(Enum):
 
     def _reference_code(self, operand):
         code = ""
+
+        if isinstance(operand, tree.nodes.types.Identifier.Identifier):
+            if operand.is_function():
+                code += instruction("leaq", operand.name + "(%rip)", Registers.RAX)
+
+                return code
 
         code += instruction("leaq", operand.get_value_address(), Registers.RAX)
 

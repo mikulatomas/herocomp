@@ -22,6 +22,8 @@ class Identifier(Node):
                     offset = parent.variables_table.get_variable_offset(self.name)
                 except ValueError as e:
                     pass
+                else:
+                    break
             parent = parent.parent
 
         if offset is None:
@@ -77,6 +79,35 @@ class Identifier(Node):
                     return str(address) + Registers.RIP.dereference()
                 except Exception as e:
                     raise
+
+    # only for global variables
+    def get_value_type(self):
+        parent = self.parent
+
+        while parent.parent is not None:
+            if isinstance(parent, tree.nodes.Program.Program):
+                break
+
+            parent = parent.parent
+
+        try:
+            var_type = parent.variables_table.get_variable_type(self.name)
+        except ValueError as e:
+            error_string = "Variable {0} is not a global variable".format(self.name)
+            raise ValueError(error_string)
+
+        return var_type
+
+    def is_function(self):
+        parent = self.parent
+
+        while parent.parent is not None:
+            if isinstance(parent, tree.nodes.Program.Program):
+                break
+
+            parent = parent.parent
+
+        return self.name in parent.functions_table
 
     def get_code(self):
         address = self.get_value_address()

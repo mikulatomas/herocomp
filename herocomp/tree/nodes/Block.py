@@ -64,6 +64,7 @@ class Block(Node):
                 # print(repr(statement.identifier.name))
                 # print(statement.variable_offset)
                 self.variables_table.add_variable(statement.identifier.name, statement.variable_offset)
+                # print(self.variables_table.table)
                 code += statement.get_code()
 
                 # Array variable

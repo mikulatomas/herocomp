@@ -1,3 +1,4 @@
+import tree
 from asm.Asm import *
 from asm.Registers import Registers
 from tree.nodes.Node import Node
@@ -6,6 +7,7 @@ from tree.nodes.Node import Node
 class FunctionCall(Node):
     def __init__(self, identifier=None, parent=None):
         self.identifier = identifier
+        self.identifier.parent = self
         super(FunctionCall, self).__init__(parent)
 
     def __str__(self):
@@ -36,9 +38,11 @@ class FunctionCall(Node):
                 pass
             argument_possition += 1
 
-        # Later implement pointr tu function
-
-        code += instruction("call", self.identifier.name)
+        if isinstance(self.identifier, tree.nodes.types.Identifier.Identifier):
+            code += instruction("call", self.identifier.name)
+        else:
+            code += self.identifier.get_code()
+            code += instruction("call", "*" + str(Registers.RAX))
 
         number_arguments_on_stack = len(self.statements) - 6
 

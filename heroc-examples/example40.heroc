@@ -34,7 +34,7 @@ permute (string, k, n)
 	for (i = k; i < n; i ++) {
 	    swap (string, k, i);
 	    copy (string, n);
-	    permute (string + n, k + 1, n);
+	    permute (string + (n * sizeof(long)), k + 1, n);
 	}
     }
 }

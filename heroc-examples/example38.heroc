@@ -3,10 +3,10 @@ fubar ()
 {
     long i;
     for (i = 0; i < 4; i ++) {
-	print_long ({10, 20, 30, 40} [i]);
-	print_nl ();
-	print_long (*({10, 20, 30, 40} + (i * sizeof (long))));
-	print_nl ();
+    	print_long ({10, 20, 30, 40} [i]);
+    	print_nl ();
+    	print_long (*({10, 20, 30, 40} + (i * sizeof (long))));
+    	print_nl ();
     }
 }
 

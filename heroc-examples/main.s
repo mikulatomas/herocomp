@@ -1,43 +1,226 @@
-	.file	"main.c"
+	.file	"example26.heroc"
 	.global	main
+	.data
+	.comm heap,800000,32
+front:
+	.quad	heap
 	.text
-print_string:
+lalloc:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$16, %rsp
+	movq	front(%rip), %rax
+	movq	%rax, %r12
+	movq	%r12, -16(%rbp)
+	movq	$8, %rax
+	pushq	%rax
+	movq	-8(%rbp), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	imulq	%r10, %r11
+	pushq	%r11
+	movq	front(%rip), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	addq	%r10, %r11
+	pushq	%r11
+	popq	%rax
+	movq	%rax, %r12
+	movq	%r12, front(%rip)
+	movq	-16(%rbp), %rax
+	leave	
+	ret	
+cons:
 	pushq	%rbp
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	movq	%rsi, -16(%rbp)
 	subq	$24, %rsp
-	movq	$0, %rax
-	movq	%rax, %r12
-	movq	%r12, -24(%rbp)
-LOOP21:
-	movq	-16(%rbp), %rax
-	pushq	%rax
-	movq	-24(%rbp), %rax
-	pushq	%rax
-	popq	%r11
-	popq	%r10
-	cmpq	%r10, %r11
-	movq	$0, %rax
-	movq	$1, %r12
-	cmovlq	%r12, %rax
-	pushq	%rax
-	popq	%rax
-	cmpq	$0, %rax
-	je	LOOP21_END
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+	movq	$3, %rax
+	movq	%rax, %rdi
+	call	lalloc
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %r12
+	movq	%r12, -24(%rbp)
+	movq	$1, %rax
+	movq	%rax, %r12
+	movq	-24(%rbp), %rax
+	pushq	%rax
+	movq	$0, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	%r10, %rax
+	movq	%r12, (%rax)
+	movq	-8(%rbp), %rax
+	movq	%rax, %r12
+	movq	-24(%rbp), %rax
+	pushq	%rax
+	movq	$1, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	%r10, %rax
+	movq	%r12, (%rax)
+	movq	-16(%rbp), %rax
+	movq	%rax, %r12
+	movq	-24(%rbp), %rax
+	pushq	%rax
+	movq	$2, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	%r10, %rax
+	movq	%r12, (%rax)
+	movq	-24(%rbp), %rax
+	leave	
+	ret	
+pairp:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$8, %rsp
+	movq	$1, %rax
+	pushq	%rax
 	movq	-8(%rbp), %rax
 	pushq	%rax
-	movq	-24(%rbp), %rax
+	movq	$0, %rax
 	popq	%r10
 	imulq	$8, %rax
 	addq	%rax, %r10
 	movq	(%r10), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	cmpq	%r10, %r11
+	movq	$0, %rax
+	movq	$1, %r12
+	cmove	%r12, %rax
+	pushq	%rax
+	popq	%rax
+	leave	
+	ret	
+car:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$8, %rsp
+	movq	-8(%rbp), %rax
+	pushq	%rax
+	movq	$1, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	(%r10), %rax
+	leave	
+	ret	
+cdr:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$8, %rsp
+	movq	-8(%rbp), %rax
+	pushq	%rax
+	movq	$2, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	(%r10), %rax
+	leave	
+	ret	
+num:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$16, %rsp
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$2, %rax
+	movq	%rax, %rdi
+	call	lalloc
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %r12
+	movq	%r12, -16(%rbp)
+	movq	$0, %rax
+	movq	%rax, %r12
+	movq	-16(%rbp), %rax
+	pushq	%rax
+	movq	$0, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	%r10, %rax
+	movq	%r12, (%rax)
+	movq	-8(%rbp), %rax
+	movq	%rax, %r12
+	movq	-16(%rbp), %rax
+	pushq	%rax
+	movq	$1, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	%r10, %rax
+	movq	%r12, (%rax)
+	movq	-16(%rbp), %rax
+	leave	
+	ret	
+value:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$8, %rsp
+	movq	-8(%rbp), %rax
+	pushq	%rax
+	movq	$1, %rax
+	popq	%r10
+	imulq	$8, %rax
+	addq	%rax, %r10
+	movq	(%r10), %rax
+	leave	
+	ret	
+prt:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	movq	%rsi, -16(%rbp)
+	subq	$16, %rsp
+	movq	-8(%rbp), %rax
+	cmpq	$0, %rax
+	movq	$0, %rax
+	movq	$1, %r12
+	cmove	%r12, %rax
+	cmpq	$0, %rax
+	je	IF114_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$40, %rax
 	movq	%rax, %rdi
 	call	print_char
 	popq	%r9
@@ -46,14 +229,721 @@ LOOP21:
 	popq	%rdx
 	popq	%rsi
 	popq	%rdi
-LOOP21_NEXT:
-	movq	-24(%rbp), %rax
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$41, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	leave	
+	ret	
+	jmp	IF114_END
+IF114_ELSE:
+IF114_END:
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	pairp
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	cmpq	$0, %rax
+	movq	$0, %rax
+	movq	$1, %r12
+	cmove	%r12, %rax
+	cmpq	$0, %rax
+	je	IF125_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	value
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	print_long
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	leave	
+	ret	
+	jmp	IF125_END
+IF125_ELSE:
+IF125_END:
+	movq	-16(%rbp), %rax
+	cmpq	$0, %rax
+	je	IF137_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$40, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	jmp	IF137_END
+IF137_ELSE:
+IF137_END:
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	car
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	$1, %rax
+	movq	%rax, %rsi
+	call	prt
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	pairp
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
 	pushq	%rax
-	incq	%rax
-	movq	%rax, -24(%rbp)
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rax
+	popq	%r10
+	popq	%r11
+	cmpq	$0, %r10
+	movq	$1, %r10
+	movq	$0, %r12
+	cmove	%r12, %r10
+	cmpq	$0, %r11
+	movq	$1, %r11
+	movq	$0, %r12
+	cmove	%r12, %r11
+	andq	%r10, %r11
+	pushq	%r11
 	popq	%rax
-	jmp	LOOP21
-LOOP21_END:
+	cmpq	$0, %rax
+	je	IF149_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$32, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	$0, %rax
+	movq	%rax, %rsi
+	call	prt
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	jmp	IF149_END
+IF149_ELSE:
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	cmpq	$0, %rax
+	je	IF170_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$32, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$46, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$32, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	$0, %rax
+	movq	%rax, %rsi
+	call	prt
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	jmp	IF170_END
+IF170_ELSE:
+IF170_END:
+IF149_END:
+	movq	-16(%rbp), %rax
+	cmpq	$0, %rax
+	je	IF190_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$41, %rax
+	movq	%rax, %rdi
+	call	print_char
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	jmp	IF190_END
+IF190_ELSE:
+IF190_END:
+	leave	
+	ret	
+print_elem:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$8, %rsp
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	movq	$1, %rax
+	movq	%rax, %rsi
+	call	prt
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	leave	
+	ret	
+append:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	movq	%rsi, -16(%rbp)
+	subq	$16, %rsp
+	movq	$0, %rax
+	pushq	%rax
+	movq	-8(%rbp), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	cmpq	%r10, %r11
+	movq	$0, %rax
+	movq	$1, %r12
+	cmove	%r12, %rax
+	pushq	%rax
+	popq	%rax
+	cmpq	$0, %rax
+	je	TERNARY210_ELSE
+	movq	-16(%rbp), %rax
+	jmp	TERNARY210_END
+TERNARY210_ELSE:
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	car
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	-16(%rbp), %rax
+	movq	%rax, %rsi
+	call	append
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+TERNARY210_END:
+	leave	
+	ret	
+mapcons:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	movq	%rsi, -16(%rbp)
+	subq	$16, %rsp
+	movq	$0, %rax
+	pushq	%rax
+	movq	-16(%rbp), %rax
+	pushq	%rax
+	popq	%r11
+	popq	%r10
+	cmpq	%r10, %r11
+	movq	$0, %rax
+	movq	$1, %r12
+	cmove	%r12, %rax
+	pushq	%rax
+	popq	%rax
+	cmpq	$0, %rax
+	je	TERNARY232_ELSE
+	movq	$0, %rax
+	jmp	TERNARY232_END
+TERNARY232_ELSE:
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	car
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-16(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	mapcons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+TERNARY232_END:
+	leave	
+	ret	
+power:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	movq	%rdi, -8(%rbp)
+	subq	$16, %rsp
+	movq	-8(%rbp), %rax
+	cmpq	$0, %rax
+	je	IF255_ELSE
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	cdr
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	power
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %r12
+	movq	%r12, -16(%rbp)
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	-8(%rbp), %rax
+	movq	%rax, %rdi
+	call	car
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	-16(%rbp), %rax
+	movq	%rax, %rsi
+	call	mapcons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	-16(%rbp), %rax
+	movq	%rax, %rsi
+	call	append
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	leave	
+	ret	
+	jmp	IF255_END
+IF255_ELSE:
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$0, %rax
+	movq	%rax, %rdi
+	movq	$0, %rax
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	leave	
+	ret	
+IF255_END:
+	leave	
+	ret	
+main:
+	pushq	%rbp
+	movq	%rsp, %rbp
+	subq	$0, %rsp
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$0, %rax
+	movq	%rax, %rdi
+	call	power
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	print_elem
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
@@ -67,126 +957,306 @@ LOOP21_END:
 	popq	%rdx
 	popq	%rsi
 	popq	%rdi
-	leave	
-	ret	
-main:
-	pushq	%rbp
-	movq	%rsp, %rbp
-	subq	$0, %rsp
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
-	subq	$416, %rsp
-	movq	$114, %rax
-	movq	%rax, -8(%rbp)
-	movq	$97, %rax
-	movq	%rax, -16(%rbp)
-	movq	$98, %rax
-	movq	%rax, -24(%rbp)
-	movq	$117, %rax
-	movq	%rax, -32(%rbp)
-	movq	$70, %rax
-	movq	%rax, -40(%rbp)
-	movq	$32, %rax
-	movq	%rax, -48(%rbp)
-	movq	$44, %rax
-	movq	%rax, -56(%rbp)
-	movq	$101, %rax
-	movq	%rax, -64(%rbp)
-	movq	$104, %rax
-	movq	%rax, -72(%rbp)
-	movq	$101, %rax
-	movq	%rax, -80(%rbp)
-	movq	$104, %rax
-	movq	%rax, -88(%rbp)
-	movq	$117, %rax
-	movq	%rax, -96(%rbp)
-	movq	$77, %rax
-	movq	%rax, -104(%rbp)
-	movq	$40, %rax
-	movq	%rax, -112(%rbp)
-	movq	$32, %rax
-	movq	%rax, -120(%rbp)
-	movq	$103, %rax
-	movq	%rax, -128(%rbp)
-	movq	$110, %rax
-	movq	%rax, -136(%rbp)
-	movq	$105, %rax
-	movq	%rax, -144(%rbp)
-	movq	$114, %rax
-	movq	%rax, -152(%rbp)
-	movq	$116, %rax
-	movq	%rax, -160(%rbp)
-	movq	$115, %rax
-	movq	%rax, -168(%rbp)
-	movq	$95, %rax
-	movq	%rax, -176(%rbp)
-	movq	$116, %rax
-	movq	%rax, -184(%rbp)
-	movq	$110, %rax
-	movq	%rax, -192(%rbp)
-	movq	$105, %rax
-	movq	%rax, -200(%rbp)
-	movq	$114, %rax
-	movq	%rax, -208(%rbp)
-	movq	$112, %rax
-	movq	%rax, -216(%rbp)
-	movq	$32, %rax
-	movq	%rax, -224(%rbp)
-	movq	$32, %rax
-	movq	%rax, -232(%rbp)
-	movq	$32, %rax
-	movq	%rax, -240(%rbp)
-	movq	$32, %rax
-	movq	%rax, -248(%rbp)
-	movq	$10, %rax
-	movq	%rax, -256(%rbp)
-	movq	$59, %rax
-	movq	%rax, -264(%rbp)
-	movq	$41, %rax
-	movq	%rax, -272(%rbp)
-	movq	$51, %rax
-	movq	%rax, -280(%rbp)
-	movq	$49, %rax
-	movq	%rax, -288(%rbp)
-	movq	$32, %rax
-	movq	%rax, -296(%rbp)
-	movq	$44, %rax
-	movq	%rax, -304(%rbp)
-	movq	$33, %rax
-	movq	%rax, -312(%rbp)
-	movq	$100, %rax
-	movq	%rax, -320(%rbp)
-	movq	$108, %rax
-	movq	%rax, -328(%rbp)
-	movq	$114, %rax
-	movq	%rax, -336(%rbp)
-	movq	$111, %rax
-	movq	%rax, -344(%rbp)
-	movq	$87, %rax
-	movq	%rax, -352(%rbp)
-	movq	$32, %rax
-	movq	%rax, -360(%rbp)
-	movq	$44, %rax
-	movq	%rax, -368(%rbp)
-	movq	$111, %rax
-	movq	%rax, -376(%rbp)
-	movq	$108, %rax
-	movq	%rax, -384(%rbp)
-	movq	$108, %rax
-	movq	%rax, -392(%rbp)
-	movq	$101, %rax
-	movq	%rax, -400(%rbp)
-	movq	$72, %rax
-	movq	%rax, -408(%rbp)
-	leaq	-408(%rbp), %rax
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$1, %rax
 	movq	%rax, %rdi
-	movq	$13, %rax
+	call	num
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	$0, %rax
 	movq	%rax, %rsi
-	call	print_string
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	power
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	print_elem
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	call	print_nl
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$1, %rax
+	movq	%rax, %rdi
+	call	num
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$2, %rax
+	movq	%rax, %rdi
+	call	num
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	$0, %rax
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	power
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	print_elem
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	call	print_nl
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$1, %rax
+	movq	%rax, %rdi
+	call	num
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$2, %rax
+	movq	%rax, %rdi
+	call	num
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	movq	$3, %rax
+	movq	%rax, %rdi
+	call	num
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	movq	$0, %rax
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rsi
+	call	cons
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	power
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	movq	%rax, %rdi
+	call	print_elem
+	popq	%r9
+	popq	%r8
+	popq	%rcx
+	popq	%rdx
+	popq	%rsi
+	popq	%rdi
+	pushq	%rdi
+	pushq	%rsi
+	pushq	%rdx
+	pushq	%rcx
+	pushq	%r8
+	pushq	%r9
+	call	print_nl
 	popq	%r9
 	popq	%r8
 	popq	%rcx
