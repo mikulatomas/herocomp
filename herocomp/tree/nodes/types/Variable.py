@@ -21,22 +21,9 @@ class Variable(Node):
     def get_code(self):
         code = ""
 
-        # if self.variable_type == VariableType.VARIABLE:
-            # If variable has assignment
         if len(self.statements) != 0:
             for statement in self.statements:
                 code += statement.get_code()
-        else:
-            pass
-
-            # if len(self.statements) == 1:
-            #     assignment = self.statements[0]
-                # assignment
-                # if isinstance(assignment.statements[0], tree.Number.Number):
-                #     code += movq(assignment.statements[0].get_asm_value(), str(self.variable_offset) + Registers.RBP.dereference())
-                # elif isinstance(assignment.statements[0], tree.nodes.types.Identifier.Identifier):
-                #     code += movq(assignment.statements[0].get_asm_value(), str(self.variable_offset) + Registers.RBP.dereference())
-        # elif self.variable_type == VariableType.ARRAY:
 
         return code
 

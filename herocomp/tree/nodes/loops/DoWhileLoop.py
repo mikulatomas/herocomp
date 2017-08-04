@@ -17,9 +17,11 @@ class DoWhileLoop(Loop):
         code = ""
 
         code += label(self.start_label())
+
         # Body
         block_code, has_return = self.statements[0].get_code()
         code += block_code
+        
         # Condition
         code += self.statements[1].get_code()
         code += instruction("cmpq", number_constant(0), Registers.RAX)

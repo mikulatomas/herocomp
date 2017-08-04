@@ -29,4 +29,4 @@ class Registers(Enum):
         return self.value
 
     def dereference(self):
-        return "(" + self.value  + ")"
+        return "(" + self.value + ")"

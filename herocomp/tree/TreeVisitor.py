@@ -21,27 +21,11 @@ from tree.nodes.loops.JumpStatementType import JumpStatementType
 from tree.nodes.loops.WhileLoop import WhileLoop
 from tree.nodes.Node import Node
 from tree.nodes.operations.BinaryOperation import BinaryOperation
-# from tree.nodes.operations.AdditiveOperation import AdditiveOperation
-# from tree.nodes.operations.AndOperation import AndOperation
-# from tree.nodes.operations.BitwiseNotOperation import BitwiseNotOperation
-# from tree.nodes.operations.BitwiseOrOperation import BitwiseOrOperation
-# from tree.nodes.operations.BitwiseXOrOperation import BitwiseXOrOperation
-# from tree.nodes.operations.EqualityOperation import EqualityOperation
-# from tree.nodes.operations.IncrementalOperation import IncrementalOperation
-# from tree.nodes.operations.LogicalAndOperation import LogicalAndOperation
-# from tree.nodes.operations.LogicalNotOperation import LogicalNotOperation
-# from tree.nodes.operations.LogicalOrOperation import LogicalOrOperation
-# from tree.nodes.operations.MultiplicativeOperation import MultiplicativeOperation
 from tree.nodes.operations.OperationType import OperationType
 from tree.nodes.operations.UnaryOperation import UnaryOperation
 from tree.nodes.types.Array import Array
 from tree.nodes.types.Identifier import Identifier
 from tree.nodes.types.Number import Number
-# from tree.nodes.operations.PointerOperation import PointerOperation
-# from tree.nodes.operations.RelationalOperation import RelationalOperation
-# from tree.nodes.operations.ShiftOperation import ShiftOperation
-# from tree.nodes.operations.SubscriptOperation import SubscriptOperation
-# from tree.nodes.operations.UnaryAdditiveOperation import UnaryAdditiveOperation
 from tree.nodes.types.String import String
 from tree.nodes.types.Variable import Variable
 from tree.nodes.types.VariableType import VariableType
@@ -63,8 +47,6 @@ class TreeVisitor(HerocVisitor):
             if isinstance(r, list):
                 logging.info("Adding variables")
                 ast.root.addVariableList(r)
-                # for variable in r:
-                #     ast.root.addStatement(variable)
             else:
                 logging.info("Adding statement")
                 ast.root.addStatement(r)
@@ -140,10 +122,6 @@ class TreeVisitor(HerocVisitor):
             assignment.addStatement(identifier)
             assignment.addStatement(init_value)
             variable.addStatement(assignment)
-        # else:
-        #     # Default value to 0
-        #     init_value = Number()
-        #     variable.addStatement(init_)
 
         return variable
 
@@ -171,9 +149,6 @@ class TreeVisitor(HerocVisitor):
                 array_size = Number(0)
 
         array.setArraySize(array_size)
-        # if array_size.value > 0 and len(array_values) == 0:
-        #     for i in range(array_size.value):
-        #         array_values.append(Number(0))
 
         array.addStatementList(array_values)
         assignment = Assignment(AssignmentType.ASSIGN)
@@ -385,23 +360,6 @@ class TreeVisitor(HerocVisitor):
             operation_type = self.visit(ctx.getChild(0))
             operation = UnaryOperation(operation=operation_type)
 
-            # if operation_type is OperationType.LOGICAL_NOT:
-            #     operation = LogicalNotOperation(operation=operation_type)
-            # elif operation_type is OperationType.REFERENCE:
-            #     operation = PointerOperation(operation=operation_type)
-            # elif operation_type is OperationType.DEREFERENCE:
-            #     operation = PointerOperation(operation=operation_type)
-            # elif operation_type is OperationType.BITWISE_NOT:
-            #     operation = BitwiseNotOperation(operation=operation_type)
-            # elif operation_type is OperationType.INCREMENT:
-            #     operation = IncrementalOperation(operation=operation_type)
-            # elif operation_type is OperationType.DECREMENT:
-            #     operation = IncrementalOperation(operation=operation_type)
-            # elif operation_type is OperationType.PLUS:
-            #     operation = UnaryAdditiveOperation(operation=operation_type)
-            # elif operation_type is OperationType.MINUS:
-            #     operation = UnaryAdditiveOperation(operation=operation_type)
-
             operation.addStatement(self.visit(ctx.getChild(1)))
             return operation
         else:
@@ -456,10 +414,6 @@ class TreeVisitor(HerocVisitor):
                 array_size = Number(0)
 
             array.setArraySize(array_size)
-
-            # if array_size.value > 0 and len(array_values) == 0:
-            #     for i in range(array_size.value):
-            #         array_values.append(Number(0))
 
             array.addStatementList(array_values)
 
@@ -588,23 +542,6 @@ class TreeVisitor(HerocVisitor):
                 identifiers.append(Identifier(name=str(child)))
 
         return identifiers
-
-    # def visitFunctionCallStatement(self, ctx):
-    #     logging.info(str(sys._getframe().f_code.co_name))
-    #
-    #     identifier = Identifier(str(ctx.getChild(0)))
-    #     arguments = []
-    #
-    #     for i in range(1, ctx.getChildCount()):
-    #         child = ctx.getChild(i)
-    #
-    #         if isinstance(child, HerocParser.ArgumentExpressionListContext):
-    #             arguments = self.visit(child)
-    #
-    #     function_call = FunctionCall(identifier=identifier)
-    #     function_call.addStatementList(arguments)
-    #
-    #     return function_call
 
     def visitArgumentExpressionList(self, ctx):
         logging.info(str(sys._getframe().f_code.co_name))

@@ -17,6 +17,7 @@ class WhileLoop(Loop):
         code = ""
 
         code += label(self.start_label())
+
         # Condition
         code += self.statements[0].get_code()
         code += instruction("cmpq", number_constant(0), Registers.RAX)

@@ -9,16 +9,18 @@ class ForLoop(Loop):
         self.inicialization = inicialization
         if self.inicialization is not None:
             self.inicialization.parent = self
+
         self.condition = condition
         if self.condition is not None:
             self.condition.parent = self
+
         self.incrementation = incrementation
         if self.incrementation is not None:
             self.incrementation.parent = self
+
         super(ForLoop, self).__init__(parent=parent)
 
     def __str__(self):
-        # TODO print
         valuesString = self.printStatements()
 
         return "ForLoop: {}".format(valuesString)

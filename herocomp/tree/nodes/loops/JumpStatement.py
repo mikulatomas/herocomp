@@ -36,6 +36,7 @@ class JumpStatement(Node):
         if self.jump_statement_type == JumpStatementType.RETURN:
             if len(self.statements) > 0:
                 code += self.statements[0].get_code()
+
             code += instruction("leave")
             code += instruction("ret")
         elif self.jump_statement_type == JumpStatementType.BREAK:
@@ -44,4 +45,5 @@ class JumpStatement(Node):
         elif self.jump_statement_type == JumpStatementType.CONTINUE:
             outer_loop = self._get_outer_loop()
             code += instruction("jmp", outer_loop.next_label())
+
         return code

@@ -13,10 +13,6 @@ class VariablesTable():
             raise ValueError(error_string)
 
     def check_variable(self, identifier):
-        # print(identifier)
-        # print(self.table.keys())
-        # print(identifier in self.table.keys())
-        # print("////")
         return identifier in self.table.keys()
 
     def get_variable_offset(self, identifier):

@@ -73,7 +73,6 @@ class OperationType(Enum):
         elif ((self.name == self.MODULO.name)):
             return self._modulo_code()
         else:
-            # delete later
             return "{0} : not implemented\n".format(self.value)
 
     def get_unary_operation_code(self, is_postfix, operand, expression, parent):
@@ -100,7 +99,6 @@ class OperationType(Enum):
         elif (self.name == self.BITWISE_NOT.name):
             return self._complement_code(operand)
         else:
-            # delete later
             return "{0} : not implemented\n".format(self.value)
 
     def _complement_code(self, operand):
@@ -138,22 +136,16 @@ class OperationType(Enum):
 
             if isinstance(parent, tree.nodes.Assignment.Assignment) and parent.statements[0] is operand.parent:
                 code += instruction("movq", Registers.R12, "({0},{1})".format(Registers.RDX, Registers.RAX))
-
             else:
                 code += instruction("movq", "({0},{1})".format(Registers.RDX, Registers.RAX), Registers.RAX)
-
-                # if operand.get_value_type() is not VariableType.ARRAY:
-                #     code += instruction("movq", Registers.RAX.dereference(), Registers.RAX)
         else:
             code += operand_code
             code += instruction("pushq", Registers.RAX)
             code += expression.get_code()
-            # CHECK REGISTER
             code += instruction("popq", Registers.R10)
             code += instruction("imulq", number_constant(8), Registers.RAX)
             code += instruction("addq", Registers.RAX, Registers.R10)
-            # print(repr(operand))
-            # print(repr(parent))
+
             if isinstance(parent, tree.nodes.Assignment.Assignment) and parent.statements[0] is operand.parent:
                 code += instruction("movq", Registers.R10, Registers.RAX)
             else:
@@ -196,9 +188,7 @@ class OperationType(Enum):
     def _dereference_code(self, operand):
         code = ""
 
-        # code += "operand code\n"
         code += operand.get_code()
-        # code += "////operand code\n"
         code += instruction("movq", Registers.RAX.dereference(), Registers.RAX)
 
         return code
@@ -218,7 +208,6 @@ class OperationType(Enum):
 
         code += instruction(operator, Registers.RAX)
 
-        # Probably only for inc/dec
         code += instruction("movq", Registers.RAX, operand.get_value_address())
 
         if is_postfix:

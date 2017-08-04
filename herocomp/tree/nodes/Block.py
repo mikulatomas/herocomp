@@ -14,26 +14,9 @@ class Block(Node):
         self.variables_table = VariablesTable()
         super(Block, self).__init__(parent)
 
-    # def addVariable(self, variableNode):
-    #     self.variables.append(variableNode)
-    #     variableNode.parent = self
-    #
-    # def addVariableList(self, variableNodeList):
-    #     for node in variableNodeList:
-    #         self.addVariable(node)
-
     def __str__(self):
-        # variablesString = ""
-
-        # for var in self.variables:
-        #     var.depth = self.depth + 1
-        #     variablesString += "\n"
-        #     variablesString += var.generateTabsForDepth()
-        #     variablesString += str(var)
-
         statementsString = self.printStatements()
 
-        # return "Block: {0} {1}".format(variablesString, statementsString)
         return "Block: {0}".format(statementsString)
 
     def get_variable_offset(self):
@@ -61,17 +44,8 @@ class Block(Node):
                     return code, False
             elif isinstance(statement, tree.nodes.types.Variable.Variable):
                 statement.variable_offset = self.get_variable_offset()
-                # print(repr(statement.identifier.name))
-                # print(statement.variable_offset)
                 self.variables_table.add_variable(statement.identifier.name, statement.variable_offset)
-                # print(self.variables_table.table)
                 code += statement.get_code()
-
-                # Array variable
-                # if statement.variable_type == VariableType.ARRAY:
-                #     # TODO
-                #
-                #     code += statement.get_code()
 
             elif isinstance(statement, tree.nodes.Block.Block):
                 block_code, has_return = statement.get_code()

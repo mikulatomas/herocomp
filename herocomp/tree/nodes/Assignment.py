@@ -24,10 +24,6 @@ class Assignment(Node):
         if self.operation is not AssignmentType.ASSIGN:
             arithmetic_operation = self.operation.get_operation()
             value = tree.nodes.operations.BinaryOperation.BinaryOperation(arithmetic_operation)
-            # value.statements.append(destination)
-            # value.statements.append(self.statements[1])
-            # for statement in value.statements:
-            #     statement.parent = self
             value.addStatement(destination)
             value.addStatement(self.statements[1])
             value.parent = self
@@ -37,25 +33,15 @@ class Assignment(Node):
         if not (isinstance(destination, tree.nodes.types.Identifier.Identifier) or isinstance(destination, tree.nodes.operations.UnaryOperation.UnaryOperation)):
             raise ValueError("Left side of assignment has to be identifier or unary operation!")
 
-        # code += "value\n"
         code += value.get_code()
 
         # Restore original parent in case of binary operation
         destination.parent = self
 
-        # code += "value/////\n"
         # Maybe for dereference
         code += instruction("movq", Registers.RAX, Registers.R12)
 
-
-        # TODO FIX
         if isinstance(destination, tree.nodes.types.Identifier.Identifier):
-            # TODO - prepsat na metodo z ident
-            # if isinstance(self.parent, tree.nodes.types.Variable.Variable):
-            #     destination_address = str(self.parent.variable_offset) + Registers.RBP.dereference()
-            # else:
-            #     destination_address = str(destination.get_stack_offset()) + Registers.RBP.dereference()
-
             destination_address = destination.get_value_address()
 
             code += instruction("movq", Registers.R12, destination_address)

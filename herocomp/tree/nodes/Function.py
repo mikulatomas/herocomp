@@ -93,17 +93,12 @@ class Function(Node):
 
         code += instruction("subq", number_constant(self.number_of_local_variables * 8), Registers.RSP)
 
-        # for statement in self.statements:
-        #     if isinstance(statement, tree.nodes.Block.Block):
-
         code += block_code
         self.has_return_statement = has_return
 
         if not has_return:
             code += instruction("leave")
             code += instruction("ret")
-        # code += pop(Registers.RBP)
-        # code += ret()
 
         return code
 
