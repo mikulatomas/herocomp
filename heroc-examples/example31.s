@@ -14,27 +14,42 @@ main:
 	movq	$10, %rax
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
+
 	movq	$16, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -47,25 +62,38 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
+
 	movq	$5, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 / : not implemented
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
@@ -77,33 +105,45 @@ main:
 	movq	-16(%rbp), %rax
 	decq	%rax
 	movq	%rax, -16(%rbp)
+
 	movq	-8(%rbp), %rax
 	decq	%rax
 	movq	%rax, -8(%rbp)
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
 	decq	%rax
 	movq	%rax, -16(%rbp)
 	popq	%rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	decq	%rax
 	movq	%rax, -8(%rbp)
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -32(%rbp)
@@ -112,18 +152,24 @@ main:
 	incq	%rax
 	movq	%rax, -8(%rbp)
 	popq	%rax
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	decq	%rax
 	movq	%rax, -8(%rbp)
 	popq	%rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -40(%rbp)

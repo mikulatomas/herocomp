@@ -14,6 +14,7 @@ class BinaryOperation(Node):
         stack = self.fill_operation_stack()
 
         while len(stack) > 0:
+            code += "\n"
             item = stack.pop()
 
             if isinstance(item, OperationType):
@@ -23,6 +24,7 @@ class BinaryOperation(Node):
                 # argumet
                 code += item.get_code()
                 code += instruction("pushq", Registers.RAX)
+            code += "\n"
 
         code += instruction("popq", Registers.RAX)
 

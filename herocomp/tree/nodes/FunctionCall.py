@@ -31,11 +31,10 @@ class FunctionCall(Node):
         argument_possition = 0
         for argument in self.statements:
             code += argument.get_code()
-            if argument_possition <= 6:
+            if argument_possition < 6:
                 code += instruction("movq", Registers.RAX, arguments_register_order[argument_possition])
             else:
-                # stack
-                pass
+                code += instruction("pushq", Registers.RAX)
             argument_possition += 1
 
         if isinstance(self.identifier, tree.nodes.types.Identifier.Identifier):
@@ -47,8 +46,7 @@ class FunctionCall(Node):
         number_arguments_on_stack = len(self.statements) - 6
 
         if number_arguments_on_stack > 0:
-            # Handle stack
-            pass
+            code += instruction("addq", number_constant(number_arguments_on_stack), Registers.RSP)
 
         # Restore Registers
         for register in reversed(not_save_registers):

@@ -6,10 +6,15 @@ fib:
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	subq	$8, %rsp
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -17,6 +22,7 @@ fib:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF4_ELSE
@@ -25,20 +31,27 @@ fib:
 	ret	
 	jmp	IF4_END
 IF4_ELSE:
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	fib
@@ -49,20 +62,28 @@ IF4_ELSE:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	fib
@@ -73,10 +94,13 @@ IF4_ELSE:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leave	
 	ret	
@@ -91,10 +115,15 @@ main:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP45:
+
 	movq	$15, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -102,6 +131,7 @@ LOOP45:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP45_END

@@ -13,20 +13,30 @@ lalloc:
 	movq	front(%rip), %rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
+
 	movq	$8, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	front(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, front(%rip)

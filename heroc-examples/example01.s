@@ -26,12 +26,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$5, %rax
 	pushq	%rax
+
+
 	movq	$4, %rax
 	pushq	%rax
+
+
 	movq	$6, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -44,10 +51,13 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_char
@@ -198,12 +208,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$28, %rax
 	pushq	%rax
+
+
 	movq	$7, %rax
 	pushq	%rax
+
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -216,10 +233,13 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_char

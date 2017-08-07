@@ -11,10 +11,15 @@ print_array:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP30:
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -22,6 +27,7 @@ LOOP30:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP30_END
@@ -165,14 +171,20 @@ partition:
 	movq	(%r10), %rax
 	movq	%rax, %r12
 	movq	%r12, -40(%rbp)
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -48(%rbp)
@@ -180,16 +192,25 @@ partition:
 	movq	%rax, %r12
 	movq	%r12, -32(%rbp)
 LOOP102:
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-32(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -197,11 +218,15 @@ LOOP102:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP102_END
+
 	movq	-40(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	movq	-32(%rbp), %rax
@@ -210,6 +235,8 @@ LOOP102:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -217,6 +244,7 @@ LOOP102:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF88_ELSE
@@ -263,14 +291,20 @@ LOOP102_END:
 	pushq	%r9
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-48(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rsi
 	movq	-24(%rbp), %rax
@@ -282,14 +316,20 @@ LOOP102_END:
 	popq	%rdx
 	popq	%rsi
 	popq	%rdi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-48(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leave	
 	ret	
@@ -300,10 +340,15 @@ quick_sort_rec:
 	movq	%rsi, -16(%rbp)
 	movq	%rdx, -24(%rbp)
 	subq	$32, %rsp
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -311,6 +356,7 @@ quick_sort_rec:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF120_ELSE
@@ -345,14 +391,20 @@ quick_sort_rec:
 	movq	%rax, %rdi
 	movq	-16(%rbp), %rax
 	movq	%rax, %rsi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-32(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdx
 	call	quick_sort_rec
@@ -370,14 +422,20 @@ quick_sort_rec:
 	pushq	%r9
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-32(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rsi
 	movq	-24(%rbp), %rax
@@ -410,14 +468,20 @@ quick_sort:
 	movq	%rax, %rdi
 	movq	$0, %rax
 	movq	%rax, %rsi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdx
 	call	quick_sort_rec

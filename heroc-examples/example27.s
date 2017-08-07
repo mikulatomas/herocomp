@@ -11,10 +11,15 @@ print_array:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP30:
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -22,6 +27,7 @@ LOOP30:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP30_END
@@ -119,10 +125,15 @@ LOOP42:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP97:
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -130,9 +141,11 @@ LOOP97:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP97_END
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	movq	-24(%rbp), %rax
@@ -141,22 +154,32 @@ LOOP97:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -164,9 +187,11 @@ LOOP97:
 	movq	$1, %r12
 	cmovg	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF56_ELSE
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	movq	-24(%rbp), %rax
@@ -175,60 +200,86 @@ LOOP97:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
 	addq	%rax, %r10
 	movq	%r10, %rax
 	movq	%r12, (%rax)
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	movq	-24(%rbp), %rax
@@ -237,10 +288,13 @@ LOOP97:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax
@@ -251,6 +305,7 @@ LOOP97:
 	addq	%rax, %r10
 	movq	%r10, %rax
 	movq	%r12, (%rax)
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	movq	-24(%rbp), %rax
@@ -259,38 +314,55 @@ LOOP97:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax

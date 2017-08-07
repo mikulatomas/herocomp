@@ -1836,10 +1836,15 @@ walk:
 	movq	%rdi, -8(%rbp)
 	movq	%rsi, -16(%rbp)
 	subq	$16, %rsp
+
 	movq	end_y(%rip), %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -1847,10 +1852,16 @@ walk:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
+
 	movq	end_x(%rip), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -1858,6 +1869,8 @@ walk:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -1870,25 +1883,36 @@ walk:
 	cmove	%r12, %r11
 	andq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF1853_ELSE
 	movq	$1, %rax
 	movq	%rax, %r12
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	correct_path(%rip), %rax
@@ -1899,46 +1923,73 @@ walk:
 	jmp	IF1853_END
 IF1853_ELSE:
 IF1853_END:
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	was_here(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	pushq	%rax
+
+
 	movq	$1, %rax
 	pushq	%rax
+
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	maze(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -1946,6 +1997,8 @@ IF1853_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -1958,6 +2011,7 @@ IF1853_END:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF1873_ELSE
@@ -1969,24 +2023,35 @@ IF1873_ELSE:
 IF1873_END:
 	movq	$1, %rax
 	movq	%rax, %r12
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	was_here(%rip), %rax
 	movq	%r12, (%rdx,%rax)
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
@@ -1995,14 +2060,20 @@ IF1873_END:
 	pushq	%r9
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rsi
 	call	walk
@@ -2013,6 +2084,8 @@ IF1873_END:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
@@ -2021,14 +2094,20 @@ IF1873_END:
 	pushq	%r9
 	movq	-8(%rbp), %rax
 	movq	%rax, %rdi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rsi
 	call	walk
@@ -2039,20 +2118,28 @@ IF1873_END:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	movq	-16(%rbp), %rax
@@ -2065,20 +2152,28 @@ IF1873_END:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	movq	-16(%rbp), %rax
@@ -2091,6 +2186,8 @@ IF1873_END:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -2103,6 +2200,8 @@ IF1873_END:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -2115,6 +2214,8 @@ IF1873_END:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -2127,25 +2228,36 @@ IF1873_END:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF1903_ELSE
 	movq	$1, %rax
 	movq	%rax, %r12
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	correct_path(%rip), %rax
@@ -2167,10 +2279,15 @@ solve:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP1968:
+
 	movq	$1817, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -2178,6 +2295,7 @@ LOOP1968:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP1968_END
@@ -2227,10 +2345,15 @@ print_solution:
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
 LOOP2033:
+
 	movq	$23, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -2238,6 +2361,7 @@ LOOP2033:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP2033_END
@@ -2245,10 +2369,15 @@ LOOP2033:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP2030:
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -2256,30 +2385,46 @@ LOOP2030:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP2030_END
+
 	movq	$0, %rax
 	pushq	%rax
+
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	maze(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -2287,6 +2432,7 @@ LOOP2030:
 	movq	$1, %r12
 	cmovne	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF1999_ELSE
@@ -2307,20 +2453,30 @@ LOOP2030:
 	popq	%rdi
 	jmp	IF1999_END
 IF1999_ELSE:
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$79, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	correct_path(%rip), %rax

@@ -11,10 +11,15 @@ line_of_stars:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP33:
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -22,6 +27,7 @@ LOOP33:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	movq	$0, %rax
@@ -29,16 +35,23 @@ LOOP33:
 	cmove	%r12, %rax
 	cmpq	$0, %rax
 	je	LOOP33_END
+
 	movq	-8(%rbp), %rax
 	cmpq	$0, %rax
 	movq	$0, %rax
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -46,8 +59,12 @@ LOOP33:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -60,6 +77,8 @@ LOOP33:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -72,6 +91,7 @@ LOOP33:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF16_ELSE
@@ -168,10 +188,15 @@ LOOP47:
 	decq	%rax
 	movq	%rax, -8(%rbp)
 	popq	%rax
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -179,6 +204,7 @@ LOOP47:
 	movq	$1, %r12
 	cmovge	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP47_END

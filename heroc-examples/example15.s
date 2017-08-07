@@ -6,10 +6,15 @@ fa:
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	subq	$8, %rsp
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -17,26 +22,34 @@ fa:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	TERNARY5_ELSE
 	movq	$1, %rax
 	jmp	TERNARY5_END
 TERNARY5_ELSE:
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	fb
@@ -47,12 +60,17 @@ TERNARY5_ELSE:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 TERNARY5_END:
 	leave	
@@ -62,10 +80,15 @@ fb:
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	subq	$8, %rsp
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -73,26 +96,34 @@ fb:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	TERNARY22_ELSE
 	movq	$1, %rax
 	jmp	TERNARY22_END
 TERNARY22_ELSE:
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	fa
@@ -103,12 +134,17 @@ TERNARY22_ELSE:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 TERNARY22_END:
 	leave	
@@ -121,10 +157,15 @@ main:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP55:
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -132,6 +173,7 @@ LOOP55:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP55_END

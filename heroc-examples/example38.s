@@ -9,10 +9,15 @@ fubar:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP41:
+
 	movq	$4, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -20,6 +25,7 @@ LOOP41:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP41_END
@@ -71,14 +77,21 @@ LOOP41:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$8, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$40, %rax
 	movq	%rax, -48(%rbp)
 	movq	$30, %rax
@@ -89,10 +102,13 @@ LOOP41:
 	movq	%rax, -72(%rbp)
 	leaq	-72(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	(%rax), %rax
 	movq	%rax, %rdi

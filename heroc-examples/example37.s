@@ -11,10 +11,15 @@ print_string:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP21:
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -22,6 +27,7 @@ LOOP21:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP21_END

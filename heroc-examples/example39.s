@@ -32,10 +32,15 @@ print_stack:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP44:
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -43,13 +48,19 @@ LOOP44:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP44_END
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -57,6 +68,7 @@ LOOP44:
 	movq	$1, %r12
 	cmovg	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF28_ELSE
@@ -169,13 +181,18 @@ jrz1:
 	decq	%rax
 	movq	%rax, sp(%rip)
 	popq	%rax
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -183,17 +200,24 @@ jrz1:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF68_ELSE
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, pc(%rip)
@@ -214,14 +238,20 @@ add2:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	push1
@@ -245,14 +275,20 @@ mul2:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	push1
@@ -276,10 +312,15 @@ leq2:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -287,6 +328,7 @@ leq2:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	push1
@@ -454,11 +496,16 @@ LOOP149:
 	movq	(%r10), %rax
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
+
 	movq	$1, %rax
 	negq	%rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -466,17 +513,24 @@ LOOP149:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF158_ELSE
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, pc(%rip)
@@ -488,14 +542,20 @@ LOOP149:
 	pushq	%r9
 	movq	prgm(%rip), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
@@ -504,14 +564,20 @@ LOOP149:
 	movq	%rax, %rdi
 	movq	prgm(%rip), %rax
 	pushq	%rax
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
@@ -528,10 +594,15 @@ LOOP149:
 	jmp	IF158_END
 IF158_ELSE:
 IF158_END:
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -539,42 +610,61 @@ IF158_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF179_ELSE
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, pc(%rip)
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, sp(%rip)
@@ -588,14 +678,20 @@ IF158_END:
 	movq	%rax, %rdi
 	movq	prgm(%rip), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
@@ -612,10 +708,15 @@ IF158_END:
 	jmp	IF179_END
 IF179_ELSE:
 IF179_END:
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -623,56 +724,81 @@ IF179_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF206_ELSE
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -32(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, pc(%rip)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, sp(%rip)
@@ -688,14 +814,20 @@ IF179_END:
 	movq	%rax, %rsi
 	movq	prgm(%rip), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
@@ -712,10 +844,15 @@ IF179_END:
 	jmp	IF206_END
 IF206_ELSE:
 IF206_END:
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -723,70 +860,101 @@ IF206_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF242_ELSE
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -40(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -48(%rbp)
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leaq	(,%rax,8), %rdx
 	leaq	stack(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -56(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, pc(%rip)
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	sp(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, sp(%rip)
@@ -804,14 +972,20 @@ IF206_END:
 	movq	%rax, %rdx
 	movq	prgm(%rip), %rax
 	pushq	%rax
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	pc(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax

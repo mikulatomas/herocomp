@@ -27,14 +27,20 @@ LOOP5:
 	popq	%rdx
 	popq	%rsi
 	popq	%rdi
+
 	movq	$8, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
@@ -114,10 +120,15 @@ copy:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP68:
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -125,6 +136,7 @@ LOOP68:
 	movq	$1, %r12
 	cmovge	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP68_END
@@ -138,14 +150,20 @@ LOOP68:
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	popq	%r10
 	imulq	$8, %rax
@@ -169,10 +187,15 @@ permute:
 	movq	%rsi, -16(%rbp)
 	movq	%rdx, -24(%rbp)
 	subq	$32, %rsp
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -180,6 +203,7 @@ permute:
 	movq	$1, %r12
 	cmovge	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF75_ELSE
@@ -206,10 +230,15 @@ IF75_ELSE:
 	movq	%rax, %r12
 	movq	%r12, -32(%rbp)
 LOOP116:
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-32(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -217,6 +246,7 @@ LOOP116:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP116_END
@@ -262,30 +292,46 @@ LOOP116:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$8, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rsi
 	movq	-24(%rbp), %rax
@@ -1370,10 +1416,15 @@ main:
 	movq	%rax, %r12
 	movq	%r12, -8208(%rbp)
 LOOP153:
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	-8208(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -1381,17 +1432,24 @@ LOOP153:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP153_END
+
 	movq	$65, %rax
 	pushq	%rax
+
+
 	movq	-8208(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax

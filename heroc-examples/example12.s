@@ -6,14 +6,20 @@ bar:
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	subq	$8, %rsp
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	leave	
 	ret	
@@ -28,14 +34,20 @@ foo:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	bar

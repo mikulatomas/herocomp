@@ -7,10 +7,15 @@ fac:
 	movq	%rdi, -8(%rbp)
 	movq	%rsi, -16(%rbp)
 	subq	$24, %rsp
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -18,6 +23,7 @@ fac:
 	movq	$1, %r12
 	cmovg	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF5_ELSE
@@ -27,14 +33,20 @@ fac:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	movq	-16(%rbp), %rax
@@ -50,14 +62,20 @@ fac:
 	movq	(%rax), %rax
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
@@ -78,10 +96,15 @@ main:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP58:
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -89,6 +112,7 @@ LOOP58:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP58_END

@@ -11,26 +11,40 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$4, %rax
 	pushq	%rax
+
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -59,14 +73,20 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$65280, %rax
 	pushq	%rax
+
+
 	movq	$65535, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	andq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -95,14 +115,20 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -131,20 +157,30 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -173,20 +209,30 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -215,10 +261,15 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$9, %rax
 	pushq	%rax
+
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -231,18 +282,27 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -271,16 +331,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$9, %rax
 	pushq	%rax
+
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -293,12 +362,17 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -327,22 +401,35 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$9, %rax
 	pushq	%rax
+
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -355,6 +442,7 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -383,16 +471,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$9, %rax
 	pushq	%rax
+
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -405,18 +502,27 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -445,16 +551,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$9, %rax
 	pushq	%rax
+
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -467,19 +582,28 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	notq	%rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -508,16 +632,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$9, %rax
 	pushq	%rax
+
+
 	movq	$678, %rax
 	pushq	%rax
+
+
 	movq	$12345, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -530,19 +663,28 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	movq	$891010, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	notq	%rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	orq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -601,10 +743,15 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$40, %rax
 	pushq	%rax
+
+
 	movq	$40, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -612,10 +759,16 @@ main:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -623,6 +776,8 @@ main:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -635,6 +790,7 @@ main:
 	cmove	%r12, %r11
 	andq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -663,12 +819,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$333, %rax
 	pushq	%rax
+
+
 	movq	$40, %rax
 	pushq	%rax
+
+
 	movq	$40, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -676,10 +839,16 @@ main:
 	movq	$1, %r12
 	cmovge	%r12, %rax
 	pushq	%rax
+
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -687,6 +856,8 @@ main:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -699,6 +870,8 @@ main:
 	cmove	%r12, %r11
 	andq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -711,12 +884,17 @@ main:
 	cmove	%r12, %r11
 	orq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long

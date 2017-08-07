@@ -61,7 +61,7 @@ class Identifier(Node):
         try:
             address = parent.variables_table.get_variable_offset(self.name)
         except ValueError as e:
-            error_string = "Variable {0} is not a global variable".format(self.name)
+            error_string = "Variable {0} is not defined".format(self.name)
             raise ValueError(error_string)
 
         return address

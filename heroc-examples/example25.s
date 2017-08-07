@@ -13,20 +13,30 @@ lalloc:
 	movq	front(%rip), %rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
+
 	movq	$8, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	front(%rip), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, front(%rip)
@@ -94,8 +104,11 @@ pairp:
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	subq	$8, %rsp
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
 	movq	$0, %rax
@@ -104,6 +117,8 @@ pairp:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -111,6 +126,7 @@ pairp:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	leave	
 	ret	
@@ -356,6 +372,7 @@ IF137_END:
 	popq	%rdx
 	popq	%rsi
 	popq	%rdi
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
@@ -386,6 +403,8 @@ IF137_END:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	pushq	%rdi
 	pushq	%rsi
 	pushq	%rdx
@@ -402,6 +421,8 @@ IF137_END:
 	popq	%rsi
 	popq	%rdi
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	cmpq	$0, %r10
@@ -414,6 +435,7 @@ IF137_END:
 	cmove	%r12, %r11
 	andq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF149_ELSE

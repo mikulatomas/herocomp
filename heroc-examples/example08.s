@@ -7,10 +7,15 @@ line_of_stars:
 	movq	%rdi, -8(%rbp)
 	subq	$16, %rsp
 LOOP16:
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -18,6 +23,7 @@ LOOP16:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	movq	$0, %rax
@@ -74,10 +80,15 @@ LOOP26:
 	movq	$666, %rax
 	cmpq	$0, %rax
 	je	LOOP26_END
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -85,6 +96,7 @@ LOOP26:
 	movq	$1, %r12
 	cmovge	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF29_ELSE

@@ -11,20 +11,30 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$30, %rax
 	pushq	%rax
+
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -53,20 +63,30 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$30, %rax
 	pushq	%rax
+
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -95,16 +115,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$7, %rax
 	pushq	%rax
+
+
 	movq	$6, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$5, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -117,6 +146,7 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -145,12 +175,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$7, %rax
 	pushq	%rax
+
+
 	movq	$6, %rax
 	pushq	%rax
+
+
 	movq	$5, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -163,10 +200,13 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -195,16 +235,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	$6, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	movq	$50000, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -217,6 +266,7 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -245,12 +295,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	$6, %rax
 	pushq	%rax
+
+
 	movq	$50000, %rax
 	pushq	%rax
+
+
 	popq	%r10
 	popq	%r11
 	pushq	%rdx
@@ -263,10 +320,13 @@ main:
 	popq	%rcx
 	popq	%rdx
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -295,12 +355,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$1, %rax
 	pushq	%rax
+
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%rax
 	popq	%r10
 	pushq	%rdx
@@ -309,10 +376,13 @@ main:
 	popq	%rax
 	pushq	%rdx
 	movq	%rax, %rdx
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -341,12 +411,19 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%rax
 	popq	%r10
 	pushq	%rdx
@@ -355,10 +432,13 @@ main:
 	popq	%rax
 	pushq	%rdx
 	movq	%rax, %rdx
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -387,16 +467,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$3, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%rax
 	popq	%r10
 	pushq	%rdx
@@ -405,6 +494,7 @@ main:
 	popq	%rax
 	pushq	%rdx
 	movq	%rax, %rdx
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -433,16 +523,25 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	$66, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -450,6 +549,7 @@ main:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -478,10 +578,15 @@ main:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -489,12 +594,17 @@ main:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
+
 	movq	$66, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long

@@ -7,44 +7,62 @@ swap:
 	movq	%rdi, -8(%rbp)
 	movq	%rsi, -16(%rbp)
 	subq	$16, %rsp
+
 	movq	-16(%rbp), %rax
 	movq	(%rax), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	movq	(%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax
 	movq	%r12, (%rax)
+
 	movq	-8(%rbp), %rax
 	movq	(%rax), %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	movq	(%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-16(%rbp), %rax
 	movq	%r12, (%rax)
+
 	movq	-16(%rbp), %rax
 	movq	(%rax), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	movq	(%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	xorq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-8(%rbp), %rax

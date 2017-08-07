@@ -22,10 +22,15 @@ LOOP18:
 	popq	%rdx
 	popq	%rsi
 	popq	%rdi
+
 	movq	$0, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -33,6 +38,7 @@ LOOP18:
 	movq	$1, %r12
 	cmovleq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF12_ELSE
@@ -77,14 +83,20 @@ LOOP43:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	subq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	line_of_stars
@@ -99,10 +111,15 @@ LOOP43:
 	incq	%rax
 	movq	%rax, -8(%rbp)
 	popq	%rax
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -110,6 +127,7 @@ LOOP43:
 	movq	$1, %r12
 	cmovg	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	IF37_ELSE

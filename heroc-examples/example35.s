@@ -37,14 +37,20 @@ helper:
 	movq	-8(%rbp), %rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
+
 	movq	$111, %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
@@ -79,14 +85,20 @@ helper:
 	movq	-24(%rbp), %rax
 	movq	%rax, %r12
 	movq	%r12, -32(%rbp)
+
 	movq	$2, %rax
 	pushq	%rax
+
+
 	movq	-32(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	imulq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -40(%rbp)

@@ -15,10 +15,15 @@ main:
 	movq	%rax, %r12
 	movq	%r12, -24(%rbp)
 LOOP39:
+
 	movq	$20, %rax
 	pushq	%rax
+
+
 	movq	-24(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -26,20 +31,27 @@ LOOP39:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP39_END
 	movq	-16(%rbp), %rax
 	movq	%rax, %r12
 	movq	%r12, -32(%rbp)
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)

@@ -12,17 +12,23 @@ foo:
 	movq	%rsp, %rbp
 	movq	%rdi, -8(%rbp)
 	subq	$8, %rsp
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	$2, %rax
 	leaq	(,%rax,8), %rdx
 	leaq	y(%rip), %rax
 	movq	(%rdx,%rax), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	$2, %rax
@@ -51,8 +57,11 @@ bar:
 	leaq	-48(%rbp), %rax
 	movq	%rax, %r12
 	movq	%r12, -16(%rbp)
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	movq	-16(%rbp), %rax
 	pushq	%rax
 	movq	$2, %rax
@@ -61,10 +70,13 @@ bar:
 	addq	%rax, %r10
 	movq	(%r10), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	-16(%rbp), %rax
@@ -92,10 +104,15 @@ main:
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)
 LOOP99:
+
 	movq	$80, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -103,6 +120,7 @@ LOOP99:
 	movq	$1, %r12
 	cmovlq	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	LOOP99_END
@@ -326,14 +344,20 @@ LOOP99:
 	popq	%rsi
 	popq	%rdi
 LOOP99_NEXT:
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	addq	%r10, %r11
 	pushq	%r11
+
 	popq	%rax
 	movq	%rax, %r12
 	movq	%r12, -8(%rbp)

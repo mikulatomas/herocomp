@@ -49,10 +49,15 @@ TERNARY8_END:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -60,6 +65,7 @@ TERNARY8_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	TERNARY16_ELSE
@@ -95,6 +101,7 @@ TERNARY16_END:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	cmpq	$0, %rax
 	je	TERNARY28_ELSE
@@ -104,8 +111,12 @@ TERNARY28_ELSE:
 	movq	$30, %rax
 TERNARY28_END:
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -113,6 +124,7 @@ TERNARY28_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	movq	%rax, %rdi
 	call	print_long
@@ -141,6 +153,7 @@ TERNARY28_END:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	cmpq	$0, %rax
 	je	TERNARY39_ELSE
@@ -150,8 +163,12 @@ TERNARY39_ELSE:
 	movq	$30, %rax
 TERNARY39_END:
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -159,6 +176,7 @@ TERNARY39_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	TERNARY36_ELSE
@@ -194,10 +212,15 @@ TERNARY36_END:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -205,6 +228,7 @@ TERNARY36_END:
 	movq	$1, %r12
 	cmove	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	TERNARY49_ELSE
@@ -247,10 +271,15 @@ TERNARY49_END:
 	pushq	%rcx
 	pushq	%r8
 	pushq	%r9
+
 	movq	$10, %rax
 	pushq	%rax
+
+
 	movq	-8(%rbp), %rax
 	pushq	%rax
+
+
 	popq	%r11
 	popq	%r10
 	cmpq	%r10, %r11
@@ -258,6 +287,7 @@ TERNARY49_END:
 	movq	$1, %r12
 	cmovne	%r12, %rax
 	pushq	%rax
+
 	popq	%rax
 	cmpq	$0, %rax
 	je	TERNARY62_ELSE

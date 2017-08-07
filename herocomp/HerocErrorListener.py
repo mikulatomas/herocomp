@@ -1,6 +1,7 @@
 import sys
 
 from antlr4.error.ErrorListener import ErrorListener
+from tools.ErrorOutput import eprint
 
 
 class HerocErrorListener( ErrorListener ):
@@ -9,14 +10,5 @@ class HerocErrorListener( ErrorListener ):
         super(HerocErrorListener, self).__init__()
 
     def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        print("line " + str(line) + ":" + str(column) + " " + msg, file=sys.stderr)
-        raise Exception("Oh no!!")
-
-    # def reportAmbiguity(self, recognizer, dfa, startIndex, stopIndex, exact, ambigAlts, configs):
-    #     raise Exception("Oh no!!")
-    #
-    # def reportAttemptingFullContext(self, recognizer, dfa, startIndex, stopIndex, conflictingAlts, configs):
-    #     raise Exception("Oh no!!")
-    #
-    # def reportContextSensitivity(self, recognizer, dfa, startIndex, stopIndex, prediction, configs):
-    #     raise Exception("Oh no!!")
+        eprint("SYNTAX ERROR: line " + str(line) + ":" + str(column) + " " + msg)
+        raise Exception("AST Error")

@@ -52,14 +52,16 @@ class Function(Node):
         table = {}
 
         arguments_register_order = [Registers.RDI, Registers.RSI, Registers.RDX, Registers.RCX, Registers.R8, Registers.R9]
-        stack_offset = 16
+
+        stack_offset = ((len(self.arguments) - 6) + 1) * 8
+        #  = 16
 
         for i in range(len(self.arguments)):
-            if i < 7:
+            if i < 6:
                 location = str(arguments_register_order[i])
             else:
                 location = str(stack_offset) + Registers.RBP.dereference()
-                stack_offset += 8
+                stack_offset -= 8
 
             table[self.arguments[i].name] = location
 
@@ -83,10 +85,17 @@ class Function(Node):
         self.number_of_local_variables, has_return = self.get_number_of_local_variables(self)
 
 
-        for argument in self.arguments:
+        for i in range(len(self.arguments)):
+        # for argument in self.arguments:
             self.variables_offset -= 8
-            body.variables_table.add_variable(argument.name, self.variables_offset)
-            code += instruction("movq", self.arguments_table.get(argument.name), str(self.variables_offset) + Registers.RBP.dereference())
+            body.variables_table.add_variable(self.arguments[i].name, self.variables_offset)
+
+            if i >= 6:
+                code += instruction("movq", self.arguments_table.get(self.arguments[i].name), Registers.RAX)
+                code += instruction("movq", Registers.RAX, str(self.variables_offset) + Registers.RBP.dereference())
+            else:
+                code += instruction("movq", self.arguments_table.get(self.arguments[i].name), str(self.variables_offset) + Registers.RBP.dereference())
+
             self.number_of_local_variables += 1
 
         block_code, has_return = body.get_code()
