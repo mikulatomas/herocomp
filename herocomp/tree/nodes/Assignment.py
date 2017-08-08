@@ -38,7 +38,6 @@ class Assignment(Node):
         # Restore original parent in case of binary operation
         destination.parent = self
 
-        # Maybe for dereference
         code += instruction("movq", Registers.RAX, Registers.R12)
 
         if isinstance(destination, tree.nodes.types.Identifier.Identifier):
